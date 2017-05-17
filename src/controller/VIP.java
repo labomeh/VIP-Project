@@ -15,15 +15,16 @@ public class VIP {
 	private String[] surname;
 	private LocalDate birthdate;
 	private String birthplace;
-	private char roleCode;
+	private char roleCode; // value A for Actor, R for Realisator, B for Both, N for None
 	private VIP partner;
 	
-	public VIP(String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode) {
+	public VIP(String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
 		this.birthplace = birthplace;
 		this.roleCode = roleCode;
+		
 	}
 
 	public String getName() {
