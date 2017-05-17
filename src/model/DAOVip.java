@@ -10,7 +10,7 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.List;
 
-import controller.VIP;
+import controller.Vip;
 
 /**
  * @author Simon
@@ -24,7 +24,7 @@ public class DAOVip {
         this.connexion = connexion;
     }
 
-    public void recupererDepartements(List<VIP> vipList) throws SQLException {
+    public void recupererDepartements(List<Vip> vipList) throws SQLException {
         String requete = "select * from VIP";
         Statement stmt = connexion.createStatement();
         ResultSet rset = stmt.executeQuery(requete);
@@ -37,7 +37,7 @@ public class DAOVip {
             String birthplace = rset.getString(6);
             char roleCodeVIP = rset.getString(7).charAt(0);
             int idPartner = rset.getInt(8);
-            VIP vip = new VIP(name, surname, birthdate, birthplace, roleCodeVIP, idPartner);
+            Vip vip = new Vip(name, surname, birthdate, birthplace, roleCodeVIP, idPartner);
             vipList.add(vip);
         }        
         rset.close();
