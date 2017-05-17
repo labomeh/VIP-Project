@@ -10,15 +10,15 @@ import java.time.*;
  *
  */
 
-public class VIP {
+public class Vip {
 	private String name;
 	private String[] surname;
 	private LocalDate birthdate;
 	private String birthplace;
 	private char roleCode; // value A for Actor, R for Realisator, B for Both, N for None
-	private VIP partner;
+	private Vip partner;
 	
-	public VIP(String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
+	public Vip(String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
@@ -51,11 +51,11 @@ public class VIP {
 		this.roleCode = roleCode;
 	}
 
-	public VIP getPartner() {
+	public Vip getPartner() {
 		return partner;
 	}
 
-	public void setPartner(VIP partner) {
+	public void setPartner(Vip partner) {
 		this.partner = partner;
 	}
 
