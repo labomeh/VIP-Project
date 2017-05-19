@@ -6,20 +6,18 @@ import java.net.PasswordAuthentication;
 import javax.sql.DataSource;
 import javax.swing.UIManager;
 
-
+import model.DAOVip;
 import model.SourceMariaDB;
 import view.mainFrame;
 
 public class App {
-
+	private static DataSource dataSource;
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		char[] pwd = {'2','5','3','5','0','2'};
-		DataSource dataSource;
 		try{
-			dataSource = SourceMariaDB.getSource(new PasswordAuthentication("p1517582",pwd));
+			dataSource = SourceMariaDB.getSource("p1517582","253502");
 		}
 		catch(Exception ex){
 			System.out.println("Echec connexion : "+ex.getMessage());

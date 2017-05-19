@@ -5,6 +5,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import model.DAOVip;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.sql.DataSource;
@@ -17,13 +20,16 @@ import java.awt.event.ActionEvent;
 public class mainFrame extends JFrame {
 
 	private JPanel contentPane;
+	private DataSource dataSource;
 
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public mainFrame(DataSource datasource) {
+	public mainFrame(DataSource dataSource) {
+		this.dataSource=dataSource;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 476);
 		contentPane = new JPanel();
@@ -36,6 +42,7 @@ public class mainFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					VipListFrame frame = vipListDisplay();
+					frame.setVisible(true);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -67,6 +74,6 @@ public class mainFrame extends JFrame {
 	}
 	
 	private VipListFrame vipListDisplay() throws SQLException{
-		return new VipListFrame(this);
+		return new VipListFrame(this,new DAOVip(dataSource.getConnection()));
 	}
 }
