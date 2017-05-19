@@ -21,7 +21,7 @@ public class SourceMariaDB {
         String user = login.getUserName();
         String pwd = new String(login.getPassword());
         Properties properties = new Properties();
-        FileInputStream propertiesFile = new FileInputStream("src/connexion.properties");
+        FileInputStream propertiesFile = new FileInputStream("src/connection.properties");
         properties.load(propertiesFile);
         MariaDbDataSource mdbDataSource = new MariaDbDataSource();
         mdbDataSource.setPortNumber(Integer.parseInt(properties.getProperty("port")));

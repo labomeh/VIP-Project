@@ -7,31 +7,23 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.sql.DataSource;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.awt.event.ActionEvent;
 
 public class mainFrame extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					mainFrame frame = new mainFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public mainFrame() {
+	public mainFrame(DataSource datasource) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 476);
 		contentPane = new JPanel();
@@ -40,11 +32,20 @@ public class mainFrame extends JFrame {
 		contentPane.setLayout(null);
 		
 		JButton btnViewVipList = new JButton("View all the VIP");
-		btnViewVipList.setBounds(96, 76, 138, 65);
+		btnViewVipList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					VipListFrame frame = vipListDisplay();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnViewVipList.setBounds(123, 103, 138, 65);
 		contentPane.add(btnViewVipList);
 		
 		JButton btnViewEventList = new JButton("View all the events");
-		btnViewEventList.setBounds(246, 76, 138, 65);
+		btnViewEventList.setBounds(287, 103, 138, 65);
 		contentPane.add(btnViewEventList);
 		
 		JButton btnNewVip = new JButton("New VIP");
@@ -52,15 +53,20 @@ public class mainFrame extends JFrame {
 		contentPane.add(btnNewVip);
 		
 		JButton btnNewEvent = new JButton("New Event");
-		btnNewEvent.setBounds(186, 286, 97, 25);
+		btnNewEvent.setBounds(220, 286, 97, 25);
 		contentPane.add(btnNewEvent);
 		
 		JButton btnNewPhoto = new JButton("New Photo");
-		btnNewPhoto.setBounds(310, 284, 97, 25);
+		btnNewPhoto.setBounds(367, 286, 97, 25);
 		contentPane.add(btnNewPhoto);
 		
-		JLabel lblTitle = new JLabel("VIP World");
-		lblTitle.setBounds(195, 30, 88, 16);
-		contentPane.add(lblTitle);
+		JLabel lblVipWorld = new JLabel("VIP WORLD");
+		lblVipWorld.setFont(new Font("Tahoma", Font.BOLD, 41));
+		lblVipWorld.setBounds(143, 11, 251, 65);
+		contentPane.add(lblVipWorld);
+	}
+	
+	private VipListFrame vipListDisplay() throws SQLException{
+		return new VipListFrame(this);
 	}
 }
