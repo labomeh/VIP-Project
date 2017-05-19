@@ -54,6 +54,6 @@ public class DAOMovie {
 		rset.close();
 		pstmt.close();
 		return movieGenres;
-	} // getMovies method
+	} // getMovieGenre method
 	
 } // DAOVip class

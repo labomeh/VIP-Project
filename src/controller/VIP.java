@@ -26,7 +26,6 @@ public class Vip {
 		this.birthdate = birthdate;
 		this.birthplace = birthplace;
 		this.roleCode = roleCode;
-		
 	}
 
 	public int getIdVip() {

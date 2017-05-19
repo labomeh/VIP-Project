@@ -95,5 +95,5 @@ public class DAOVip {
 		pstmt.close();
 		return vipDirectedMovies;
 	} // getVipDirectedMovies method
-
+	
 } // DAOVip class
