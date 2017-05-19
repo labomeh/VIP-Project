@@ -23,7 +23,7 @@ public class DAOGenre {
         this.connexion = connexion;
     }
 
-    public void recupererDepartements(List<Genre> genreList) throws SQLException {
+    public void getGenres(List<Genre> genreList) throws SQLException {
         String requete = "select * from movie";
         Statement stmt = connexion.createStatement();
         ResultSet rset = stmt.executeQuery(requete);

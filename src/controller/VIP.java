@@ -11,6 +11,7 @@ import java.time.*;
  */
 
 public class Vip {
+	private int idVip;
 	private String name;
 	private String[] surname;
 	private LocalDate birthdate;
@@ -18,13 +19,18 @@ public class Vip {
 	private char roleCode; // value A for Actor, R for Realisator, B for Both, N for None
 	private Vip partner;
 	
-	public Vip(String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
+	public Vip(int idVip, String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
+		this.idVip = idVip;
 		this.name = name;
 		this.surname = surname;
 		this.birthdate = birthdate;
 		this.birthplace = birthplace;
 		this.roleCode = roleCode;
 		
+	}
+
+	public int getIdVip() {
+		return idVip;
 	}
 
 	public String getName() {

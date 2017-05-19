@@ -23,7 +23,7 @@ public class DAOMovie {
         this.connexion = connexion;
     }
 
-    public void recupererDepartements(List<Movie> movieList) throws SQLException {
+    public void getMovies(List<Movie> movieList) throws SQLException {
         String requete = "select * from movie";
         Statement stmt = connexion.createStatement();
         ResultSet rset = stmt.executeQuery(requete);
