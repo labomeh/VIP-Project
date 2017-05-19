@@ -79,5 +79,21 @@ public class DAOVip {
 		pstmt.close();
 		return vipPlayedMovies;
 	} // getVipPlayedMovies method
+	
+	public List<Integer> getVipDirectedMovies(Vip vip) throws SQLException {
+		int idVip = vip.getIdVip();
+		List<Integer> vipDirectedMovies = new ArrayList<>();
+		String requete = "SELECT movieVisa FROM directing WHERE idVIP=?";
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		pstmt.setInt(1, idVip);
+		ResultSet rset = pstmt.executeQuery(requete);
+		while (rset.next()) {
+			int directedMovie = rset.getInt(1);
+			vipDirectedMovies.add(directedMovie);
+		}
+		rset.close();
+		pstmt.close();
+		return vipDirectedMovies;
+	} // getVipDirectedMovies method
 
 } // DAOVip class
