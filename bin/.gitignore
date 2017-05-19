@@ -3,3 +3,5 @@
 /view/
 /model/
 /controller/
+/app/
+/connection.properties

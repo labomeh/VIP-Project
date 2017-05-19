@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controller.Movie;
+import controller.Vip;
 
 /**
  * @author Simon
@@ -55,5 +56,39 @@ public class DAOMovie {
 		pstmt.close();
 		return movieGenres;
 	} // getMovieGenre method
+	
+	public List<Integer> getCasting(Movie movie) throws SQLException {
+		int movieVisa = movie.getMovieVisa();
+		List<Integer> movieCasting = new ArrayList<>();
+		String requete = "SELECT idVIP FROM playing WHERE movieVisa=?";
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		pstmt.setInt(1, movieVisa);
+		ResultSet rset = pstmt.executeQuery(requete);
+		while (rset.next()) {
+			int playingActor = rset.getInt(1);
+			movieCasting.add(playingActor);
+		}
+		rset.close();
+		pstmt.close();
+		return movieCasting;
+	} // getCasting method
+	
+	public List<Integer> getDirector(Movie movie) throws SQLException {
+		int movieVisa = movie.getMovieVisa();
+		List<Integer> movieDirectors = new ArrayList<>();
+		String requete = "SELECT idVIP FROM directing WHERE movieVisa=?";
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		pstmt.setInt(1, movieVisa);
+		ResultSet rset = pstmt.executeQuery(requete);
+		while (rset.next()) {
+			int idDirector = rset.getInt(1);
+			movieDirectors.add(idDirector);
+		}
+		rset.close();
+		pstmt.close();
+		return movieDirectors;
+	} // getDirector method
+	
+	
 	
 } // DAOVip class
