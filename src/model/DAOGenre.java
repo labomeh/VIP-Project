@@ -17,22 +17,23 @@ import controller.Genre;
  */
 public class DAOGenre {
 
-    private final Connection connexion;
+	private final Connection connexion;
 
-    public DAOGenre(Connection connexion) {
-        this.connexion = connexion;
-    }
+	public DAOGenre(Connection connexion) {
+		this.connexion = connexion;
+	}
 
-    public void getGenres(List<Genre> genreList) throws SQLException {
-        String requete = "select * from movie";
-        Statement stmt = connexion.createStatement();
-        ResultSet rset = stmt.executeQuery(requete);
-         while (rset.next()) {
-            String genreTitle = rset.getString(1);
-            Genre genre = new Genre(genreTitle);
-            genreList.add(genre);
-        }        
-        rset.close();
-        stmt.close();
-    }
+	public void getGenres(List<Genre> genreList) throws SQLException {
+		String requete = "select * from movie";
+		Statement stmt = connexion.createStatement();
+		ResultSet rset = stmt.executeQuery(requete);
+		while (rset.next()) {
+			String genreTitle = rset.getString(1);
+			Genre genre = new Genre(genreTitle);
+			genreList.add(genre);
+		}
+		rset.close();
+		stmt.close();
+	} // getGenres method
+
 } // DAOVip class
