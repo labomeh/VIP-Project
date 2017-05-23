@@ -16,6 +16,7 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class mainFrame extends JFrame {
 
@@ -26,8 +27,9 @@ public class mainFrame extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public mainFrame(DataSource dataSource) {
+	public mainFrame(DataSource dataSource) throws SQLException {
 		this.dataSource=dataSource;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

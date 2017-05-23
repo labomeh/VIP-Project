@@ -17,15 +17,15 @@ import controller.Genre;
  */
 public class DAOGenre {
 
-	private final Connection connexion;
+	private final Connection connection;
 
-	public DAOGenre(Connection connexion) {
-		this.connexion = connexion;
+	public DAOGenre(Connection connection) {
+		this.connection = connection;
 	}
 
 	public void getGenres(List<Genre> genreList) throws SQLException {
 		String requete = "select * from movie";
-		Statement stmt = connexion.createStatement();
+		Statement stmt = connection.createStatement();
 		ResultSet rset = stmt.executeQuery(requete);
 		while (rset.next()) {
 			String genreTitle = rset.getString(1);
