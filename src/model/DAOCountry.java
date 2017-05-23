@@ -10,15 +10,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import controller.Country;
-import controller.Genre;
-
 /**
  * 
  * @author Mehdi
  *
  */
 public class DAOCountry {
+	
 	private static Connection connection;
 
 	public DAOCountry(Connection connection) {

@@ -1,14 +1,11 @@
 package app;
 
 import java.awt.EventQueue;
-import java.net.PasswordAuthentication;
-
 import javax.sql.DataSource;
 import javax.swing.UIManager;
 
-import model.DAOVip;
 import model.SourceMariaDB;
-import view.mainFrame;
+import view.MainFrame;
 
 public class App {
 	private static DataSource dataSource;
@@ -26,7 +23,7 @@ public class App {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					mainFrame frame = new mainFrame(dataSource);
+					MainFrame frame = new MainFrame(dataSource);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();

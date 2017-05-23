@@ -28,6 +28,10 @@ public class Vip {
 		this.roleCode = roleCode;
 	}
 
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+
 	public Vip() {
 	}
 
