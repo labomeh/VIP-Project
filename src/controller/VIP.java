@@ -16,7 +16,7 @@ public class Vip {
 	private String[] surname;
 	private LocalDate birthdate;
 	private String birthplace;
-	private char roleCode; // value A for Actor, R for Realisator, B for Both, N for None
+	private char roleCode; // value A for Actor, D for Director, B for Both, N for None
 	private Vip partner;
 	
 	public Vip(int idVip, String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
