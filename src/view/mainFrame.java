@@ -64,6 +64,7 @@ public class mainFrame extends JFrame {
 				try {
 					Vip newVip = new Vip();
 					NewVipFrame newVipFrame = newVipDisplay(newVip);
+					newVipFrame.setVisible(true);
 					
 				} catch (SQLException e) {
 					e.printStackTrace();

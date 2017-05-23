@@ -98,15 +98,12 @@ public class DAOVip {
 	} // getVipDirectedMovies method
 	
 	public void addNewVip(Vip vip) throws SQLException {
-		String requete = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, ?, ?, ?, ?);";
+		String requete = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, null, ?, null, null);";
 		PreparedStatement pstmt = connexion.prepareStatement(requete);
 		pstmt.setString(1, vip.getName());
 		pstmt.setString(2, vip.getSurname()[0]);
 		pstmt.setString(3, vip.getSurname()[1]);
-		pstmt.setDate(4, Date.valueOf(vip.getBirthdate()));
-		pstmt.setString(5, vip.getBirthplace());
-		pstmt.setString(6, String.valueOf(vip.getRoleCode()));
-		pstmt.setInt(7, vip.getPartner().getIdVip());
+		pstmt.setString(4, vip.getBirthplace());
 		pstmt.executeUpdate();
 		pstmt.close();
 		connexion.close();
