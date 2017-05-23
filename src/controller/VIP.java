@@ -28,6 +28,9 @@ public class Vip {
 		this.roleCode = roleCode;
 	}
 
+	public Vip() {
+	}
+
 	public int getIdVip() {
 		return idVip;
 	}
