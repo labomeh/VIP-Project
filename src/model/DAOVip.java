@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,5 +97,17 @@ public class DAOVip {
 		pstmt.close();
 		return vipDirectedMovies;
 	} // getVipDirectedMovies method
+	
+	public void addNewVip(Vip vip) throws SQLException {
+		String requete = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, null, ?, null, null);";
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		pstmt.setString(1, vip.getName());
+		pstmt.setString(2, vip.getSurname()[0]);
+		pstmt.setString(3, vip.getSurname()[1]);
+		pstmt.setString(4, vip.getBirthplace());
+		pstmt.executeUpdate();
+		pstmt.close();
+		connexion.close();
+	}
 	
 } // DAOVip class

@@ -10,16 +10,20 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+<<<<<<< HEAD
 import app.App;
 import controller.Country;
 import controller.Genre;
 
+=======
+>>>>>>> origin/master
 /**
  * 
  * @author Mehdi
  *
  */
 public class DAOCountry {
+	
 	private static Connection connection;
 
 	public DAOCountry() {

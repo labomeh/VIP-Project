@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.Vip;
 import model.DAOVip;
 
 import javax.swing.JButton;
@@ -18,7 +19,7 @@ import java.sql.SQLException;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
-public class mainFrame extends JFrame {
+public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
 	private DataSource dataSource;
@@ -29,7 +30,7 @@ public class mainFrame extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public mainFrame(DataSource dataSource) throws SQLException {
+	public MainFrame(DataSource dataSource) throws SQLException {
 		this.dataSource=dataSource;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,8 +44,8 @@ public class mainFrame extends JFrame {
 		btnViewVipList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					VipListFrame frame = vipListDisplay();
-					frame.setVisible(true);
+					VipListFrame vipListFrame = vipListDisplay();
+					vipListFrame.setVisible(true);
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
@@ -58,6 +59,18 @@ public class mainFrame extends JFrame {
 		contentPane.add(btnViewEventList);
 		
 		JButton btnNewVip = new JButton("New VIP");
+		btnNewVip.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					Vip newVip = new Vip();
+					NewVipFrame newVipFrame = newVipDisplay(newVip);
+					newVipFrame.setVisible(true);
+					
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btnNewVip.setBounds(67, 286, 97, 25);
 		contentPane.add(btnNewVip);
 		
@@ -77,5 +90,9 @@ public class mainFrame extends JFrame {
 	
 	private VipListFrame vipListDisplay() throws SQLException{
 		return new VipListFrame(this);
+	}
+	
+	private NewVipFrame newVipDisplay(Vip newVip) throws SQLException{
+		return new NewVipFrame(this,new DAOVip(), newVip);
 	}
 }
