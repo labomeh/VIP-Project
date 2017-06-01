@@ -1,7 +1,6 @@
 package app;
 
 import java.awt.EventQueue;
-<<<<<<< HEAD
 import java.net.PasswordAuthentication;
 import java.sql.Connection;
 
@@ -12,11 +11,9 @@ import model.DAOCountry;
 import model.DAOGenre;
 import model.DAOMovie;
 import model.DAOVip;
-=======
 import javax.sql.DataSource;
 import javax.swing.UIManager;
 
->>>>>>> origin/master
 import model.SourceMariaDB;
 import view.MainFrame;
 
