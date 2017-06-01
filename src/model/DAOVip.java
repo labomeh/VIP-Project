@@ -47,6 +47,7 @@ public class DAOVip {
 		}
 		rset.close();
 		stmt.close();
+		
 	} // getVip method
 
 	public List<String> getVipNationalities(Vip vip) throws SQLException {
@@ -64,6 +65,7 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipNationalities;
+		
 	} // getVipNationalities method
 
 	public List<Integer> getVipPlayedMovies(Vip vip) throws SQLException {
@@ -80,6 +82,7 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipPlayedMovies;
+		
 	} // getVipPlayedMovies method
 	
 	public List<Integer> getVipDirectedMovies(Vip vip) throws SQLException {
@@ -96,15 +99,17 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipDirectedMovies;
+		
 	} // getVipDirectedMovies method
 	
 	public void addNewVip(Vip vip, String nationality1, String nationality2) throws SQLException {
-		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, null, ?, null, null);";
+		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, ?, ?, null, null);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
 		pstmtNewVip.setString(1, vip.getName());
 		pstmtNewVip.setString(2, vip.getSurname()[0]);
 		pstmtNewVip.setString(3, vip.getSurname()[1]);
-		pstmtNewVip.setString(4, vip.getBirthplace());
+		pstmtNewVip.setString(4, vip.getBirthdate().toString());
+		pstmtNewVip.setString(5, vip.getBirthplace());
 		pstmtNewVip.executeUpdate();
 		
 		String queryGetCurrentId = "SELECT MAX(idVIP) FROM VIP";
@@ -120,7 +125,6 @@ public class DAOVip {
 		pstmtNewNat1.executeUpdate();
 		
 		if(nationality2!=null) {
-			System.out.println("coucou");
 			String queryNewNat2 = "INSERT INTO nationality VALUES(?, ?);";
 			PreparedStatement pstmtNewNat2 = connexion.prepareStatement(queryNewNat2);
 			pstmtNewNat2.setInt(1, idVIP);
@@ -133,26 +137,7 @@ public class DAOVip {
 		pstmtNewVip.close();
 		pstmtNewNat1.close();
 		// connexion.close();
-	}
-
-	private void addNationality(int idVIP, String nationality1, String nationality2) throws SQLException {
-		String queryNewNat1 = "INSERT INTO nationality VALUES(?, ?);";
-		PreparedStatement pstmtNewNat1 = connexion.prepareStatement(queryNewNat1);
-		pstmtNewNat1.setInt(1, idVIP);
-		pstmtNewNat1.setString(2, nationality1.toString());
-		pstmtNewNat1.executeUpdate();
 		
-		if(nationality2!=null) {
-			System.out.println("coucou");
-			String queryNewNat2 = "INSERT INTO nationality VALUES(?, ?);";
-			PreparedStatement pstmtNewNat2 = connexion.prepareStatement(queryNewNat2);
-			pstmtNewNat2.setInt(1, idVIP);
-			pstmtNewNat2.setString(2, nationality2.toString());
-			pstmtNewNat2.executeUpdate();
-			pstmtNewNat2.close();
-		}
-		pstmtNewNat1.close();
-		// connexion.close();
-	}
+	} // addNewVip method
 	
 } // DAOVip class
