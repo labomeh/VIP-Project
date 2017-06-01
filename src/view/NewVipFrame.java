@@ -120,6 +120,7 @@ public class NewVipFrame extends JFrame {
 		contentPane.add(lblNewNationality2);
 		
 		JComboBox cbxNationality2 = new JComboBox();
+		cbxNationality2.setModel(countryJComboBox);
 		cbxNationality2.setBounds(147, 296, 158, 22);
 		contentPane.add(cbxNationality2);
 		
