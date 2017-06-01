@@ -93,6 +93,6 @@ public class MainFrame extends JFrame {
 	}
 	
 	private NewVipFrame newVipDisplay(Vip newVip) throws SQLException{
-		return new NewVipFrame(this,new DAOVip(), newVip);
+		return new NewVipFrame(this, newVip);
 	}
 }

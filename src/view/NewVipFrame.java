@@ -146,7 +146,7 @@ public class NewVipFrame extends JFrame {
 						newVip.setSurname(surnames);
 						newVip.setBirthplace(txtNewBirthplace.getText());
 						String nationality1 = (String) cbxNationality1.getSelectedItem();
-						String nationality2 = (String) cbxNationality1.getSelectedItem();
+						String nationality2 = (String) cbxNationality2.getSelectedItem();
 						App.getDaoVip().addNewVip(newVip, nationality1, nationality2);
 					}
 				} catch (Exception e) {
