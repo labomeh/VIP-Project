@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import app.App;
 import model.DAOVip;
 
 import javax.swing.JTable;
@@ -27,7 +28,7 @@ public class VipListFrame extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public VipListFrame(Frame parent,DAOVip dao) throws SQLException {
+	public VipListFrame(Frame parent) throws SQLException {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 564, 476);
@@ -36,7 +37,7 @@ public class VipListFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		model = new VipJTable(dao);
+		model = new VipJTable(App.getDaoVip());
 		
 		JLabel lblVipList = new JLabel("Vip List");
 		lblVipList.setFont(new Font("Tahoma", Font.PLAIN, 26));

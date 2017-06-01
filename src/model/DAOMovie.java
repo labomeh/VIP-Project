@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.App;
 import controller.Movie;
 import controller.Vip;
 
@@ -20,15 +21,15 @@ import controller.Vip;
  */
 public class DAOMovie {
 
-	private final Connection connexion;
+	private final Connection connection;
 
-	public DAOMovie(Connection connexion) {
-		this.connexion = connexion;
+	public DAOMovie() {
+		this.connection = App.getConnection();
 	}
 
 	public void getMovies(List<Movie> movieList) throws SQLException {
 		String requete = "select * from movie";
-		Statement stmt = connexion.createStatement();
+		Statement stmt = connection.createStatement();
 		ResultSet rset = stmt.executeQuery(requete);
 		while (rset.next()) {
 			int movieVisa = rset.getInt(1);
@@ -45,7 +46,7 @@ public class DAOMovie {
 		int movieVisa = movie.getMovieVisa();
 		List<String> movieGenres = new ArrayList<>();
 		String requete = "select genreTitle from movieCategory where movieVisa=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		ResultSet rset = pstmt.executeQuery(requete);
 		pstmt.setInt(1, movieVisa);
 		while (rset.next()) {
@@ -61,7 +62,7 @@ public class DAOMovie {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieCasting = new ArrayList<>();
 		String requete = "SELECT idVIP FROM playing WHERE movieVisa=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, movieVisa);
 		ResultSet rset = pstmt.executeQuery(requete);
 		while (rset.next()) {
@@ -77,7 +78,7 @@ public class DAOMovie {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieDirectors = new ArrayList<>();
 		String requete = "SELECT idVIP FROM directing WHERE movieVisa=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, movieVisa);
 		ResultSet rset = pstmt.executeQuery(requete);
 		while (rset.next()) {

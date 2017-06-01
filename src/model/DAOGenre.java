@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
+import app.App;
 import controller.Genre;
 
 /**
@@ -19,8 +20,8 @@ public class DAOGenre {
 
 	private final Connection connection;
 
-	public DAOGenre(Connection connection) {
-		this.connection = connection;
+	public DAOGenre() {
+		this.connection = App.getConnection();
 	}
 
 	public void getGenres(List<Genre> genreList) throws SQLException {

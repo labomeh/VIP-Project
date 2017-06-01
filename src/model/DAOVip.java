@@ -12,6 +12,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.App;
 import controller.Vip;
 
 /**
@@ -22,8 +23,8 @@ public class DAOVip {
 
 	private final Connection connexion;
 
-	public DAOVip(Connection connexion) {
-		this.connexion = connexion;
+	public DAOVip() {
+		this.connexion = App.getConnection();
 	}
 
 	public void getVip(List<Vip> vipList) throws SQLException {

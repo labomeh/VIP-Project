@@ -76,6 +76,6 @@ public class mainFrame extends JFrame {
 	}
 	
 	private VipListFrame vipListDisplay() throws SQLException{
-		return new VipListFrame(this,new DAOVip(dataSource.getConnection()));
+		return new VipListFrame(this);
 	}
 }

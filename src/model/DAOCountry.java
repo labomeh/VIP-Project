@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import app.App;
 import controller.Country;
 import controller.Genre;
 
@@ -21,8 +22,8 @@ import controller.Genre;
 public class DAOCountry {
 	private static Connection connection;
 
-	public DAOCountry(Connection connection) {
-		this.connection = connection;
+	public DAOCountry() {
+		this.connection = App.getConnection();
 	}
 
 	public static List<String> getCountries() throws SQLException {
