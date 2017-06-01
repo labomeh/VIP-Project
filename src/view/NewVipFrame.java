@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import app.App;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -11,7 +14,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import controller.Vip;
-import model.DAOVip;
 import javax.swing.JComboBox;
 import java.awt.Component;
 import javax.swing.SwingConstants;
@@ -26,12 +28,12 @@ public class NewVipFrame extends JFrame {
 	private JTextField txtNewBirthdate;
 	private JTextField txtNewBirthplace;
 	private Vip newVip;
-	private CountryJComboBox countryJComboBox;
+	
 
 	/**
 	 * Create the frame.
 	 */
-	public NewVipFrame(MainFrame mainFrame, DAOVip daoVip, Vip newVip) throws SQLException {
+	public NewVipFrame(MainFrame mainFrame, Vip newVip) throws SQLException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 416, 454);
 		contentPane = new JPanel();
@@ -110,8 +112,7 @@ public class NewVipFrame extends JFrame {
 		contentPane.add(lblNewNationality1);
 		
 		JComboBox cbxNationality1 = new JComboBox();
-		countryJComboBox = new CountryJComboBox();
-		cbxNationality1.setModel(countryJComboBox);
+		cbxNationality1.setModel(new CountryJComboBox());
 		cbxNationality1.setBounds(147, 261, 158, 22);
 		contentPane.add(cbxNationality1);
 		
@@ -120,7 +121,7 @@ public class NewVipFrame extends JFrame {
 		contentPane.add(lblNewNationality2);
 		
 		JComboBox cbxNationality2 = new JComboBox();
-		cbxNationality2.setModel(countryJComboBox);
+		cbxNationality2.setModel(new CountryJComboBox());
 		cbxNationality2.setBounds(147, 296, 158, 22);
 		contentPane.add(cbxNationality2);
 		
@@ -140,12 +141,13 @@ public class NewVipFrame extends JFrame {
 					if (txtNewSurname1.getText().isEmpty()) {
 						throw new Exception("You must fill the surname field");
 					} else {
-						System.out.println("coucou");
 						newVip.setName(txtNewName.getText());
 						String[] surnames = {txtNewSurname1.getText(), txtNewSurname2.getText()};
 						newVip.setSurname(surnames);
 						newVip.setBirthplace(txtNewBirthplace.getText());
-						daoVip.addNewVip(newVip);
+						String nationality1 = (String) cbxNationality1.getSelectedItem();
+						String nationality2 = (String) cbxNationality1.getSelectedItem();
+						App.getDaoVip().addNewVip(newVip, nationality1, nationality2);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

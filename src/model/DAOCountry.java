@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import app.App;
-import controller.Country;
 import controller.Genre;
 
 /**

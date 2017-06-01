@@ -29,9 +29,9 @@ public class DAOVip {
 	}
 
 	public void getVip(List<Vip> vipList) throws SQLException {
-		String requete = "select * from VIP";
+		String query = "select * from VIP";
 		Statement stmt = connexion.createStatement();
-		ResultSet rset = stmt.executeQuery(requete);
+		ResultSet rset = stmt.executeQuery(query);
 		while (rset.next()) {
 			int idVip = rset.getInt(1);
 			String name = rset.getString(2);
@@ -52,11 +52,11 @@ public class DAOVip {
 	public List<String> getVipNationalities(Vip vip) throws SQLException {
 		int idVip = vip.getIdVip();
 		List<String> vipNationalities = new ArrayList<>();
-		String requete = "SELECT country.country FROM country, VIP, nationality WHERE VIP.idVIP=? and nationality.idVIP=? and country.country=nationality.country";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		String query = "SELECT country.country FROM country, VIP, nationality WHERE VIP.idVIP=? and nationality.idVIP=? and country.country=nationality.country";
+		PreparedStatement pstmt = connexion.prepareStatement(query);
 		pstmt.setInt(1, idVip);
 		pstmt.setInt(2, idVip);
-		ResultSet rset = pstmt.executeQuery(requete);
+		ResultSet rset = pstmt.executeQuery(query);
 		while (rset.next()) {
 			String nationality = rset.getString(1);
 			vipNationalities.add(nationality);
@@ -69,10 +69,10 @@ public class DAOVip {
 	public List<Integer> getVipPlayedMovies(Vip vip) throws SQLException {
 		int idVip = vip.getIdVip();
 		List<Integer> vipPlayedMovies = new ArrayList<>();
-		String requete = "SELECT movieVisa FROM playing WHERE idVIP=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		String query = "SELECT movieVisa FROM playing WHERE idVIP=?";
+		PreparedStatement pstmt = connexion.prepareStatement(query);
 		pstmt.setInt(1, idVip);
-		ResultSet rset = pstmt.executeQuery(requete);
+		ResultSet rset = pstmt.executeQuery(query);
 		while (rset.next()) {
 			int playedMovie = rset.getInt(1);
 			vipPlayedMovies.add(playedMovie);
@@ -85,10 +85,10 @@ public class DAOVip {
 	public List<Integer> getVipDirectedMovies(Vip vip) throws SQLException {
 		int idVip = vip.getIdVip();
 		List<Integer> vipDirectedMovies = new ArrayList<>();
-		String requete = "SELECT movieVisa FROM directing WHERE idVIP=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		String query = "SELECT movieVisa FROM directing WHERE idVIP=?";
+		PreparedStatement pstmt = connexion.prepareStatement(query);
 		pstmt.setInt(1, idVip);
-		ResultSet rset = pstmt.executeQuery(requete);
+		ResultSet rset = pstmt.executeQuery(query);
 		while (rset.next()) {
 			int directedMovie = rset.getInt(1);
 			vipDirectedMovies.add(directedMovie);
@@ -98,16 +98,42 @@ public class DAOVip {
 		return vipDirectedMovies;
 	} // getVipDirectedMovies method
 	
-	public void addNewVip(Vip vip) throws SQLException {
-		String requete = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, null, ?, null, null);";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+	public void addNewVip(Vip vip, String nationality1, String nationality2) throws SQLException {
+		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, null, ?, null, null);";
+		PreparedStatement pstmt = connexion.prepareStatement(queryNewVip);
 		pstmt.setString(1, vip.getName());
 		pstmt.setString(2, vip.getSurname()[0]);
 		pstmt.setString(3, vip.getSurname()[1]);
 		pstmt.setString(4, vip.getBirthplace());
 		pstmt.executeUpdate();
+		
+		String queryGetCurrentId = "SELECT MAX(idVIP) FROM VIP";
+		Statement stmt = connexion.createStatement();
+		ResultSet rset = stmt.executeQuery(queryGetCurrentId);
+		rset.next();
+		int idVIP = rset.getInt(1);
+		addNationality(idVIP, nationality1, nationality2);
+		stmt.close();
 		pstmt.close();
 		connexion.close();
+	}
+
+	private void addNationality(int idVIP, String nationality1, String nationality2) throws SQLException {
+		String query = "INSERT INTO nationality VALUES(?, ?);";
+		PreparedStatement pstmt = connexion.prepareStatement(query);
+		pstmt.setInt(1, idVIP);
+		pstmt.setString(2, nationality1.toString());
+		pstmt.executeUpdate();
+		
+		if(nationality2!=null) {
+			query = "INSERT INTO nationality VALUES(?, ?);";
+			pstmt = connexion.prepareStatement(query);
+			pstmt.setInt(1, idVIP);
+			pstmt.setString(2, nationality2.toString());
+			pstmt.executeUpdate();
+			pstmt.close();
+		}
+		
 	}
 	
 } // DAOVip class
