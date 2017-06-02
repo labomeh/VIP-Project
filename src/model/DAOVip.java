@@ -22,16 +22,16 @@ import controller.Vip;
  */
 public class DAOVip {
 
-	private final Connection connexion;
+	private final Connection connection;
 
 	public DAOVip() {
-		this.connexion = App.getConnection();
+		this.connection = App.getConnection();
 	}
 
 	public void getVip(List<Vip> vipList) throws SQLException {
-		String requete = "select * from VIP";
-		Statement stmt = connexion.createStatement();
-		ResultSet rset = stmt.executeQuery(requete);
+		String request = "select * from VIP";
+		Statement stmt = connection.createStatement();
+		ResultSet rset = stmt.executeQuery(request);
 		while (rset.next()) {
 			int idVip = rset.getInt(1);
 			String name = rset.getString(2);
@@ -53,7 +53,7 @@ public class DAOVip {
 		int idVip = vip.getIdVip();
 		List<String> vipNationalities = new ArrayList<>();
 		String requete = "SELECT country.country FROM country, VIP, nationality WHERE VIP.idVIP=? and nationality.idVIP=? and country.country=nationality.country";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, idVip);
 		pstmt.setInt(2, idVip);
 		ResultSet rset = pstmt.executeQuery(requete);
@@ -70,7 +70,7 @@ public class DAOVip {
 		int idVip = vip.getIdVip();
 		List<Integer> vipPlayedMovies = new ArrayList<>();
 		String requete = "SELECT movieVisa FROM playing WHERE idVIP=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, idVip);
 		ResultSet rset = pstmt.executeQuery(requete);
 		while (rset.next()) {
@@ -86,7 +86,7 @@ public class DAOVip {
 		int idVip = vip.getIdVip();
 		List<Integer> vipDirectedMovies = new ArrayList<>();
 		String requete = "SELECT movieVisa FROM directing WHERE idVIP=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, idVip);
 		ResultSet rset = pstmt.executeQuery(requete);
 		while (rset.next()) {
@@ -100,14 +100,13 @@ public class DAOVip {
 	
 	public void addNewVip(Vip vip) throws SQLException {
 		String requete = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, null, ?, null, null);";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
+		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setString(1, vip.getName());
 		pstmt.setString(2, vip.getSurname()[0]);
 		pstmt.setString(3, vip.getSurname()[1]);
 		pstmt.setString(4, vip.getBirthplace());
 		pstmt.executeUpdate();
 		pstmt.close();
-		connexion.close();
 	}
 	
 } // DAOVip class

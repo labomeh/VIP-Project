@@ -55,6 +55,16 @@ public class MainFrame extends JFrame {
 		contentPane.add(btnViewVipList);
 		
 		JButton btnViewEventList = new JButton("View all the events");
+		btnViewEventList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					EventListFrame eventListFrame = eventListDisplay();
+					eventListFrame.setVisible(true);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btnViewEventList.setBounds(287, 103, 138, 65);
 		contentPane.add(btnViewEventList);
 		
@@ -91,6 +101,11 @@ public class MainFrame extends JFrame {
 	private VipListFrame vipListDisplay() throws SQLException{
 		return new VipListFrame(this);
 	}
+	
+	private EventListFrame eventListDisplay() throws SQLException{
+		return new EventListFrame(this);
+	}
+	
 	
 	private NewVipFrame newVipDisplay(Vip newVip) throws SQLException{
 		return new NewVipFrame(this,new DAOVip(), newVip);

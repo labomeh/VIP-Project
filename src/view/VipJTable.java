@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
+import app.App;
 import controller.Vip;
 import model.DAOVip;
 
@@ -22,9 +23,9 @@ public class VipJTable extends AbstractTableModel{
 	private final String[] columnHeads = {"Name", "Surname", "Surname 2", "Birthdate", "Birthplace", "Role"};
 	private DAOVip dao;
 	
-	public VipJTable(DAOVip dao) throws SQLException{
+	public VipJTable() throws SQLException{
 		vipList = new ArrayList<Vip>();
-		this.dao=dao;
+		this.dao=App.getDaoVip();
 		dao.getVip(vipList);
 	}
 	
