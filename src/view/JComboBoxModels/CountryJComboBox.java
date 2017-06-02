@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
+import app.App;
 import model.DAOCountry;
 
 /**
@@ -12,10 +13,12 @@ import model.DAOCountry;
  *
  */
 public class CountryJComboBox extends DefaultComboBoxModel<String> {
-	private final List<String> countryList;
+	private List<String> countryList;
+	private DAOCountry dao;
 
 	public CountryJComboBox() throws SQLException {
-		this.countryList = DAOCountry.getCountries();
+		this.dao = App.getDaoCountry();
+		this.countryList = dao.getCountries();
 	}
 
 	@Override

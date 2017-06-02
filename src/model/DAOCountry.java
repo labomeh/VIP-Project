@@ -24,7 +24,7 @@ public class DAOCountry {
 		this.connection = App.getConnection();
 	}
 
-	public static List<String> getCountries() throws SQLException {
+	public List<String> getCountries() throws SQLException {
 		List<String> countryList = new ArrayList<String>();
 		String query = "select * from country";
 		Statement stmt = connection.createStatement();

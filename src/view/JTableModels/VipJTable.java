@@ -6,7 +6,6 @@ package view.JTableModels;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import app.App;
@@ -19,12 +18,11 @@ import model.DAOVip;
  *
  */
 public class VipJTable extends AbstractTableModel{
-	private List<Vip> vipList;
+	private List<Vip> vipList = new ArrayList<>();
 	private final String[] columnHeads = {"Name", "Surname", "Surname 2", "Birthdate", "Birthplace", "Role"};
 	private DAOVip dao;
 	
 	public VipJTable() throws SQLException{
-		vipList = new ArrayList<>();
 		this.dao=App.getDaoVip();
 		vipList = dao.getVip();
 	}

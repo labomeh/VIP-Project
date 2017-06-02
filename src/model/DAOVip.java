@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import controller.Vip;
  */
 public class DAOVip {
 
-	private final Connection connexion;
+	private static Connection connexion;
 
 	public DAOVip() {
 		this.connexion = App.getConnection();

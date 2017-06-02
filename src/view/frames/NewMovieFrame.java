@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 
 import controller.Movie;
 import view.JComboBoxModels.GenreJComboBox;
+import view.JComboBoxModels.VipJComboBox;
 
 import javax.swing.JComboBox;
 import java.awt.Component;
@@ -28,11 +29,15 @@ import javax.swing.SwingConstants;
 public class NewMovieFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNewVisa;
-	private JTextField txtNewTitle;
-	private JTextField txtNewReleaseYear;
+	private JTextField txtNewVisa, txtNewTitle, txtNewReleaseYear;
 	private Movie newMovie;
 	private List<String> genres = new ArrayList<>();
+	private List<String> actors = new ArrayList<>();
+	private List<Integer> actorsId = new ArrayList<>();
+	private List<String> directors = new ArrayList<>();
+	private List<Integer> directorsId = new ArrayList<>();
+	private JComboBox cbxGenre = new JComboBox(), cbxActor = new JComboBox(), cbxDirector = new JComboBox();
+	private JLabel genresValues, actorsValues, directorsValues;
 
 	/**
 	 * Create the frame.
@@ -70,38 +75,38 @@ public class NewMovieFrame extends JFrame {
 		JLabel lblAddedGenres = new JLabel("Added Genres");
 		lblAddedGenres.setBounds(22, 192, 113, 16);
 		contentPane.add(lblAddedGenres);
-
-		JLabel lblyyyy = new JLabel("(yyyy)");
-		lblyyyy.setBounds(317, 125, 104, 16);
-		contentPane.add(lblyyyy);
-
-		JLabel genresValues = new JLabel("");
-		genresValues.setBounds(147, 192, 274, 16);
-		contentPane.add(genresValues);
 		
 		JLabel lblNewActor = new JLabel("Actor");
 		lblNewActor.setBounds(22, 224, 113, 16);
 		contentPane.add(lblNewActor);
 		
-		JLabel lblNewDirector = new JLabel("Director");
-		lblNewDirector.setBounds(22, 288, 113, 16);
-		contentPane.add(lblNewDirector);
-		
 		JLabel lblAddedActors = new JLabel("Added Actors");
 		lblAddedActors.setBounds(22, 256, 113, 16);
 		contentPane.add(lblAddedActors);
 		
-		JLabel actorsValues = new JLabel("");
-		actorsValues.setBounds(147, 256, 417, 16);
-		contentPane.add(actorsValues);
+		JLabel lblNewDirector = new JLabel("Director");
+		lblNewDirector.setBounds(22, 288, 113, 16);
+		contentPane.add(lblNewDirector);
 		
 		JLabel lblAddedDirectors = new JLabel("Added Directors");
 		lblAddedDirectors.setBounds(22, 322, 113, 16);
 		contentPane.add(lblAddedDirectors);
+
+		JLabel lblyyyy = new JLabel("(yyyy)");
+		lblyyyy.setBounds(317, 125, 104, 16);
+		contentPane.add(lblyyyy);
+
+		genresValues = new JLabel("");
+		genresValues.setBounds(147, 192, 274, 16);
+		contentPane.add(genresValues);
 		
-		JLabel directorValues = new JLabel("");
-		directorValues.setBounds(147, 322, 417, 16);
-		contentPane.add(directorValues);
+		actorsValues = new JLabel("");
+		actorsValues.setBounds(147, 256, 417, 16);
+		contentPane.add(actorsValues);
+		
+		directorsValues = new JLabel("");
+		directorsValues.setBounds(147, 322, 417, 16);
+		contentPane.add(directorsValues);
 
 		txtNewVisa = new JTextField();
 		txtNewVisa.setBounds(147, 52, 158, 22);
@@ -117,26 +122,27 @@ public class NewMovieFrame extends JFrame {
 		txtNewReleaseYear.setBounds(147, 122, 158, 22);
 		contentPane.add(txtNewReleaseYear);
 		txtNewReleaseYear.setColumns(10);
-
-		JComboBox cbxGenre = new JComboBox();
+		
 		cbxGenre.setModel(new GenreJComboBox());
 		cbxGenre.setBounds(147, 157, 158, 22);
 		contentPane.add(cbxGenre);
 
-		JButton btnErase = new JButton("Erase");
-		btnErase.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				clearInfo(cbxGenre, genresValues);
-			}
-		});
-		
-		JComboBox cbxActor = new JComboBox();
+		VipJComboBox actorJComboBox = new VipJComboBox();
+		cbxActor.setModel(actorJComboBox);
 		cbxActor.setBounds(147, 221, 274, 22);
 		contentPane.add(cbxActor);
 		
-		JComboBox cbxDirector = new JComboBox();
+		VipJComboBox directorJComboBox = new VipJComboBox();
+		cbxDirector.setModel(directorJComboBox);
 		cbxDirector.setBounds(147, 285, 274, 22);
 		contentPane.add(cbxDirector);
+		
+		JButton btnErase = new JButton("Erase");
+		btnErase.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clearInfo();
+			}
+		});
 		btnErase.setBounds(147, 386, 158, 25);
 		contentPane.add(btnErase);
 
@@ -153,7 +159,10 @@ public class NewMovieFrame extends JFrame {
 						newMovie.setMovieVisa(new Integer(txtNewVisa.getText()));
 						newMovie.setMovieTitle(txtNewTitle.getText());
 						App.getDaoMovie().addNewMovie(newMovie, genres);
-						clearInfo(cbxGenre, genresValues);
+						App.getDaoMovie().addNewMovieCategory(newMovie, genres);
+						App.getDaoMovie().addNewMovieCasting(newMovie, actors);
+						App.getDaoMovie().addNewMovieDirection(newMovie, directors);
+						clearInfo();
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -166,8 +175,8 @@ public class NewMovieFrame extends JFrame {
 		JButton btnAddGenre = new JButton("Add");
 		btnAddGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nationality = (String) cbxGenre.getSelectedItem();
-				genres.add(nationality);
+				String genre = (String) cbxGenre.getSelectedItem();
+				genres.add(genre);
 				genresValues.setText(genres.toString());
 				cbxGenre.setSelectedIndex(-1);
 			}
@@ -176,22 +185,50 @@ public class NewMovieFrame extends JFrame {
 		contentPane.add(btnAddGenre);
 		
 		JButton btnAddActor = new JButton("Add");
+		btnAddActor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String actor = (String) cbxActor.getSelectedItem();
+				actors.add(actor);
+				Integer actorId = (Integer) actorJComboBox.getCurrentId(cbxActor.getSelectedIndex());
+				actorsId.add(actorId);
+				actorsValues.setText(actors.toString());
+				cbxActor.setSelectedIndex(-1);
+			}
+		});
 		btnAddActor.setBounds(431, 220, 133, 25);
 		contentPane.add(btnAddActor);
 		
 		JButton btnAddDirector = new JButton("Add");
+		btnAddDirector.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String director = (String) cbxDirector.getSelectedItem();
+				directors.add(director);
+				Integer directorId = (Integer) directorJComboBox.getCurrentId(cbxDirector.getSelectedIndex());
+				directorsId.add(directorId);
+				directorsValues.setText(directors.toString());
+				cbxDirector.setSelectedIndex(-1);
+			}
+		});
 		btnAddDirector.setBounds(431, 284, 133, 25);
 		contentPane.add(btnAddDirector);
+		
+		
 
 	}
 
-	private void clearInfo(JComboBox cbxGenre, JLabel nationalitiesValues) {
+	private void clearInfo() {
 		txtNewVisa.setText("");
 		txtNewTitle.setText("");
 		txtNewReleaseYear.setText("");
 		cbxGenre.setSelectedIndex(-1);
+		cbxActor.setSelectedIndex(-1);
+		cbxDirector.setSelectedIndex(-1);
 		genres.clear();
+		actors.clear();
+		directors.clear();
+		genresValues.setText("");
+		actorsValues.setText("");
+		directorsValues.setText("");
 		System.out.println(genres.toString());
-		nationalitiesValues.setText("");
 	}
 }

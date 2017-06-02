@@ -110,5 +110,20 @@ public class DAOMovie {
 		pstmtNewVip.close();
 		// connexion.close();
 	} // addNewMovie method
+
+	public void addNewMovieCategory(Movie newMovie, List<String> genres) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addNewMovieCasting(Movie newMovie, List<String> actors) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addNewMovieDirection(Movie newMovie, List<String> directors) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 } // DAOVip class
