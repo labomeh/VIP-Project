@@ -10,7 +10,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import app.App;
-import controller.Genre;
 
 /**
  * 
@@ -27,9 +26,9 @@ public class DAOCountry {
 
 	public static List<String> getCountries() throws SQLException {
 		List<String> countryList = new ArrayList<String>();
-		String request = "select * from country";
+		String query = "select * from country";
 		Statement stmt = connection.createStatement();
-		ResultSet rset = stmt.executeQuery(request);
+		ResultSet rset = stmt.executeQuery(query);
 		while (rset.next()) {
 			String countryName = rset.getString(1);
 			countryList.add(countryName);
@@ -38,4 +37,5 @@ public class DAOCountry {
 		stmt.close();
 		return countryList;
 	}
+	
 }

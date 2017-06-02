@@ -3,6 +3,7 @@ package view;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.lang.Integer;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,28 +17,25 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-import controller.Vip;
+import controller.Movie;
 import javax.swing.JComboBox;
 import java.awt.Component;
 
 import javax.swing.SwingConstants;
-import java.sql.Date;
 
 public class NewMovieFrame extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtNewName;
-	private JTextField txtNewSurname1;
-	private JTextField txtNewSurname2;
-	private JTextField txtNewBirthdate;
-	private JTextField txtNewBirthplace;
-	private Vip newVip;
-	private List<String> nationalities = new ArrayList<>();
+	private JTextField txtNewVisa;
+	private JTextField txtNewTitle;
+	private JTextField txtNewReleaseYear;
+	private Movie newMovie;
+	private List<String> genres = new ArrayList<>();
 
 	/**
 	 * Create the frame.
 	 */
-	public NewMovieFrame(MainFrame mainFrame, Vip newVip) throws SQLException {
+	public NewMovieFrame(MainFrame mainFrame, Movie newMovie) throws SQLException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 451, 454);
 		contentPane = new JPanel();
@@ -45,86 +43,64 @@ public class NewMovieFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblVipCreation = new JLabel("VIP Creation");
-		lblVipCreation.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVipCreation.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblVipCreation.setBounds(12, 0, 409, 42);
-		contentPane.add(lblVipCreation);
+		JLabel lblMovieCreation = new JLabel("Movie Creation");
+		lblMovieCreation.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMovieCreation.setAlignmentX(Component.CENTER_ALIGNMENT);
+		lblMovieCreation.setBounds(12, 0, 409, 42);
+		contentPane.add(lblMovieCreation);
 
-		JLabel lblNewName = new JLabel("Last Name");
-		lblNewName.setBounds(22, 55, 113, 16);
-		contentPane.add(lblNewName);
+		JLabel lblNewVisa = new JLabel("Visa");
+		lblNewVisa.setBounds(22, 55, 113, 16);
+		contentPane.add(lblNewVisa);
 
-		JLabel lblNewSurname1 = new JLabel("First Name 1");
-		lblNewSurname1.setBounds(22, 90, 113, 16);
-		contentPane.add(lblNewSurname1);
+		JLabel lblNewTitle = new JLabel("Movie Title");
+		lblNewTitle.setBounds(22, 90, 113, 16);
+		contentPane.add(lblNewTitle);
 
-		JLabel lblNewSurname2 = new JLabel("First Name 2");
-		lblNewSurname2.setBounds(22, 125, 113, 16);
-		contentPane.add(lblNewSurname2);
+		JLabel lblNewReleaseYear = new JLabel("Release Year");
+		lblNewReleaseYear.setBounds(22, 125, 113, 16);
+		contentPane.add(lblNewReleaseYear);
 
-		JLabel lblNewBirthdate = new JLabel("Birthdate");
-		lblNewBirthdate.setBounds(22, 160, 113, 16);
-		contentPane.add(lblNewBirthdate);
+		JLabel lblNewGenre = new JLabel("Genre");
+		lblNewGenre.setBounds(22, 160, 113, 16);
+		contentPane.add(lblNewGenre);
 
-		JLabel lblNewBirthplace = new JLabel("Birthplace");
-		lblNewBirthplace.setBounds(22, 195, 113, 16);
-		contentPane.add(lblNewBirthplace);
+		JLabel lblAddedGenres = new JLabel("Added Genres");
+		lblAddedGenres.setBounds(22, 192, 113, 16);
+		contentPane.add(lblAddedGenres);
 
-		JLabel lblNewNationality1 = new JLabel("Nationality");
-		lblNewNationality1.setBounds(22, 264, 113, 16);
-		contentPane.add(lblNewNationality1);
+		JLabel lblyyyy = new JLabel("(yyyy)");
+		lblyyyy.setBounds(317, 125, 104, 16);
+		contentPane.add(lblyyyy);
 
-		JLabel lblAddedNationalities = new JLabel("Added Nationalities");
-		lblAddedNationalities.setBounds(22, 299, 113, 16);
-		contentPane.add(lblAddedNationalities);
+		JLabel genresValues = new JLabel("");
+		genresValues.setBounds(147, 192, 274, 16);
+		contentPane.add(genresValues);
 
-		JLabel lblNewSurname2Opt = new JLabel("(optional)");
-		lblNewSurname2Opt.setBounds(317, 125, 104, 16);
-		contentPane.add(lblNewSurname2Opt);
+		txtNewVisa = new JTextField();
+		txtNewVisa.setBounds(147, 52, 158, 22);
+		contentPane.add(txtNewVisa);
+		txtNewVisa.setColumns(10);
 
-		JLabel lblyyyymmdd = new JLabel("(yyyy-mm-dd)");
-		lblyyyymmdd.setBounds(317, 160, 104, 16);
-		contentPane.add(lblyyyymmdd);
+		txtNewTitle = new JTextField();
+		txtNewTitle.setBounds(147, 87, 274, 22);
+		contentPane.add(txtNewTitle);
+		txtNewTitle.setColumns(10);
 
-		JLabel nationalitiesValues = new JLabel("");
-		nationalitiesValues.setBounds(147, 299, 274, 16);
-		contentPane.add(nationalitiesValues);
+		txtNewReleaseYear = new JTextField();
+		txtNewReleaseYear.setBounds(147, 122, 158, 22);
+		contentPane.add(txtNewReleaseYear);
+		txtNewReleaseYear.setColumns(10);
 
-		txtNewName = new JTextField();
-		txtNewName.setBounds(147, 52, 158, 22);
-		contentPane.add(txtNewName);
-		txtNewName.setColumns(10);
-
-		txtNewSurname1 = new JTextField();
-		txtNewSurname1.setBounds(147, 87, 158, 22);
-		contentPane.add(txtNewSurname1);
-		txtNewSurname1.setColumns(10);
-
-		txtNewSurname2 = new JTextField();
-		txtNewSurname2.setBounds(147, 122, 158, 22);
-		contentPane.add(txtNewSurname2);
-		txtNewSurname2.setColumns(10);
-
-		txtNewBirthdate = new JTextField();
-		txtNewBirthdate.setBounds(147, 157, 158, 22);
-		contentPane.add(txtNewBirthdate);
-		txtNewBirthdate.setColumns(10);
-
-		txtNewBirthplace = new JTextField();
-		txtNewBirthplace.setBounds(147, 192, 158, 56);
-		contentPane.add(txtNewBirthplace);
-		txtNewBirthplace.setColumns(10);
-
-		JComboBox cbxNationality = new JComboBox();
-		cbxNationality.setModel(new CountryJComboBox());
-		cbxNationality.setBounds(147, 261, 158, 22);
-		contentPane.add(cbxNationality);
+		JComboBox cbxGenre = new JComboBox();
+		cbxGenre.setModel(new GenreJComboBox());
+		cbxGenre.setBounds(147, 157, 158, 22);
+		contentPane.add(cbxGenre);
 
 		JButton btnErase = new JButton("Erase");
 		btnErase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				clearInfo(cbxNationality, nationalitiesValues);
+				clearInfo(cbxGenre, genresValues);
 			}
 		});
 		btnErase.setBounds(147, 331, 158, 25);
@@ -134,19 +110,16 @@ public class NewMovieFrame extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if (txtNewName.getText().isEmpty()) {
-						throw new Exception("You must fill the name field");
+					if (txtNewVisa.getText().isEmpty()) {
+						throw new Exception("You must fill the Visa field");
 					}
-					if (txtNewSurname1.getText().isEmpty()) {
-						throw new Exception("You must fill the surname field");
+					if (txtNewTitle.getText().isEmpty()) {
+						throw new Exception("You must fill the Title field");
 					} else {
-						newVip.setName(txtNewName.getText());
-						String[] surnames = { txtNewSurname1.getText(), txtNewSurname2.getText() };
-						newVip.setSurname(surnames);
-						newVip.setBirthdate(Date.valueOf(txtNewBirthdate.getText()));
-						newVip.setBirthplace(txtNewBirthplace.getText());
-						App.getDaoVip().addNewVip(newVip, nationalities);
-						clearInfo(cbxNationality, nationalitiesValues);
+						newMovie.setMovieVisa(new Integer(txtNewVisa.getText()));
+						newMovie.setMovieTitle(txtNewTitle.getText());
+						App.getDaoMovie().addNewMovie(newMovie, genres);
+						clearInfo(cbxGenre, genresValues);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -156,29 +129,27 @@ public class NewMovieFrame extends JFrame {
 		btnSave.setBounds(147, 369, 158, 25);
 		contentPane.add(btnSave);
 
-		JButton btnAddNationality = new JButton("Add");
-		btnAddNationality.addActionListener(new ActionListener() {
+		JButton btnAddGenres = new JButton("Add");
+		btnAddGenres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String nationality = (String) cbxNationality.getSelectedItem();
-				nationalities.add(nationality);
-				nationalitiesValues.setText(nationalities.toString());
-				cbxNationality.setSelectedIndex(-1);
+				String nationality = (String) cbxGenre.getSelectedItem();
+				genres.add(nationality);
+				genresValues.setText(genres.toString());
+				cbxGenre.setSelectedIndex(-1);
 			}
 		});
-		btnAddNationality.setBounds(317, 260, 104, 25);
-		contentPane.add(btnAddNationality);
+		btnAddGenres.setBounds(317, 156, 104, 25);
+		contentPane.add(btnAddGenres);
 
 	}
 
-	private void clearInfo(JComboBox cbxNationality, JLabel nationalitiesValues) {
-		txtNewName.setText("");
-		txtNewSurname1.setText("");
-		txtNewSurname2.setText("");
-		txtNewBirthdate.setText("");
-		txtNewBirthplace.setText("");
-		cbxNationality.setSelectedIndex(-1);
-		nationalities.clear();
-		System.out.println(nationalities.toString());
+	private void clearInfo(JComboBox cbxGenre, JLabel nationalitiesValues) {
+		txtNewVisa.setText("");
+		txtNewTitle.setText("");
+		txtNewReleaseYear.setText("");
+		cbxGenre.setSelectedIndex(-1);
+		genres.clear();
+		System.out.println(genres.toString());
 		nationalitiesValues.setText("");
 	}
 }
