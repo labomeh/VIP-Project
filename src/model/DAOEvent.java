@@ -11,7 +11,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import controller.Event;
-import controller.Genre;
 
 /**
  * @author Simon

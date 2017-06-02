@@ -99,10 +99,10 @@ public class DAOMovie {
 		pstmtNewVip.executeUpdate();
 		
 		for(String genre : genres) {
-			String queryNewNat = "INSERT INTO genre VALUES(?, ?);";
+			String queryNewNat = "INSERT INTO movieCategory VALUES(?, ?);";
 			PreparedStatement pstmtNewGenre = connexion.prepareStatement(queryNewNat);
 			pstmtNewGenre.setInt(1, movie.getMovieVisa());
-			pstmtNewGenre.setString(2, genre.toString());
+			pstmtNewGenre.setString(2, genre);
 			pstmtNewGenre.executeUpdate();
 			pstmtNewGenre.close();
 		}
