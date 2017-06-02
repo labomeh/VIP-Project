@@ -8,6 +8,7 @@ import javax.sql.DataSource;
 import javax.swing.UIManager;
 
 import model.DAOCountry;
+import model.DAOEvent;
 import model.DAOGenre;
 import model.DAOMovie;
 import model.DAOVip;
@@ -24,8 +25,17 @@ public class App {
 	private static DAOCountry daoCountry;
 	private static DAOMovie daoMovie;
 	private static DAOGenre daoGenre;
+	private static DAOEvent daoEvent;
 
 	
+
+	public static DAOEvent getDaoEvent() {
+		return daoEvent;
+	}
+
+	public static void setDaoEvent(DAOEvent daoEvent) {
+		App.daoEvent = daoEvent;
+	}
 
 	public static Connection getConnection() {
 		return connection;
