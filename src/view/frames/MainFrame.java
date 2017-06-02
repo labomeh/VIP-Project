@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.Movie;
 import controller.Vip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -69,20 +70,36 @@ public class MainFrame extends JFrame {
 					NewVipFrame newVipFrame = newVipDisplay(newVip);
 					newVipFrame.setVisible(true);
 					
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException eVipCreation) {
+					eVipCreation.printStackTrace();
 				}
 			}
 		});
-		btnNewVip.setBounds(67, 286, 97, 25);
+		btnNewVip.setBounds(31, 286, 97, 25);
 		contentPane.add(btnNewVip);
 		
+		JButton btnNewMovie = new JButton("New Movie");
+		btnNewMovie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Movie newMovie = new Movie();
+					NewMovieFrame newMovieFrame = newMovieDisplay(newMovie);
+					newMovieFrame.setVisible(true);
+					
+				} catch (SQLException eMovieCreation) {
+					eMovieCreation.printStackTrace();
+				}
+			}
+		});
+		btnNewMovie.setBounds(159, 286, 97, 25);
+		contentPane.add(btnNewMovie);
+		
 		JButton btnNewEvent = new JButton("New Event");
-		btnNewEvent.setBounds(220, 286, 97, 25);
+		btnNewEvent.setBounds(287, 286, 97, 25);
 		contentPane.add(btnNewEvent);
 		
 		JButton btnNewPhoto = new JButton("New Photo");
-		btnNewPhoto.setBounds(367, 286, 97, 25);
+		btnNewPhoto.setBounds(415, 286, 97, 25);
 		contentPane.add(btnNewPhoto);
 		
 		JLabel lblVipWorld = new JLabel("VIP WORLD");
@@ -99,8 +116,11 @@ public class MainFrame extends JFrame {
 		return new EventListFrame(this);
 	}
 	
-	
 	private NewVipFrame newVipDisplay(Vip newVip) throws SQLException{
 		return new NewVipFrame(this, newVip);
+	}
+	
+	private NewMovieFrame newMovieDisplay(Movie newMovie) throws SQLException{
+		return new NewMovieFrame(this, newMovie);
 	}
 }
