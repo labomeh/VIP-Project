@@ -37,7 +37,7 @@ public class NewMovieFrame extends JFrame {
 	 */
 	public NewMovieFrame(MainFrame mainFrame, Movie newMovie) throws SQLException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 451, 454);
+		setBounds(100, 100, 594, 491);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -76,6 +76,30 @@ public class NewMovieFrame extends JFrame {
 		JLabel genresValues = new JLabel("");
 		genresValues.setBounds(147, 192, 274, 16);
 		contentPane.add(genresValues);
+		
+		JLabel lblNewActor = new JLabel("Actor");
+		lblNewActor.setBounds(22, 224, 113, 16);
+		contentPane.add(lblNewActor);
+		
+		JLabel lblNewDirector = new JLabel("Director");
+		lblNewDirector.setBounds(22, 288, 113, 16);
+		contentPane.add(lblNewDirector);
+		
+		JLabel lblAddedActors = new JLabel("Added Actors");
+		lblAddedActors.setBounds(22, 256, 113, 16);
+		contentPane.add(lblAddedActors);
+		
+		JLabel actorsValues = new JLabel("");
+		actorsValues.setBounds(147, 256, 417, 16);
+		contentPane.add(actorsValues);
+		
+		JLabel lblAddedDirectors = new JLabel("Added Directors");
+		lblAddedDirectors.setBounds(22, 322, 113, 16);
+		contentPane.add(lblAddedDirectors);
+		
+		JLabel directorValues = new JLabel("");
+		directorValues.setBounds(147, 322, 417, 16);
+		contentPane.add(directorValues);
 
 		txtNewVisa = new JTextField();
 		txtNewVisa.setBounds(147, 52, 158, 22);
@@ -83,7 +107,7 @@ public class NewMovieFrame extends JFrame {
 		txtNewVisa.setColumns(10);
 
 		txtNewTitle = new JTextField();
-		txtNewTitle.setBounds(147, 87, 274, 22);
+		txtNewTitle.setBounds(147, 87, 417, 22);
 		contentPane.add(txtNewTitle);
 		txtNewTitle.setColumns(10);
 
@@ -103,7 +127,15 @@ public class NewMovieFrame extends JFrame {
 				clearInfo(cbxGenre, genresValues);
 			}
 		});
-		btnErase.setBounds(147, 331, 158, 25);
+		
+		JComboBox cbxActor = new JComboBox();
+		cbxActor.setBounds(147, 221, 274, 22);
+		contentPane.add(cbxActor);
+		
+		JComboBox cbxDirector = new JComboBox();
+		cbxDirector.setBounds(147, 285, 274, 22);
+		contentPane.add(cbxDirector);
+		btnErase.setBounds(147, 386, 158, 25);
 		contentPane.add(btnErase);
 
 		JButton btnSave = new JButton("Save");
@@ -126,11 +158,11 @@ public class NewMovieFrame extends JFrame {
 				}
 			}
 		});
-		btnSave.setBounds(147, 369, 158, 25);
+		btnSave.setBounds(350, 386, 158, 25);
 		contentPane.add(btnSave);
 
-		JButton btnAddGenres = new JButton("Add");
-		btnAddGenres.addActionListener(new ActionListener() {
+		JButton btnAddGenre = new JButton("Add");
+		btnAddGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nationality = (String) cbxGenre.getSelectedItem();
 				genres.add(nationality);
@@ -138,8 +170,16 @@ public class NewMovieFrame extends JFrame {
 				cbxGenre.setSelectedIndex(-1);
 			}
 		});
-		btnAddGenres.setBounds(317, 156, 104, 25);
-		contentPane.add(btnAddGenres);
+		btnAddGenre.setBounds(317, 156, 104, 25);
+		contentPane.add(btnAddGenre);
+		
+		JButton btnAddActor = new JButton("Add");
+		btnAddActor.setBounds(431, 220, 133, 25);
+		contentPane.add(btnAddActor);
+		
+		JButton btnAddDirector = new JButton("Add");
+		btnAddDirector.setBounds(431, 284, 133, 25);
+		contentPane.add(btnAddDirector);
 
 	}
 

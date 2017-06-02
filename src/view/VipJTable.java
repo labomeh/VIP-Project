@@ -23,9 +23,9 @@ public class VipJTable extends AbstractTableModel{
 	private DAOVip dao;
 	
 	public VipJTable(DAOVip dao) throws SQLException{
-		vipList = new ArrayList<Vip>();
+		vipList = new ArrayList<>();
 		this.dao=dao;
-		dao.getVip(vipList);
+		vipList = dao.getVip();
 	}
 	
 	@Override

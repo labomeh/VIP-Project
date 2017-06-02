@@ -28,7 +28,8 @@ public class DAOVip {
 		this.connexion = App.getConnection();
 	}
 
-	public void getVip(List<Vip> vipList) throws SQLException {
+	public List<Vip> getVip() throws SQLException {
+		List<Vip> vipList = new ArrayList<>();
 		String query = "select * from VIP";
 		Statement stmt = connexion.createStatement();
 		ResultSet rset = stmt.executeQuery(query);
@@ -47,6 +48,7 @@ public class DAOVip {
 		}
 		rset.close();
 		stmt.close();
+		return vipList;
 		
 	} // getVip method
 
