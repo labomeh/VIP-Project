@@ -14,7 +14,6 @@ import java.util.List;
 
 import app.App;
 import controller.Event;
-import controller.Genre;
 
 /**
  * @author Simon

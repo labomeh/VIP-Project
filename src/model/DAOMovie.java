@@ -21,15 +21,15 @@ import controller.Vip;
  */
 public class DAOMovie {
 
-	private final Connection connection;
+	private final Connection connexion;
 
 	public DAOMovie() {
-		this.connection = App.getConnection();
+		this.connexion = App.getConnection();
 	}
 
 	public void getMovies(List<Movie> movieList) throws SQLException {
 		String requete = "select * from movie";
-		Statement stmt = connection.createStatement();
+		Statement stmt = connexion.createStatement();
 		ResultSet rset = stmt.executeQuery(requete);
 		while (rset.next()) {
 			int movieVisa = rset.getInt(1);
@@ -46,7 +46,7 @@ public class DAOMovie {
 		int movieVisa = movie.getMovieVisa();
 		List<String> movieGenres = new ArrayList<>();
 		String requete = "select genreTitle from movieCategory where movieVisa=?";
-		PreparedStatement pstmt = connection.prepareStatement(requete);
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
 		ResultSet rset = pstmt.executeQuery(requete);
 		pstmt.setInt(1, movieVisa);
 		while (rset.next()) {
@@ -62,7 +62,7 @@ public class DAOMovie {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieCasting = new ArrayList<>();
 		String requete = "SELECT idVIP FROM playing WHERE movieVisa=?";
-		PreparedStatement pstmt = connection.prepareStatement(requete);
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
 		pstmt.setInt(1, movieVisa);
 		ResultSet rset = pstmt.executeQuery(requete);
 		while (rset.next()) {
@@ -78,7 +78,7 @@ public class DAOMovie {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieDirectors = new ArrayList<>();
 		String requete = "SELECT idVIP FROM directing WHERE movieVisa=?";
-		PreparedStatement pstmt = connection.prepareStatement(requete);
+		PreparedStatement pstmt = connexion.prepareStatement(requete);
 		pstmt.setInt(1, movieVisa);
 		ResultSet rset = pstmt.executeQuery(requete);
 		while (rset.next()) {
@@ -90,6 +90,25 @@ public class DAOMovie {
 		return movieDirectors;
 	} // getDirector method
 	
-	
+	public void addNewMovie(Movie movie, List<String> genres) throws SQLException {
+		String queryNewVip = "INSERT INTO movie VALUES(?, ?, ?);";
+		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
+		pstmtNewVip.setInt(1, movie.getMovieVisa());
+		pstmtNewVip.setString(2, movie.getMovieTitle());
+		pstmtNewVip.setInt(3, movie.getReleaseYear());
+		pstmtNewVip.executeUpdate();
+		
+		for(String genre : genres) {
+			String queryNewNat = "INSERT INTO movieCategory VALUES(?, ?);";
+			PreparedStatement pstmtNewGenre = connexion.prepareStatement(queryNewNat);
+			pstmtNewGenre.setInt(1, movie.getMovieVisa());
+			pstmtNewGenre.setString(2, genre);
+			pstmtNewGenre.executeUpdate();
+			pstmtNewGenre.close();
+		}
+		
+		pstmtNewVip.close();
+		// connexion.close();
+	} // addNewMovie method
 	
 } // DAOVip class

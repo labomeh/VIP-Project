@@ -2,6 +2,7 @@
  * 
  */
 package controller;
+import java.sql.Date;
 import java.time.*;
 
 /**
@@ -19,6 +20,9 @@ public class Vip {
 	private char roleCode; // value A for Actor, D for Director, B for Both, N for None
 	private Vip partner;
 	
+	public Vip() {
+	}
+	
 	public Vip(int idVip, String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
 		this.idVip = idVip;
 		this.name = name;
@@ -26,13 +30,6 @@ public class Vip {
 		this.birthdate = birthdate;
 		this.birthplace = birthplace;
 		this.roleCode = roleCode;
-	}
-
-	public void setBirthplace(String birthplace) {
-		this.birthplace = birthplace;
-	}
-
-	public Vip() {
 	}
 
 	public int getIdVip() {
@@ -74,9 +71,17 @@ public class Vip {
 	public LocalDate getBirthdate() {
 		return birthdate;
 	}
-
+	
+	public void setBirthdate(Date birthdate) {
+		this.birthdate=birthdate.toLocalDate();
+	}
+	
 	public String getBirthplace() {
 		return birthplace;
+	}
+	
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
 	}
 }
 
