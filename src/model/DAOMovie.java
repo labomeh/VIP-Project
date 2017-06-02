@@ -90,6 +90,4 @@ public class DAOMovie {
 		return movieDirectors;
 	} // getDirector method
 	
-	
-	
 } // DAOVip class

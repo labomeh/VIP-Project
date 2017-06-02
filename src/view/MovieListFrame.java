@@ -12,10 +12,10 @@ import java.awt.Frame;
 import java.sql.SQLException;
 import javax.swing.JScrollPane;
 
-public class VipListFrame extends JFrame {
+public class MovieListFrame extends JFrame {
 
 	private JPanel contentPane;
-	private VipJTable model;
+	private MovieJTable model;
 	private boolean outputState;
 	private JTable table;
 
@@ -23,7 +23,7 @@ public class VipListFrame extends JFrame {
 	 * Create the frame.
 	 * @throws SQLException 
 	 */
-	public VipListFrame(Frame parent) throws SQLException {
+	public MovieListFrame(Frame parent) throws SQLException {
 		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 564, 476);
@@ -32,7 +32,7 @@ public class VipListFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		model = new VipJTable(App.getDaoVip());
+		model = new MovieJTable(App.getDaoMovie());
 		
 		JLabel lblMovieList = new JLabel("Movies");
 		lblMovieList.setFont(new Font("Tahoma", Font.PLAIN, 26));
