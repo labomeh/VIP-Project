@@ -1,6 +1,9 @@
 package view;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +19,7 @@ import java.awt.event.ActionEvent;
 import controller.Vip;
 import javax.swing.JComboBox;
 import java.awt.Component;
+
 import javax.swing.SwingConstants;
 import java.sql.Date;
 
@@ -28,7 +32,7 @@ public class NewVipFrame extends JFrame {
 	private JTextField txtNewBirthdate;
 	private JTextField txtNewBirthplace;
 	private Vip newVip;
-	
+	private List<String> nationalities = new ArrayList<>();
 
 	/**
 	 * Create the frame.
@@ -44,48 +48,48 @@ public class NewVipFrame extends JFrame {
 		JLabel lblVipCreation = new JLabel("VIP Creation");
 		lblVipCreation.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVipCreation.setAlignmentX(Component.CENTER_ALIGNMENT);
-		lblVipCreation.setBounds(12, 0, 374, 42);
+		lblVipCreation.setBounds(12, 0, 409, 42);
 		contentPane.add(lblVipCreation);
 
 		JLabel lblNewName = new JLabel("Last Name");
 		lblNewName.setBounds(22, 55, 113, 16);
 		contentPane.add(lblNewName);
-		
+
 		JLabel lblNewSurname1 = new JLabel("First Name 1");
 		lblNewSurname1.setBounds(22, 90, 113, 16);
 		contentPane.add(lblNewSurname1);
-		
+
 		JLabel lblNewSurname2 = new JLabel("First Name 2");
 		lblNewSurname2.setBounds(22, 125, 113, 16);
 		contentPane.add(lblNewSurname2);
-				
+
 		JLabel lblNewBirthdate = new JLabel("Birthdate");
 		lblNewBirthdate.setBounds(22, 160, 113, 16);
 		contentPane.add(lblNewBirthdate);
-				
+
 		JLabel lblNewBirthplace = new JLabel("Birthplace");
 		lblNewBirthplace.setBounds(22, 195, 113, 16);
 		contentPane.add(lblNewBirthplace);
-				
-		JLabel lblNewNationality1 = new JLabel("Nationality 1");
+
+		JLabel lblNewNationality1 = new JLabel("Nationality");
 		lblNewNationality1.setBounds(22, 264, 113, 16);
 		contentPane.add(lblNewNationality1);
-		
-		JLabel lblNewNationality2 = new JLabel("Nationality 2");
-		lblNewNationality2.setBounds(22, 299, 113, 16);
-		contentPane.add(lblNewNationality2);
+
+		JLabel lblAddedNationalities = new JLabel("Added Nationalities");
+		lblAddedNationalities.setBounds(22, 299, 113, 16);
+		contentPane.add(lblAddedNationalities);
 
 		JLabel lblNewSurname2Opt = new JLabel("(optional)");
 		lblNewSurname2Opt.setBounds(317, 125, 104, 16);
 		contentPane.add(lblNewSurname2Opt);
-		
+
 		JLabel lblyyyymmdd = new JLabel("(yyyy-mm-dd)");
 		lblyyyymmdd.setBounds(317, 160, 104, 16);
 		contentPane.add(lblyyyymmdd);
-		
-		JLabel label = new JLabel("(optional)");
-		label.setBounds(317, 299, 104, 16);
-		contentPane.add(label);
+
+		JLabel nationalitiesValues = new JLabel("");
+		nationalitiesValues.setBounds(147, 299, 274, 16);
+		contentPane.add(nationalitiesValues);
 
 		txtNewName = new JTextField();
 		txtNewName.setBounds(147, 52, 158, 22);
@@ -112,26 +116,15 @@ public class NewVipFrame extends JFrame {
 		contentPane.add(txtNewBirthplace);
 		txtNewBirthplace.setColumns(10);
 
-		JComboBox cbxNationality1 = new JComboBox();
-		cbxNationality1.setModel(new CountryJComboBox());
-		cbxNationality1.setBounds(147, 261, 158, 22);
-		contentPane.add(cbxNationality1);
-		
-		JComboBox cbxNationality2 = new JComboBox();
-		cbxNationality2.setModel(new CountryJComboBox());
-		cbxNationality2.setBounds(147, 296, 158, 22);
-		contentPane.add(cbxNationality2);
-		
+		JComboBox cbxNationality = new JComboBox();
+		cbxNationality.setModel(new CountryJComboBox());
+		cbxNationality.setBounds(147, 261, 158, 22);
+		contentPane.add(cbxNationality);
+
 		JButton btnErase = new JButton("Erase");
 		btnErase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				txtNewName.setText("");
-				txtNewSurname1.setText("");
-				txtNewSurname2.setText("");
-				txtNewBirthdate.setText("");
-				txtNewBirthplace.setText("");
-				cbxNationality1.setSelectedIndex(-1);
-				cbxNationality2.setSelectedIndex(-1);
+				clearInfo(cbxNationality, nationalitiesValues);
 			}
 		});
 		btnErase.setBounds(147, 331, 158, 25);
@@ -148,13 +141,12 @@ public class NewVipFrame extends JFrame {
 						throw new Exception("You must fill the surname field");
 					} else {
 						newVip.setName(txtNewName.getText());
-						String[] surnames = {txtNewSurname1.getText(), txtNewSurname2.getText()};
+						String[] surnames = { txtNewSurname1.getText(), txtNewSurname2.getText() };
 						newVip.setSurname(surnames);
 						newVip.setBirthdate(Date.valueOf(txtNewBirthdate.getText()));
 						newVip.setBirthplace(txtNewBirthplace.getText());
-						String nationality1 = (String) cbxNationality1.getSelectedItem();
-						String nationality2 = (String) cbxNationality2.getSelectedItem();
-						App.getDaoVip().addNewVip(newVip, nationality1, nationality2);
+						App.getDaoVip().addNewVip(newVip, nationalities);
+						clearInfo(cbxNationality, nationalitiesValues);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -163,5 +155,30 @@ public class NewVipFrame extends JFrame {
 		});
 		btnSave.setBounds(147, 369, 158, 25);
 		contentPane.add(btnSave);
+
+		JButton btnAddNationality = new JButton("Add");
+		btnAddNationality.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String nationality = (String) cbxNationality.getSelectedItem();
+				nationalities.add(nationality);
+				nationalitiesValues.setText(nationalities.toString());
+				cbxNationality.setSelectedIndex(-1);
+			}
+		});
+		btnAddNationality.setBounds(317, 260, 104, 25);
+		contentPane.add(btnAddNationality);
+
+	}
+
+	private void clearInfo(JComboBox cbxNationality, JLabel nationalitiesValues) {
+		txtNewName.setText("");
+		txtNewSurname1.setText("");
+		txtNewSurname2.setText("");
+		txtNewBirthdate.setText("");
+		txtNewBirthplace.setText("");
+		cbxNationality.setSelectedIndex(-1);
+		nationalities.clear();
+		System.out.println(nationalities.toString());
+		nationalitiesValues.setText("");
 	}
 }
