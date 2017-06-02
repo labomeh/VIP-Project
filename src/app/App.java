@@ -16,7 +16,7 @@ import javax.sql.DataSource;
 import javax.swing.UIManager;
 
 import model.SourceMariaDB;
-import view.MainFrame;
+import view.frames.MainFrame;
 
 public class App {
 	private static DataSource dataSource;

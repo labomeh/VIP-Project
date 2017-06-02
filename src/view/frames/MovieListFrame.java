@@ -1,10 +1,12 @@
-package view;
+package view.frames;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import app.App;
+import view.JTableModels.MovieJTable;
+
 import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.Font;

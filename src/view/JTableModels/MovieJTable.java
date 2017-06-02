@@ -1,4 +1,4 @@
-package view;
+package view.JTableModels;
 
 /**
  * 
@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
+import app.App;
 import controller.Movie;
 import model.DAOMovie;
 
@@ -23,7 +24,7 @@ public class MovieJTable extends AbstractTableModel{
 	
 	public MovieJTable(DAOMovie dao) throws SQLException{
 		movieList = new ArrayList<Movie>();
-		this.dao=dao;
+		this.dao=App.getDaoMovie();
 		dao.getMovies(movieList);
 	}
 	

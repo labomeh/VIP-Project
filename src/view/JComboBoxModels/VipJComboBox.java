@@ -1,4 +1,4 @@
-package view;
+package view.JComboBoxModels;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

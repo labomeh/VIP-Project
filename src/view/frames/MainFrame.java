@@ -1,23 +1,16 @@
-package view;
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
+package view.frames;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Vip;
-import model.DAOVip;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.sql.DataSource;
-import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import javax.swing.JComboBox;
 
 public class MainFrame extends JFrame {
 
@@ -108,6 +101,6 @@ public class MainFrame extends JFrame {
 	
 	
 	private NewVipFrame newVipDisplay(Vip newVip) throws SQLException{
-		return new NewVipFrame(this,new DAOVip(), newVip);
+		return new NewVipFrame(this, newVip);
 	}
 }

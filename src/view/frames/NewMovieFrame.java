@@ -1,4 +1,4 @@
-package view;
+package view.frames;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -18,6 +18,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 import controller.Movie;
+import view.JComboBoxModels.GenreJComboBox;
+
 import javax.swing.JComboBox;
 import java.awt.Component;
 

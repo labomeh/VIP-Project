@@ -1,4 +1,4 @@
-package view;
+package view.JTableModels;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
