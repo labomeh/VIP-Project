@@ -90,39 +90,46 @@ public class DAOMovie {
 		return movieDirectors;
 	} // getDirector method
 	
-	public void addNewMovie(Movie movie, List<String> genres) throws SQLException {
+	public void addNewMovie(Movie newMovie, List<String> genres) throws SQLException {
 		String queryNewVip = "INSERT INTO movie VALUES(?, ?, ?);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
-		pstmtNewVip.setInt(1, movie.getMovieVisa());
-		pstmtNewVip.setString(2, movie.getMovieTitle());
-		pstmtNewVip.setInt(3, movie.getReleaseYear());
+		pstmtNewVip.setInt(1, newMovie.getMovieVisa());
+		pstmtNewVip.setString(2, newMovie.getMovieTitle());
+		pstmtNewVip.setInt(3, newMovie.getReleaseYear());
 		pstmtNewVip.executeUpdate();
 		
 		for(String genre : genres) {
-			String queryNewNat = "INSERT INTO movieCategory VALUES(?, ?);";
-			PreparedStatement pstmtNewGenre = connexion.prepareStatement(queryNewNat);
-			pstmtNewGenre.setInt(1, movie.getMovieVisa());
+			String queryNewGenre = "INSERT INTO movieCategory VALUES(?, ?);";
+			PreparedStatement pstmtNewGenre = connexion.prepareStatement(queryNewGenre);
+			pstmtNewGenre.setInt(1, newMovie.getMovieVisa());
 			pstmtNewGenre.setString(2, genre);
 			pstmtNewGenre.executeUpdate();
 			pstmtNewGenre.close();
 		}
 		
 		pstmtNewVip.close();
-		// connexion.close();
 	} // addNewMovie method
 
-	public void addNewMovieCategory(Movie newMovie, List<String> genres) {
-		// TODO Auto-generated method stub
-		
+	public void addNewMovieCasting(Movie newMovie, List<Integer> actorsId) throws SQLException {
+		for(int actorId : actorsId) {
+			String queryNewActor = "INSERT INTO casting VALUES(?, ?);";
+			PreparedStatement pstmtNewActor = connexion.prepareStatement(queryNewActor);
+			pstmtNewActor.setInt(1, actorId);
+			pstmtNewActor.setInt(2, newMovie.getMovieVisa());
+			pstmtNewActor.executeUpdate();
+			pstmtNewActor.close();
+		}
 	}
 
-	public void addNewMovieCasting(Movie newMovie, List<String> actors) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addNewMovieDirection(Movie newMovie, List<String> directors) {
-		// TODO Auto-generated method stub
+	public void addNewMovieDirection(Movie newMovie, List<Integer> directorsId) throws SQLException {
+		for(int directorId : directorsId) {
+			String queryNewDirector = "INSERT INTO directing VALUES(?, ?);";
+			PreparedStatement pstmtNewActor = connexion.prepareStatement(queryNewDirector);
+			pstmtNewActor.setInt(1, directorId);
+			pstmtNewActor.setInt(2, newMovie.getMovieVisa());
+			pstmtNewActor.executeUpdate();
+			pstmtNewActor.close();
+		}
 		
 	}
 	

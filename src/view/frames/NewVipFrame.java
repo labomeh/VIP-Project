@@ -90,7 +90,7 @@ public class NewVipFrame extends JFrame {
 		contentPane.add(lblyyyymmdd);
 
 		JLabel nationalitiesValues = new JLabel("");
-		nationalitiesValues.setBounds(147, 299, 274, 16);
+		nationalitiesValues.setBounds(147, 299, 158, 16);
 		contentPane.add(nationalitiesValues);
 
 		txtNewName = new JTextField();
@@ -169,6 +169,27 @@ public class NewVipFrame extends JFrame {
 		});
 		btnAddNationality.setBounds(317, 260, 104, 25);
 		contentPane.add(btnAddNationality);
+		
+		JButton btnRemoveNationality = new JButton("<");
+		btnRemoveNationality.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int nbNationalities = nationalities.size();
+				nationalities.remove(nbNationalities-1);
+				nationalitiesValues.setText(nationalities.toString());
+			}
+		});
+		btnRemoveNationality.setBounds(317, 295, 51, 25);
+		contentPane.add(btnRemoveNationality);
+		
+		JButton btnClearAllNat = new JButton("<<");
+		btnClearAllNat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				nationalities.clear();
+				nationalitiesValues.setText(nationalities.toString());
+			}
+		});
+		btnClearAllNat.setBounds(370, 295, 51, 25);
+		contentPane.add(btnClearAllNat);
 
 	}
 
