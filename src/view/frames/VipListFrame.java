@@ -4,7 +4,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import app.App;
 import view.JTableModels.VipJTable;
 
 import javax.swing.JTable;

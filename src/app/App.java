@@ -1,7 +1,6 @@
 package app;
 
 import java.awt.EventQueue;
-import java.net.PasswordAuthentication;
 import java.sql.Connection;
 
 import javax.sql.DataSource;
@@ -13,9 +12,6 @@ import model.DAOGenre;
 import model.DAOMovie;
 import model.DAOPhoto;
 import model.DAOVip;
-import javax.sql.DataSource;
-import javax.swing.UIManager;
-
 import model.SourceMariaDB;
 import view.frames.MainFrame;
 

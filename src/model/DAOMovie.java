@@ -13,7 +13,6 @@ import java.util.List;
 
 import app.App;
 import controller.Movie;
-import controller.Vip;
 
 /**
  * @author Simon

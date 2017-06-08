@@ -1,7 +1,5 @@
 package view.frames;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Frame;
 import java.sql.SQLException;
@@ -13,7 +11,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 
-import app.App;
 import view.JTableModels.EventJTable;
 
 public class EventListFrame extends JFrame {
