@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.App;
@@ -27,7 +28,8 @@ public class DAOEvent {
 		this.connection = App.getConnection();
 	}
 
-	public void getEvents(List<Event> eventList) throws SQLException {
+	public List<Event> getEvents() throws SQLException {
+		List<Event> eventList = new ArrayList<>();
 		String requete = "select * from event";
 		Statement stmt = connection.createStatement();
 		ResultSet rset = stmt.executeQuery(requete);
@@ -36,12 +38,20 @@ public class DAOEvent {
 			LocalDate weddingDate = rset.getDate(2).toLocalDate();
 			int idVip2 = rset.getInt(3);
 			String weddingPlace = rset.getString(4);
-			LocalDate divorceDate = rset.getDate(5).toLocalDate();
+			LocalDate divorceDate;
+			if(rset.getDate(5)==null){
+				divorceDate= null;
+			}
+			else{
+				divorceDate = rset.getDate(5).toLocalDate();
+			}
+			 
 			Event event = new Event(idVip1, weddingDate, idVip2, weddingPlace, divorceDate);
 			eventList.add(event);
 		}
 		rset.close();
 		stmt.close();
+		return eventList;
 	} // getEvents method
 	
 	public void addWedding(Event event) throws SQLException{

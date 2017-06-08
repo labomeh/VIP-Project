@@ -95,6 +95,7 @@ public class App {
 			daoMovie=new DAOMovie() ;
 			daoGenre=new DAOGenre();
 			daoPhoto=new DAOPhoto();
+			daoEvent=new DAOEvent();
 		}
 		catch(Exception ex){
 			System.out.println("Echec connexion : "+ex.getMessage());
