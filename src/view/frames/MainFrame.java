@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.Movie;
+import controller.Photo;
 import controller.Vip;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -99,6 +100,18 @@ public class MainFrame extends JFrame {
 		contentPane.add(btnNewEvent);
 		
 		JButton btnNewPhoto = new JButton("New Photo");
+		btnNewPhoto.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Photo newPhoto = new Photo();
+					NewPhotoFrame newPhotoFrame = newPhotoDisplay(newPhoto);
+					newPhotoFrame.setVisible(true);
+					
+				} catch (SQLException ePhotoCreation) {
+					ePhotoCreation.printStackTrace();
+				}
+			}
+		});
 		btnNewPhoto.setBounds(415, 286, 97, 25);
 		contentPane.add(btnNewPhoto);
 		
@@ -122,5 +135,9 @@ public class MainFrame extends JFrame {
 	
 	private NewMovieFrame newMovieDisplay(Movie newMovie) throws SQLException{
 		return new NewMovieFrame(this, newMovie);
+	}
+	
+	private NewPhotoFrame newPhotoDisplay(Photo newPhoto) throws SQLException{
+		return new NewPhotoFrame(this, newPhoto);
 	}
 }

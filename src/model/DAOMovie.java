@@ -130,7 +130,6 @@ public class DAOMovie {
 			pstmtNewActor.executeUpdate();
 			pstmtNewActor.close();
 		}
-		
 	}
 	
 } // DAOVip class
