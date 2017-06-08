@@ -8,7 +8,6 @@ import javax.swing.table.AbstractTableModel;
 
 import app.App;
 import controller.Event;
-import controller.Vip;
 import model.DAOEvent;
 
 public class EventJTable extends AbstractTableModel{
@@ -19,7 +18,7 @@ public class EventJTable extends AbstractTableModel{
 	public EventJTable() throws SQLException{
 		eventList = new ArrayList<Event>();
 		this.dao=App.getDaoEvent();
-		dao.getEvents(eventList);
+		eventList=dao.getEvents();
 	}
 	
 	@Override
