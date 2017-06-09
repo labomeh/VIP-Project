@@ -25,7 +25,6 @@ import javax.swing.JComboBox;
 import java.awt.Component;
 
 import javax.swing.SwingConstants;
-import javax.swing.Box;
 import javax.swing.JSeparator;
 
 public class NewMovieFrame extends JFrame {

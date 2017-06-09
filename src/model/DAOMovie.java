@@ -13,7 +13,6 @@ import java.util.List;
 
 import app.App;
 import controller.Movie;
-import controller.Vip;
 
 /**
  * @author Simon
@@ -130,7 +129,6 @@ public class DAOMovie {
 			pstmtNewActor.executeUpdate();
 			pstmtNewActor.close();
 		}
-		
 	}
 	
 } // DAOVip class

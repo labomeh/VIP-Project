@@ -4,7 +4,6 @@
 package model;
 
 import java.io.FileInputStream;
-import java.net.PasswordAuthentication;
 import java.util.Properties;
 
 import javax.sql.DataSource;
