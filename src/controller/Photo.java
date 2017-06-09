@@ -14,6 +14,7 @@ public class Photo {
 	private int idPhoto;
 	private String place;
 	private LocalDate date;
+	private String fileName;
 	
 	public Photo() {
 	}
@@ -46,6 +47,14 @@ public class Photo {
 	
 	public void setPlace(String place) {
 		this.place = place;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	@Override

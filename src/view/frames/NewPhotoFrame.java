@@ -56,11 +56,11 @@ public class NewPhotoFrame extends JFrame {
 		contentPane.add(lblPhotoImport);
 
 		JLabel lblPhotoPlace = new JLabel("Place");
-		lblPhotoPlace.setBounds(22, 118, 117, 16);
+		lblPhotoPlace.setBounds(22, 99, 117, 16);
 		contentPane.add(lblPhotoPlace);
 
 		JLabel lblPhotoDate = new JLabel("Date");
-		lblPhotoDate.setBounds(22, 150, 117, 16);
+		lblPhotoDate.setBounds(22, 129, 117, 16);
 		contentPane.add(lblPhotoDate);
 		
 		JLabel lblNewVip = new JLabel("Vip");
@@ -72,7 +72,7 @@ public class NewPhotoFrame extends JFrame {
 		contentPane.add(lblAddedVip);
 
 		JLabel lblyyyy = new JLabel("(yyyy-mm-dd)");
-		lblyyyy.setBounds(337, 150, 104, 16);
+		lblyyyy.setBounds(317, 129, 104, 16);
 		contentPane.add(lblyyyy);
 		
 		identifiedVipValues = new JLabel("");
@@ -80,12 +80,12 @@ public class NewPhotoFrame extends JFrame {
 		contentPane.add(identifiedVipValues);
 
 		txtNewPlace = new JTextField();
-		txtNewPlace.setBounds(147, 115, 417, 22);
+		txtNewPlace.setBounds(129, 96, 417, 22);
 		contentPane.add(txtNewPlace);
 		txtNewPlace.setColumns(10);
 
 		txtNewDate = new JTextField();
-		txtNewDate.setBounds(147, 147, 178, 22);
+		txtNewDate.setBounds(129, 126, 178, 22);
 		contentPane.add(txtNewDate);
 		txtNewDate.setColumns(10);
 
@@ -190,6 +190,14 @@ public class NewPhotoFrame extends JFrame {
 		JSeparator separator = new JSeparator();
 		separator.setBounds(12, 55, 552, 2);
 		contentPane.add(separator);
+		
+		JLabel lblImportPhoto = new JLabel("Import photo");
+		lblImportPhoto.setBounds(22, 70, 117, 16);
+		contentPane.add(lblImportPhoto);
+		
+		JButton btnNewButton = new JButton("New button");
+		btnNewButton.setBounds(129, 66, 148, 25);
+		contentPane.add(btnNewButton);
 		
 		
 
