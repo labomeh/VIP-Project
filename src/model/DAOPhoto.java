@@ -67,10 +67,11 @@ public class DAOPhoto {
 	} // getIdentifiedVip method
 	
 	public void addNewPhoto(Photo newPhoto, List<Integer> identifiedVipId) throws SQLException {
-		String queryNewPhoto = "INSERT INTO photo VALUES(idPhoto, ?, ?);";
+		String queryNewPhoto = "INSERT INTO photo VALUES(idPhoto, ?, ?, ?);";
 		PreparedStatement pstmtNewPhoto = connexion.prepareStatement(queryNewPhoto);
 		pstmtNewPhoto.setString(1, newPhoto.getPlace());
 		pstmtNewPhoto.setString(2, newPhoto.getDate().toString());
+		pstmtNewPhoto.setString(3, newPhoto.getFileName());
 		pstmtNewPhoto.executeUpdate();
 		
 		String queryGetCurrentPhotoId = "SELECT MAX(idPhoto) FROM photo";

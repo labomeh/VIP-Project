@@ -48,9 +48,9 @@ public class DAOVip {
 		rset.close();
 		stmt.close();
 		return vipList;
-		
+
 	} // getVip method
-	
+
 	public Vip getVip(int idVip) throws SQLException {
 		String query = "select * from VIP WHERE idVip=?";
 		PreparedStatement pstmt = connexion.prepareStatement(query);
@@ -68,7 +68,7 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vip;
-		
+
 	} // getVip method
 
 	public List<String> getVipNationalities(Vip vip) throws SQLException {
@@ -86,7 +86,7 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipNationalities;
-		
+
 	} // getVipNationalities method
 
 	public List<Integer> getVipPlayedMovies(Vip vip) throws SQLException {
@@ -103,9 +103,9 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipPlayedMovies;
-		
+
 	} // getVipPlayedMovies method
-	
+
 	public List<Integer> getVipDirectedMovies(Vip vip) throws SQLException {
 		int idVip = vip.getIdVip();
 		List<Integer> vipDirectedMovies = new ArrayList<>();
@@ -120,9 +120,9 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipDirectedMovies;
-		
+
 	} // getVipDirectedMovies method
-	
+
 	public void addNewVip(Vip vip, List<String> nationalities) throws SQLException {
 		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, ?, ?, null, null);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
@@ -132,14 +132,14 @@ public class DAOVip {
 		pstmtNewVip.setString(4, vip.getBirthdate().toString());
 		pstmtNewVip.setString(5, vip.getBirthplace());
 		pstmtNewVip.executeUpdate();
-		
+
 		String queryGetCurrentId = "SELECT MAX(idVIP) FROM VIP";
 		Statement stmt = connexion.createStatement();
 		ResultSet rset = stmt.executeQuery(queryGetCurrentId);
 		rset.next();
 		int idVIP = rset.getInt(1);
-		
-		for(String nat : nationalities) {
+
+		for (String nat : nationalities) {
 			String queryNewNat = "INSERT INTO nationality VALUES(?, ?);";
 			PreparedStatement pstmtNewNat = connexion.prepareStatement(queryNewNat);
 			pstmtNewNat.setInt(1, idVIP);
@@ -147,11 +147,11 @@ public class DAOVip {
 			pstmtNewNat.executeUpdate();
 			pstmtNewNat.close();
 		}
-		
+
 		stmt.close();
 		pstmtNewVip.close();
 		// connexion.close();
-		
+
 	} // addNewVip method
-	
+
 } // DAOVip class
