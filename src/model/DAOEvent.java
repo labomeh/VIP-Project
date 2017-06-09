@@ -15,6 +15,7 @@ import java.util.List;
 
 import app.App;
 import controller.Event;
+import controller.Vip;
 
 /**
  * @author Simon
@@ -53,6 +54,31 @@ public class DAOEvent {
 		stmt.close();
 		return eventList;
 	} // getEvents method
+	
+	public Event getMaritialStatus(Vip vip) throws SQLException{
+		String query = "select * from event where (idVIP1=? or idVIP2=?) and weddingDate=(select max(weddingDate) from event where idVIP1=? or idVIP2=?)";
+		PreparedStatement pstmt = connection.prepareStatement(query);
+		pstmt.setInt(1, vip.getIdVip());
+		pstmt.setInt(2, vip.getIdVip());
+		pstmt.setInt(3, vip.getIdVip());
+		pstmt.setInt(4, vip.getIdVip());
+		ResultSet rset=pstmt.executeQuery();
+		rset.next();
+		int idVip1 = rset.getInt(1);
+		LocalDate weddingDate = rset.getDate(2).toLocalDate();
+		int idVip2 = rset.getInt(3);
+		String weddingPlace = rset.getString(4);
+		LocalDate divorceDate;
+		if(rset.getDate(5)==null){
+			divorceDate= null;
+		}
+		else{
+			divorceDate = rset.getDate(5).toLocalDate();
+		}
+		 
+		Event event = new Event(idVip1, weddingDate, idVip2, weddingPlace, divorceDate);
+		return event;
+	}
 	
 	public void addWedding(Event event) throws SQLException{
 		String requete = "INSERT INTO EVENT VALUES(?, ?, ?, ?, ?);";

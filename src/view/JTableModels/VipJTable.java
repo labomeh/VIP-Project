@@ -27,6 +27,14 @@ public class VipJTable extends AbstractTableModel{
 		vipList = dao.getVip();
 	}
 	
+	
+	
+	public List<Vip> getVipList() {
+		return vipList;
+	}
+
+
+
 	@Override
 	public String getColumnName(int col){
 		return columnHeads[col];

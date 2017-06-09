@@ -18,7 +18,7 @@ public class Vip {
 	private LocalDate birthdate;
 	private String birthplace;
 	private char roleCode; // value A for Actor, D for Director, B for Both, N for None
-	private Vip partner;
+	private int idPartner;
 	
 	public Vip() {
 	}
@@ -30,6 +30,7 @@ public class Vip {
 		this.birthdate = birthdate;
 		this.birthplace = birthplace;
 		this.roleCode = roleCode;
+		this.idPartner = idPartner;
 	}
 
 	public int getIdVip() {
@@ -60,12 +61,12 @@ public class Vip {
 		this.roleCode = roleCode;
 	}
 
-	public Vip getPartner() {
-		return partner;
+	public int getIdPartner() {
+		return idPartner;
 	}
 
-	public void setPartner(Vip partner) {
-		this.partner = partner;
+	public void setIdPartner(int idPartner) {
+		this.idPartner = idPartner;
 	}
 
 	public LocalDate getBirthdate() {
