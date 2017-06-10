@@ -4,7 +4,7 @@
 		
 		function __construct()
 		{
-			session_name('p1523150');
+			session_name('global');
 			session_start();
 		}
 		
@@ -30,25 +30,25 @@
 			}
 		}
 		
-		// fonctions connexion et deconnexion
-		public static function login($user) {
-			$_SESSION['user'] = $user;
-			$_SESSION['logged']=true;
-		}
+// 		// fonctions connexion et deconnexion
+// 		public static function login($user) {
+// 			$_SESSION['user'] = $user;
+// 			$_SESSION['logged']=true;
+// 		}
 		
-		public static function logout() {
-			$_SESSION['user'] = null;
-			$_SESSION['logged']=false;
-		}
+// 		public static function logout() {
+// 			$_SESSION['user'] = null;
+// 			$_SESSION['logged']=false;
+// 		}
 		
-		public static function isConnected() {
-			if(isset($_SESSION['logged']) && $_SESSION['logged']==true) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
+// 		public static function isConnected() {
+// 			if(isset($_SESSION['logged']) && $_SESSION['logged']==true) {
+// 				return true;
+// 			}
+// 			else {
+// 				return false;
+// 			}
+// 		}
 		
 	}
 ?>
