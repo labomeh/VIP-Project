@@ -1,12 +1,10 @@
 package view.JTableModels;
 
-/**
- * 
- */
+import javax.swing.table.AbstractTableModel;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 import app.App;
 import controller.Vip;
@@ -17,43 +15,38 @@ import model.DAOVip;
  * @author Mehdi
  *
  */
-public class VipJTable extends AbstractTableModel{
+public class VipJTable extends AbstractTableModel {
 	private List<Vip> vipList = new ArrayList<>();
-	private final String[] columnHeads = {"Name", "Surname", "Surname 2", "Birthdate", "Birthplace", "Role"};
+	private final String[] columnHeads = { "Name", "Surname", "Surname 2", "Birthdate", "Birthplace", "Role" };
 	private DAOVip dao;
-	
-	public VipJTable() throws SQLException{
-		this.dao=App.getDaoVip();
+
+	public VipJTable() throws SQLException {
+		this.dao = App.getDaoVip();
 		vipList = dao.getVip();
 	}
-	
-	
-	
+
 	public List<Vip> getVipList() {
 		return vipList;
 	}
 
-
-
 	@Override
-	public String getColumnName(int col){
+	public String getColumnName(int col) {
 		return columnHeads[col];
 	}
-	
+
 	@Override
-	public int getRowCount(){
+	public int getRowCount() {
 		return vipList.size();
 	}
-	
+
 	@Override
-	public int getColumnCount(){
+	public int getColumnCount() {
 		return columnHeads.length;
 	}
-	
-	
+
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex){
-		switch(columnIndex){
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		switch (columnIndex) {
 		case 0:
 			return vipList.get(rowIndex).getName();
 		case 1:
