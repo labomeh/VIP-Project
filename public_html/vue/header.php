@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo PATH_CSS; ?>css.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="<?php echo PATH_SCRIPT; ?>vip_script.js"></script>
 </head>
 
 	<body>
@@ -22,7 +23,6 @@
 					</div>
 					<div class="col-md-10 col-sm_10 col-xs-12">
 						<h1><?php echo NOM_SITE; ?></h1>
-							<h2>Projet PHP</h2>
 					</div>
 				</div>
 			</section>
@@ -40,22 +40,9 @@
 				</div>
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav navbar-left">
-						<li><a href="index.php?page=loremipsum">Lorem ipsum</a></li>
-						<li><a href="index.php?page=dolorsitamet">dolor sit amet</a></li>
-						<li><a href="index.php?page=consecteturadipiscing">consectetur adipiscing</a></li>
-						<li><a href="index.php?page=eiusmodtempor">eiusmod tempor</a></li>
-						<li><a href="index.php?page=slider">Slider</a></li>
+						<li><a href="index.php?page=vip">VIP</a></li>
+						<li><a href="index.php?page=movies">MOVIES</a></li>
 					</ul>
-
-
-	<?php
-	// On vérifie la connexion et on appelle la vue appropriée
-	if($base::isConnected()) {
-		include(PATH_VUE.MENU_CONNECTE);
-	} else {
-		include(PATH_VUE.MENU);
-	}
-	?>
 	
 	<!--Vue-->
 		<section class="container">
