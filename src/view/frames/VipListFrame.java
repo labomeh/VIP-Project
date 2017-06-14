@@ -24,6 +24,8 @@ import java.beans.PropertyChangeEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.ListSelectionModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class VipListFrame extends JFrame {
 
@@ -31,6 +33,7 @@ public class VipListFrame extends JFrame {
 	private VipJTable model;
 	private boolean outputState;
 	private JTable table;
+	private Vip currentVip;
 
 	/**
 	 * Create the frame.
@@ -91,12 +94,30 @@ public class VipListFrame extends JFrame {
 		lblDivorceDate.setBounds(10, 135, 218, 14);
 		panel.add(lblDivorceDate);
 		
+		JButton btnAddPlayedMovie = new JButton("Add a movie he/she played in");
+		btnAddPlayedMovie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					AddPlayedMovieFrame addPlayedMovieFrame = addPlayedMovieDisplay();
+					addPlayedMovieFrame.setVisible(true);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnAddPlayedMovie.setBounds(558, 270, 224, 25);
+		contentPane.add(btnAddPlayedMovie);
+		
+		JButton btnAddDirectedMovie = new JButton("Add a movie he/she directed");
+		btnAddDirectedMovie.setBounds(558, 308, 224, 25);
+		contentPane.add(btnAddDirectedMovie);
+		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
 	        	if(table.getSelectedRow()!=-1){
 	        		try {
-						if(model.getVipList().get(table.getSelectedRow()).getIdPartner()!=-1){
-							Vip currentVip=model.getVipList().get(table.getSelectedRow());
+	        			currentVip=model.getVipList().get(table.getSelectedRow());
+						if(model.getVipList().get(table.getSelectedRow()).getIdPartner()!=-1){							
 							lblPartner.setText("Wed to : " + App.getDaoVip().getPartner(currentVip).getSurname()[0] + " " + App.getDaoVip().getPartner(model.getVipList().get(table.getSelectedRow())).getName());
 							lblWeddingDate.setText("On : "+ App.getDaoEvent().getMaritialStatus(currentVip).getWeddingDate());
 							if(App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate()!=null){
@@ -119,4 +140,8 @@ public class VipListFrame extends JFrame {
 		
 		
 	} // Constructor
+	
+	private AddPlayedMovieFrame addPlayedMovieDisplay() throws SQLException{
+		return new AddPlayedMovieFrame(this, currentVip);
+	}
 }

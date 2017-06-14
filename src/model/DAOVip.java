@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.App;
+import controller.Movie;
 import controller.Vip;
 
 /**
@@ -137,6 +138,26 @@ public class DAOVip {
 		rset.close();
 		pstmt.close();
 		return vipPlayedMovies;
+
+	} // getVipPlayedMovies method
+	
+	public List<Movie> getVipNotPlayedMovies(Vip vip) throws SQLException {
+		int idVip = vip.getIdVip();
+		List<Movie> vipNotPlayedMovies = new ArrayList<>();
+		Movie movie = new Movie();
+		String query = "SELECT * FROM movie WHERE movieVisa NOT IN (SELECT DISTINCT movieVisa FROM casting WHERE idVIP=?);";
+		PreparedStatement pstmt = connexion.prepareStatement(query);
+		pstmt.setInt(1, idVip);
+		ResultSet rset = pstmt.executeQuery();
+		while (rset.next()) {
+			movie.setMovieVisa(rset.getInt(1));
+			movie.setMovieTitle(rset.getString(2));
+			movie.setMovieVisa(rset.getInt(3));
+			vipNotPlayedMovies.add(movie);
+		}
+		rset.close();
+		pstmt.close();
+		return vipNotPlayedMovies;
 
 	} // getVipPlayedMovies method
 
