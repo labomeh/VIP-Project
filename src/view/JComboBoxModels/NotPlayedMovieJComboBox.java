@@ -22,6 +22,7 @@ public class NotPlayedMovieJComboBox extends DefaultComboBoxModel<String> {
 	public NotPlayedMovieJComboBox(Vip vip) throws SQLException {
 		this.dao=App.getDaoVip();
 		notPlayedMovieList = dao.getVipNotPlayedMovies(vip);
+		System.out.println(notPlayedMovieList.toString());
 	}
 
 	@Override
