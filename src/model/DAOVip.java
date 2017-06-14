@@ -56,6 +56,33 @@ public class DAOVip {
 		return vipList;
 
 	} // getVip method
+	
+	public Vip getVip(int idVIP) throws SQLException {
+		Vip vip;
+		String query = "SELECT * FROM VIP WHERE idVIP=?;";
+		PreparedStatement pstmt = connexion.prepareStatement(query);
+		pstmt.setInt(1, idVIP);
+		ResultSet rset = pstmt.executeQuery();
+		rset.next();
+		int idVip = rset.getInt(1);
+		String name = rset.getString(2);
+		String surname1 = rset.getString(3);
+		String surname2 = rset.getString(4);
+		String surname[] = { surname1, surname2 };
+		LocalDate birthdate = rset.getDate(5).toLocalDate();
+		String birthplace = rset.getString(6);
+		char roleCodeVIP = rset.getString(7).charAt(0);
+		int idPartner;
+		if (rset.getObject(8) == null) {
+			idPartner = -1;
+		} else {
+			idPartner = rset.getInt(8);
+		}
+		vip = new Vip(idVip, name, surname, birthdate, birthplace, roleCodeVIP, idPartner);
+		rset.close();
+		pstmt.close();
+		return vip;
+	} // getVip method
 
 	public Vip getPartner(Vip vip) throws SQLException {
 		String query = "select * from VIP where idVIP = ? " ;
