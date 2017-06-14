@@ -87,6 +87,9 @@ public class VipListFrame extends JFrame {
 		lblWeddingDate.setBounds(10, 96, 218, 14);
 		panel.add(lblWeddingDate);
 		
+		JLabel lblDivorceDate = new JLabel("");
+		lblDivorceDate.setBounds(10, 135, 218, 14);
+		panel.add(lblDivorceDate);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
 	        public void valueChanged(ListSelectionEvent event) {
@@ -96,11 +99,12 @@ public class VipListFrame extends JFrame {
 							Vip currentVip=model.getVipList().get(table.getSelectedRow());
 							lblPartner.setText("Wed to : " + App.getDaoVip().getPartner(currentVip).getSurname()[0] + " " + App.getDaoVip().getPartner(model.getVipList().get(table.getSelectedRow())).getName());
 							lblWeddingDate.setText("On : "+ App.getDaoEvent().getMaritialStatus(currentVip).getWeddingDate());
-							
+							if(App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate()!=null){
+								lblDivorceDate.setText("Divorced : "+ App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate());
+							}
 						}
 						else{
 							lblPartner.setText("Single");
-							lblWeddingDate.setText("");
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
