@@ -162,9 +162,11 @@ public class NewVipFrame extends JFrame {
 		btnAddNationality.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nationality = (String) cbxNationality.getSelectedItem();
-				nationalities.add(nationality);
-				nationalitiesValues.setText(nationalities.toString());
-				cbxNationality.setSelectedIndex(-1);
+				if(!nationalities.contains(nationality)) {
+					nationalities.add(nationality);
+					nationalitiesValues.setText(nationalities.toString());
+					cbxNationality.setSelectedIndex(-1);
+				}
 			}
 		});
 		btnAddNationality.setBounds(317, 260, 104, 25);

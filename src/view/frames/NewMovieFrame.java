@@ -178,8 +178,10 @@ public class NewMovieFrame extends JFrame {
 		btnAddGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String genre = (String) cbxGenre.getSelectedItem();
-				genres.add(genre);
-				genresValues.setText(genres.toString());
+				if(!genres.contains(genre)){
+					genres.add(genre);
+					genresValues.setText(genres.toString());
+				}
 				cbxGenre.setSelectedIndex(-1);
 			}
 		});
@@ -190,11 +192,13 @@ public class NewMovieFrame extends JFrame {
 		btnAddActor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String actor = (String) cbxActor.getSelectedItem();
-				actors.add(actor);
-				Integer actorId = (Integer) actorJComboBox.getCurrentId(cbxActor.getSelectedIndex());
-				actorsId.add(actorId);
+				if(!actors.contains(actor)) {
+					actors.add(actor);
+					Integer actorId = (Integer) actorJComboBox.getCurrentId(cbxActor.getSelectedIndex());
+					actorsId.add(actorId);
+					cbxActor.setSelectedIndex(-1);
+				}
 				actorsValues.setText(actors.toString());
-				cbxActor.setSelectedIndex(-1);
 			}
 		});
 		
@@ -222,11 +226,13 @@ public class NewMovieFrame extends JFrame {
 		btnAddDirector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String director = (String) cbxDirector.getSelectedItem();
-				directors.add(director);
-				Integer directorId = (Integer) directorJComboBox.getCurrentId(cbxDirector.getSelectedIndex());
-				directorsId.add(directorId);
+				if(!directors.contains(director)) {
+					directors.add(director);
+					Integer directorId = (Integer) directorJComboBox.getCurrentId(cbxDirector.getSelectedIndex());
+					directorsId.add(directorId);
+					cbxDirector.setSelectedIndex(-1);
+				}
 				directorsValues.setText(directors.toString());
-				cbxDirector.setSelectedIndex(-1);
 			}
 		});
 		
