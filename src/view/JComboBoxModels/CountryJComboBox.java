@@ -1,8 +1,9 @@
 package view.JComboBoxModels;
 
+import javax.swing.DefaultComboBoxModel;
+
 import java.sql.SQLException;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 import app.App;
 import model.DAOCountry;

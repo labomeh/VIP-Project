@@ -1,46 +1,37 @@
 package view.frames;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Integer;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
 
 import app.App;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.awt.event.ActionEvent;
-
 import controller.Photo;
 import view.JComboBoxModels.VipJComboBox;
-
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-
-import java.awt.Component;
-
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
 
 public class NewPhotoFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNewPlace, txtNewDate;
-	private Photo newPhoto;
 	private List<String> identifiedVip = new ArrayList<>();
 	private List<Integer> identifiedVipId = new ArrayList<>();
 	private JComboBox cbxVip = new JComboBox();

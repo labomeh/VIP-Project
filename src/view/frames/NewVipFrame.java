@@ -1,30 +1,27 @@
 package view.frames;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import app.App;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
-import controller.Vip;
-import view.JComboBoxModels.CountryJComboBox;
-
-import javax.swing.JComboBox;
 import java.awt.Component;
 
-import javax.swing.SwingConstants;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import app.App;
+import controller.Vip;
+import view.JComboBoxModels.CountryJComboBox;
 
 public class NewVipFrame extends JFrame {
 
@@ -34,7 +31,6 @@ public class NewVipFrame extends JFrame {
 	private JTextField txtNewSurname2;
 	private JTextField txtNewBirthdate;
 	private JTextField txtNewBirthplace;
-	private Vip newVip;
 	private List<String> nationalities = new ArrayList<>();
 
 	/**
@@ -163,7 +159,7 @@ public class NewVipFrame extends JFrame {
 		btnAddNationality.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String nationality = (String) cbxNationality.getSelectedItem();
-				if(!nationalities.contains(nationality)) {
+				if (!nationalities.contains(nationality)) {
 					nationalities.add(nationality);
 					nationalitiesValues.setText(nationalities.toString());
 					cbxNationality.setSelectedIndex(-1);
@@ -172,18 +168,18 @@ public class NewVipFrame extends JFrame {
 		});
 		btnAddNationality.setBounds(317, 260, 104, 25);
 		contentPane.add(btnAddNationality);
-		
+
 		JButton btnRemoveNationality = new JButton("<");
 		btnRemoveNationality.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				int nbNationalities = nationalities.size();
-				nationalities.remove(nbNationalities-1);
+				nationalities.remove(nbNationalities - 1);
 				nationalitiesValues.setText(nationalities.toString());
 			}
 		});
 		btnRemoveNationality.setBounds(317, 295, 51, 25);
 		contentPane.add(btnRemoveNationality);
-		
+
 		JButton btnClearAllNat = new JButton("<<");
 		btnClearAllNat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

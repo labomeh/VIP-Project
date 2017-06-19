@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model;
 
 import java.sql.Connection;
@@ -8,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +38,8 @@ public class DAOMovie {
 		rset.close();
 		stmt.close();
 	} // getMovies method
-	
-	public List<String> getMoviegenres(Movie movie) throws SQLException {
+
+	public List<String> getMovieGenres(Movie movie) throws SQLException {
 		int movieVisa = movie.getMovieVisa();
 		List<String> movieGenres = new ArrayList<>();
 		String requete = "select genreTitle from movieCategory where movieVisa=?";
@@ -56,7 +54,7 @@ public class DAOMovie {
 		pstmt.close();
 		return movieGenres;
 	} // getMovieGenre method
-	
+
 	public List<Integer> getCasting(Movie movie) throws SQLException {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieCasting = new ArrayList<>();
@@ -72,7 +70,7 @@ public class DAOMovie {
 		pstmt.close();
 		return movieCasting;
 	} // getCasting method
-	
+
 	public List<Integer> getDirector(Movie movie) throws SQLException {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieDirectors = new ArrayList<>();
@@ -88,7 +86,7 @@ public class DAOMovie {
 		pstmt.close();
 		return movieDirectors;
 	} // getDirector method
-	
+
 	public void addNewMovie(Movie newMovie, List<String> genres) throws SQLException {
 		String queryNewVip = "INSERT INTO movie VALUES(?, ?, ?);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
@@ -96,8 +94,7 @@ public class DAOMovie {
 		pstmtNewVip.setString(2, newMovie.getMovieTitle());
 		pstmtNewVip.setInt(3, newMovie.getReleaseYear());
 		pstmtNewVip.executeUpdate();
-		
-		for(String genre : genres) {
+		for (String genre : genres) {
 			String queryNewGenre = "INSERT INTO movieCategory VALUES(?, ?);";
 			PreparedStatement pstmtNewGenre = connexion.prepareStatement(queryNewGenre);
 			pstmtNewGenre.setInt(1, newMovie.getMovieVisa());
@@ -105,12 +102,11 @@ public class DAOMovie {
 			pstmtNewGenre.executeUpdate();
 			pstmtNewGenre.close();
 		}
-		
 		pstmtNewVip.close();
 	} // addNewMovie method
 
-	public void addNewMovieCasting(Movie newMovie, List<Integer> actorsId) throws SQLException {
-		for(int actorId : actorsId) {
+	public void addMovieCasting(Movie newMovie, List<Integer> actorsId) throws SQLException {
+		for (int actorId : actorsId) {
 			String queryNewActor = "INSERT INTO casting VALUES(?, ?);";
 			PreparedStatement pstmtNewActor = connexion.prepareStatement(queryNewActor);
 			pstmtNewActor.setInt(1, actorId);
@@ -118,10 +114,10 @@ public class DAOMovie {
 			pstmtNewActor.executeUpdate();
 			pstmtNewActor.close();
 		}
-	}
+	} // addMovieCasting method
 
-	public void addNewMovieDirection(Movie newMovie, List<Integer> directorsId) throws SQLException {
-		for(int directorId : directorsId) {
+	public void addMovieDirection(Movie newMovie, List<Integer> directorsId) throws SQLException {
+		for (int directorId : directorsId) {
 			String queryNewDirector = "INSERT INTO directing VALUES(?, ?);";
 			PreparedStatement pstmtNewActor = connexion.prepareStatement(queryNewDirector);
 			pstmtNewActor.setInt(1, directorId);
@@ -129,6 +125,6 @@ public class DAOMovie {
 			pstmtNewActor.executeUpdate();
 			pstmtNewActor.close();
 		}
-	}
-	
+	} // addMovieDirection method
+
 } // DAOVip class

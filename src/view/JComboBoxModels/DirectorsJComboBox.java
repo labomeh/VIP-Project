@@ -13,27 +13,26 @@ import model.DAOVip;
 
 /**
  *
- * @author Mehdi
+ * @author Simon
  *
  */
-public class NotPlayedMovieJComboBox extends DefaultComboBoxModel<String> {
-	private List<Movie> notPlayedMovieList = new ArrayList<>();
+public class DirectorsJComboBox extends DefaultComboBoxModel<String> {
+	private List<Vip> vipList = new ArrayList<>();
 	private DAOVip dao;
 
-	public NotPlayedMovieJComboBox(Vip vip) throws SQLException {
+	public DirectorsJComboBox(Movie movie) throws SQLException {
 		this.dao = App.getDaoVip();
-		notPlayedMovieList = dao.getNotPlayedMovies(vip);
-		System.out.println(notPlayedMovieList.toString());
+		vipList = dao.getDirectorsToAdd(movie);
 	}
 
 	@Override
 	public String getElementAt(int i) {
-		return (notPlayedMovieList.get(i).getMovieTitle());
+		return (vipList.get(i).getName() + " " + vipList.get(i).getSurname()[0]);
 	}
 
 	@Override
 	public int getSize() {
-		return notPlayedMovieList.size();
+		return vipList.size();
 	}
 
 	@Override
@@ -41,7 +40,7 @@ public class NotPlayedMovieJComboBox extends DefaultComboBoxModel<String> {
 	}
 
 	public int getCurrentId(int i) {
-		return notPlayedMovieList.get(i).getMovieVisa();
+		return vipList.get(i).getIdVip();
 	}
 
 }

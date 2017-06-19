@@ -1,6 +1,3 @@
-/**
- * 
- */
 package model;
 
 import java.sql.Connection;
@@ -8,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +41,7 @@ public class DAOPhoto {
 		rset.close();
 		stmt.close();
 		return photoList;
-		
+
 	} // getPhoto method
 
 	public List<Vip> getIdentifiedVip(Photo photo) throws SQLException {
@@ -57,15 +55,15 @@ public class DAOPhoto {
 		while (rset.next()) {
 			identifiedVipId.add(rset.getInt(1));
 		}
-		for(int idVip : identifiedVipId) {
+		for (int idVip : identifiedVipId) {
 			identifiedVip.add(App.getDaoVip().getVip(idVip));
 		}
 		rset.close();
 		pstmt.close();
 		return identifiedVip;
-		
+
 	} // getIdentifiedVip method
-	
+
 	public void addNewPhoto(Photo newPhoto, List<Integer> identifiedVipId) throws SQLException {
 		String queryNewPhoto = "INSERT INTO photo VALUES(idPhoto, ?, ?, ?);";
 		PreparedStatement pstmtNewPhoto = connexion.prepareStatement(queryNewPhoto);
@@ -73,14 +71,12 @@ public class DAOPhoto {
 		pstmtNewPhoto.setString(2, newPhoto.getDate().toString());
 		pstmtNewPhoto.setString(3, newPhoto.getFileName());
 		pstmtNewPhoto.executeUpdate();
-		
 		String queryGetCurrentPhotoId = "SELECT MAX(idPhoto) FROM photo";
 		Statement stmt = connexion.createStatement();
 		ResultSet rset = stmt.executeQuery(queryGetCurrentPhotoId);
 		rset.next();
 		int idPhoto = rset.getInt(1);
-		
-		for(int id : identifiedVipId) {
+		for (int id : identifiedVipId) {
 			String queryIdentification = "INSERT INTO shows VALUES(?, ?);";
 			PreparedStatement pstmtNewIdentification = connexion.prepareStatement(queryIdentification);
 			pstmtNewIdentification.setInt(1, id);
@@ -88,8 +84,7 @@ public class DAOPhoto {
 			pstmtNewIdentification.executeUpdate();
 			pstmtNewIdentification.close();
 		}
-		
 		pstmtNewPhoto.close();
 	} // addNewPhoto method
-	
+
 } // DAOVip class

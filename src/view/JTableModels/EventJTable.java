@@ -1,45 +1,44 @@
 package view.JTableModels;
 
+import javax.swing.table.AbstractTableModel;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.table.AbstractTableModel;
 
 import app.App;
 import controller.Event;
 import model.DAOEvent;
 
-public class EventJTable extends AbstractTableModel{
+public class EventJTable extends AbstractTableModel {
 	private List<Event> eventList;
-	private final String[] columnHeads = {"Vip 1", "Vip 2", "Wedding date", "Wedding place", "Divorce date"};
+	private final String[] columnHeads = { "Vip 1", "Vip 2", "Wedding date", "Wedding place", "Divorce date" };
 	private DAOEvent dao;
-	
-	public EventJTable() throws SQLException{
+
+	public EventJTable() throws SQLException {
 		eventList = new ArrayList<Event>();
-		this.dao=App.getDaoEvent();
-		eventList=dao.getEvents();
+		this.dao = App.getDaoEvent();
+		eventList = dao.getEvents();
 	}
-	
+
 	@Override
-	public String getColumnName(int col){
+	public String getColumnName(int col) {
 		return columnHeads[col];
 	}
-	
+
 	@Override
-	public int getRowCount(){
+	public int getRowCount() {
 		return eventList.size();
 	}
-	
+
 	@Override
-	public int getColumnCount(){
+	public int getColumnCount() {
 		return columnHeads.length;
 	}
-	
-	
+
 	@Override
-	public Object getValueAt(int rowIndex, int columnIndex){
-		switch(columnIndex){
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		switch (columnIndex) {
 		case 0:
 			return eventList.get(rowIndex).getIdVip1();
 		case 1:

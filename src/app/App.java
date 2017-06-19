@@ -1,18 +1,14 @@
 package app;
 
 import java.awt.EventQueue;
-import java.sql.Connection;
 
-import javax.sql.DataSource;
 import javax.swing.UIManager;
 
-import model.DAOCountry;
-import model.DAOEvent;
-import model.DAOGenre;
-import model.DAOMovie;
-import model.DAOPhoto;
-import model.DAOVip;
-import model.SourceMariaDB;
+import java.sql.Connection;
+import javax.sql.DataSource;
+
+import model.*;
+
 import view.frames.MainFrame;
 
 public class App {
@@ -24,8 +20,6 @@ public class App {
 	private static DAOGenre daoGenre;
 	private static DAOEvent daoEvent;
 	private static DAOPhoto daoPhoto;
-
-	
 
 	public static DAOEvent getDaoEvent() {
 		return daoEvent;
@@ -74,7 +68,7 @@ public class App {
 	public static void setDaoGenre(DAOGenre daoGenre) {
 		App.daoGenre = daoGenre;
 	}
-	
+
 	public static DAOPhoto getDaoPhoto() {
 		return daoPhoto;
 	}
@@ -83,18 +77,17 @@ public class App {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		try{
-			dataSource = SourceMariaDB.getSource("p1517582","253502");
-			connection=dataSource.getConnection();
-			daoCountry=new DAOCountry();
-			daoVip=new DAOVip();
-			daoMovie=new DAOMovie() ;
-			daoGenre=new DAOGenre();
-			daoPhoto=new DAOPhoto();
-			daoEvent=new DAOEvent();
-		}
-		catch(Exception ex){
-			System.out.println("Echec connexion : "+ex.getMessage());
+		try {
+			dataSource = SourceMariaDB.getSource("p1517582", "253502");
+			connection = dataSource.getConnection();
+			daoCountry = new DAOCountry();
+			daoVip = new DAOVip();
+			daoMovie = new DAOMovie();
+			daoGenre = new DAOGenre();
+			daoPhoto = new DAOPhoto();
+			daoEvent = new DAOEvent();
+		} catch (Exception ex) {
+			System.out.println("Echec connexion : " + ex.getMessage());
 		}
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

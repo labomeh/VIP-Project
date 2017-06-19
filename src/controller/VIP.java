@@ -1,9 +1,8 @@
-/**
- * 
- */
 package controller;
+
 import java.sql.Date;
 import java.time.*;
+import java.util.Arrays;
 
 /**
  * 
@@ -17,13 +16,16 @@ public class Vip {
 	private String[] surname;
 	private LocalDate birthdate;
 	private String birthplace;
-	private char roleCode; // value A for Actor, D for Director, B for Both, N for None
+	private char roleCode;
+	// roleCode has the value A for Actor, D for Director, B for Both, N for
+	// None
 	private int idPartner;
-	
+
 	public Vip() {
 	}
-	
-	public Vip(int idVip, String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode, int idPartner) {
+
+	public Vip(int idVip, String name, String[] surname, LocalDate birthdate, String birthplace, char roleCode,
+			int idPartner) {
 		this.idVip = idVip;
 		this.name = name;
 		this.surname = surname;
@@ -33,6 +35,7 @@ public class Vip {
 		this.idPartner = idPartner;
 	}
 
+	// Getters
 	public int getIdVip() {
 		return idVip;
 	}
@@ -41,49 +44,56 @@ public class Vip {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String[] getSurname() {
 		return surname;
 	}
 
-	public void setSurname(String[] surname) {
-		this.surname = surname;
+	public LocalDate getBirthdate() {
+		return birthdate;
+	}
+
+	public String getBirthplace() {
+		return birthplace;
 	}
 
 	public char getRoleCode() {
 		return roleCode;
 	}
 
-	public void setRoleCode(char roleCode) {
-		this.roleCode = roleCode;
-	}
-
 	public int getIdPartner() {
 		return idPartner;
+	}
+
+	// Setters
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setSurname(String[] surname) {
+		this.surname = surname;
+	}
+
+	public void setBirthdate(Date birthdate) {
+		this.birthdate = birthdate.toLocalDate();
+	}
+
+	public void setBirthplace(String birthplace) {
+		this.birthplace = birthplace;
+	}
+
+	public void setRoleCode(char roleCode) {
+		this.roleCode = roleCode;
 	}
 
 	public void setIdPartner(int idPartner) {
 		this.idPartner = idPartner;
 	}
 
-	public LocalDate getBirthdate() {
-		return birthdate;
+	@Override
+	public String toString() {
+		return "Vip [idVip=" + idVip + ", name=" + name + ", surname=" + Arrays.toString(surname) + ", birthdate="
+				+ birthdate + ", birthplace=" + birthplace + ", roleCode=" + roleCode + ", idPartner=" + idPartner
+				+ "]";
 	}
-	
-	public void setBirthdate(Date birthdate) {
-		this.birthdate=birthdate.toLocalDate();
-	}
-	
-	public String getBirthplace() {
-		return birthplace;
-	}
-	
-	public void setBirthplace(String birthplace) {
-		this.birthplace = birthplace;
-	}
+
 }
-
-

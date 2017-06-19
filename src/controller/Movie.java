@@ -1,6 +1,3 @@
-/**
- * 
- */
 package controller;
 
 /**
@@ -11,8 +8,8 @@ public class Movie {
 	public int movieVisa;
 	public String movieTitle;
 	public int releaseYear;
-	
-	public Movie(){
+
+	public Movie() {
 	}
 
 	public Movie(int movieVisa, String movieTitle, int releaseYear) {
@@ -21,24 +18,26 @@ public class Movie {
 		this.releaseYear = releaseYear;
 	}
 
+	// Getters
 	public int getMovieVisa() {
 		return movieVisa;
-	}
-
-	public void setMovieVisa(int movieVisa) {
-		this.movieVisa = movieVisa;
 	}
 
 	public String getMovieTitle() {
 		return movieTitle;
 	}
 
-	public void setMovieTitle(String movieTitle) {
-		this.movieTitle = movieTitle;
-	}
-
 	public int getReleaseYear() {
 		return releaseYear;
+	}
+
+	// Setters
+	public void setMovieVisa(int movieVisa) {
+		this.movieVisa = movieVisa;
+	}
+
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 
 	public void setReleaseYear(int releaseYear) {

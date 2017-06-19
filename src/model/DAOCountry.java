@@ -1,14 +1,13 @@
 package model;
 
-/**
- * 
- */
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import app.App;
 
 /**
@@ -17,7 +16,7 @@ import app.App;
  *
  */
 public class DAOCountry {
-	
+
 	private static Connection connection;
 
 	public DAOCountry() {
@@ -36,6 +35,6 @@ public class DAOCountry {
 		rset.close();
 		stmt.close();
 		return countryList;
-	}
-	
-}
+	} // getCountries method
+
+} // DAOCountry class

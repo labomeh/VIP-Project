@@ -1,37 +1,33 @@
 package view.frames;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+
+import java.awt.Component;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.lang.Integer;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
 import app.App;
-
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 import controller.Movie;
 import view.JComboBoxModels.GenreJComboBox;
 import view.JComboBoxModels.VipJComboBox;
-
-import javax.swing.JComboBox;
-import java.awt.Component;
-
-import javax.swing.SwingConstants;
-import javax.swing.JSeparator;
 
 public class NewMovieFrame extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNewVisa, txtNewTitle, txtNewReleaseYear;
-	private Movie newMovie;
 	private List<String> genres = new ArrayList<>();
 	private List<String> actors = new ArrayList<>();
 	private List<Integer> actorsId = new ArrayList<>();
@@ -76,19 +72,19 @@ public class NewMovieFrame extends JFrame {
 		JLabel lblAddedGenres = new JLabel("Added Genres");
 		lblAddedGenres.setBounds(22, 208, 113, 16);
 		contentPane.add(lblAddedGenres);
-		
+
 		JLabel lblNewActor = new JLabel("Actor");
 		lblNewActor.setBounds(22, 255, 113, 16);
 		contentPane.add(lblNewActor);
-		
+
 		JLabel lblAddedActors = new JLabel("Added Actors");
 		lblAddedActors.setBounds(22, 287, 113, 16);
 		contentPane.add(lblAddedActors);
-		
+
 		JLabel lblNewDirector = new JLabel("Director");
 		lblNewDirector.setBounds(22, 335, 113, 16);
 		contentPane.add(lblNewDirector);
-		
+
 		JLabel lblAddedDirectors = new JLabel("Added Directors");
 		lblAddedDirectors.setBounds(22, 369, 113, 16);
 		contentPane.add(lblAddedDirectors);
@@ -100,11 +96,11 @@ public class NewMovieFrame extends JFrame {
 		genresValues = new JLabel("");
 		genresValues.setBounds(147, 208, 274, 16);
 		contentPane.add(genresValues);
-		
+
 		actorsValues = new JLabel("");
 		actorsValues.setBounds(147, 287, 274, 16);
 		contentPane.add(actorsValues);
-		
+
 		directorsValues = new JLabel("");
 		directorsValues.setBounds(147, 369, 274, 16);
 		contentPane.add(directorsValues);
@@ -123,7 +119,7 @@ public class NewMovieFrame extends JFrame {
 		txtNewReleaseYear.setBounds(147, 122, 158, 22);
 		contentPane.add(txtNewReleaseYear);
 		txtNewReleaseYear.setColumns(10);
-		
+
 		cbxGenre.setModel(new GenreJComboBox());
 		cbxGenre.setBounds(147, 173, 274, 22);
 		contentPane.add(cbxGenre);
@@ -132,12 +128,12 @@ public class NewMovieFrame extends JFrame {
 		cbxActor.setModel(actorJComboBox);
 		cbxActor.setBounds(147, 252, 274, 22);
 		contentPane.add(cbxActor);
-		
+
 		VipJComboBox directorJComboBox = new VipJComboBox();
 		cbxDirector.setModel(directorJComboBox);
 		cbxDirector.setBounds(147, 332, 274, 22);
 		contentPane.add(cbxDirector);
-		
+
 		JButton btnErase = new JButton("Erase");
 		btnErase.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -160,10 +156,9 @@ public class NewMovieFrame extends JFrame {
 						newMovie.setMovieVisa(new Integer(txtNewVisa.getText()));
 						newMovie.setMovieTitle(txtNewTitle.getText());
 						newMovie.setReleaseYear(Integer.valueOf(txtNewReleaseYear.getText()));
-						System.out.println(Integer.valueOf(txtNewReleaseYear.getText()));
 						App.getDaoMovie().addNewMovie(newMovie, genres);
-						App.getDaoMovie().addNewMovieCasting(newMovie, actorsId);
-						App.getDaoMovie().addNewMovieDirection(newMovie, directorsId);
+						App.getDaoMovie().addMovieCasting(newMovie, actorsId);
+						App.getDaoMovie().addMovieDirection(newMovie, directorsId);
 						clearInfo();
 					}
 				} catch (Exception e) {
@@ -178,7 +173,7 @@ public class NewMovieFrame extends JFrame {
 		btnAddGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String genre = (String) cbxGenre.getSelectedItem();
-				if(!genres.contains(genre)){
+				if (!genres.contains(genre)) {
 					genres.add(genre);
 					genresValues.setText(genres.toString());
 				}
@@ -187,12 +182,12 @@ public class NewMovieFrame extends JFrame {
 		});
 		btnAddGenre.setBounds(433, 172, 133, 25);
 		contentPane.add(btnAddGenre);
-		
+
 		JButton btnAddActor = new JButton("Add");
 		btnAddActor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String actor = (String) cbxActor.getSelectedItem();
-				if(!actors.contains(actor)) {
+				if (!actors.contains(actor)) {
 					actors.add(actor);
 					Integer actorId = (Integer) actorJComboBox.getCurrentId(cbxActor.getSelectedIndex());
 					actorsId.add(actorId);
@@ -201,16 +196,16 @@ public class NewMovieFrame extends JFrame {
 				actorsValues.setText(actors.toString());
 			}
 		});
-		
+
 		JButton btnRemoveGenre = new JButton("<");
 		btnRemoveGenre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				removeLastItem(genres,genresValues);
+				removeLastItem(genres, genresValues);
 			}
 		});
 		btnRemoveGenre.setBounds(431, 204, 63, 25);
 		contentPane.add(btnRemoveGenre);
-		
+
 		JButton btnClearAllGenres = new JButton("<<");
 		btnClearAllGenres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -221,12 +216,12 @@ public class NewMovieFrame extends JFrame {
 		contentPane.add(btnClearAllGenres);
 		btnAddActor.setBounds(431, 251, 133, 25);
 		contentPane.add(btnAddActor);
-		
+
 		JButton btnAddDirector = new JButton("Add");
 		btnAddDirector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String director = (String) cbxDirector.getSelectedItem();
-				if(!directors.contains(director)) {
+				if (!directors.contains(director)) {
 					directors.add(director);
 					Integer directorId = (Integer) directorJComboBox.getCurrentId(cbxDirector.getSelectedIndex());
 					directorsId.add(directorId);
@@ -235,7 +230,7 @@ public class NewMovieFrame extends JFrame {
 				directorsValues.setText(directors.toString());
 			}
 		});
-		
+
 		JButton btnRemoveActor = new JButton("<");
 		btnRemoveActor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -244,7 +239,7 @@ public class NewMovieFrame extends JFrame {
 		});
 		btnRemoveActor.setBounds(431, 283, 63, 25);
 		contentPane.add(btnRemoveActor);
-		
+
 		JButton btnClearAllActors = new JButton("<<");
 		btnClearAllActors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -253,10 +248,10 @@ public class NewMovieFrame extends JFrame {
 		});
 		btnClearAllActors.setBounds(501, 283, 63, 25);
 		contentPane.add(btnClearAllActors);
-		
+
 		btnAddDirector.setBounds(431, 331, 133, 25);
 		contentPane.add(btnAddDirector);
-		
+
 		JButton btnRemoveDirector = new JButton("<");
 		btnRemoveDirector.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -265,7 +260,7 @@ public class NewMovieFrame extends JFrame {
 		});
 		btnRemoveDirector.setBounds(431, 365, 63, 25);
 		contentPane.add(btnRemoveDirector);
-		
+
 		JButton btnClearAllDirectors = new JButton("<<");
 		btnClearAllDirectors.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -274,22 +269,20 @@ public class NewMovieFrame extends JFrame {
 		});
 		btnClearAllDirectors.setBounds(501, 365, 63, 25);
 		contentPane.add(btnClearAllDirectors);
-		
+
 		JSeparator separator = new JSeparator();
 		separator.setBounds(12, 157, 552, 2);
 		contentPane.add(separator);
-		
+
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(12, 237, 552, 2);
 		contentPane.add(separator_1);
-		
+
 		JSeparator separator_2 = new JSeparator();
 		separator_2.setBounds(12, 316, 552, 2);
 		contentPane.add(separator_2);
-		
-		
 
-	}
+	} // Constructor
 
 	private void clearInfo() {
 		txtNewVisa.setText("");
@@ -306,13 +299,13 @@ public class NewMovieFrame extends JFrame {
 		directorsValues.setText("");
 		System.out.println(genres.toString());
 	}
-	
-	private void removeLastItem(List list, JLabel jLabel){
+
+	private void removeLastItem(List list, JLabel jLabel) {
 		int nbItems = list.size();
-		list.remove(nbItems-1);
+		list.remove(nbItems - 1);
 		jLabel.setText(list.toString());
 	}
-	
+
 	private void clearAllItems(List list, JLabel jLabel) {
 		list.clear();
 		jLabel.setText(list.toString());

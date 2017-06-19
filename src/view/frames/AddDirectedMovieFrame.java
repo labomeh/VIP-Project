@@ -18,7 +18,7 @@ import app.App;
 import controller.Vip;
 import view.JComboBoxModels.NotPlayedMovieJComboBox;
 
-public class AddPlayedMovieFrame extends JFrame {
+public class AddDirectedMovieFrame extends JFrame {
 
 	private JPanel contentPane;
 	private List<String> movies = new ArrayList<>();
@@ -26,7 +26,7 @@ public class AddPlayedMovieFrame extends JFrame {
 	private NotPlayedMovieJComboBox moviesJComboBox;
 	private JLabel moviesValues;
 
-	public AddPlayedMovieFrame(VipListFrame vipListFrame, Vip vip) throws SQLException {
+	public AddDirectedMovieFrame(VipListFrame vipListFrame, Vip vip) throws SQLException {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 812, 517);
@@ -35,20 +35,20 @@ public class AddPlayedMovieFrame extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblAddPlayedMovies = new JLabel("Add Played Movies For");
-		lblAddPlayedMovies.setBounds(0, 0, 449, 52);
-		getContentPane().add(lblAddPlayedMovies);
+		JLabel lblAddDirectedMovies = new JLabel("Add Directed Movies For");
+		lblAddDirectedMovies.setBounds(0, 0, 449, 52);
+		getContentPane().add(lblAddDirectedMovies);
 
-		JLabel lblSelectedActor = new JLabel(vip.getSurname()[0] + vip.getName());
-		lblSelectedActor.setBounds(0, 53, 449, 52);
-		getContentPane().add(lblSelectedActor);
+		JLabel lblSelectedDirector = new JLabel(vip.getSurname()[0] + vip.getName());
+		lblSelectedDirector.setBounds(0, 53, 449, 52);
+		getContentPane().add(lblSelectedDirector);
 
 		JLabel lblMovie = new JLabel("Movie");
 		lblMovie.setBounds(10, 127, 113, 16);
 		getContentPane().add(lblMovie);
 
 		JLabel lblSelectedMovies = new JLabel("Added Movies");
-		lblSelectedMovies.setBounds(10, 162, 113, 16);
+		lblSelectedMovies.setBounds(20, 156, 113, 16);
 		getContentPane().add(lblSelectedMovies);
 
 		moviesValues = new JLabel("");
@@ -61,8 +61,8 @@ public class AddPlayedMovieFrame extends JFrame {
 		cbxMovie.setBounds(135, 124, 158, 22);
 		getContentPane().add(cbxMovie);
 
-		JButton btnAddPlayedMovie = new JButton("Add");
-		btnAddPlayedMovie.addActionListener(new ActionListener() {
+		JButton btnAddDirectedMovie = new JButton("Add");
+		btnAddDirectedMovie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				String movieTitle = (String) cbxMovie.getSelectedItem();
 				if (!movies.contains(movieTitle)) {
@@ -74,8 +74,8 @@ public class AddPlayedMovieFrame extends JFrame {
 				moviesValues.setText(movies.toString());
 			}
 		});
-		btnAddPlayedMovie.setBounds(305, 123, 104, 25);
-		getContentPane().add(btnAddPlayedMovie);
+		btnAddDirectedMovie.setBounds(305, 123, 104, 25);
+		getContentPane().add(btnAddDirectedMovie);
 
 		JButton btnRemoveMovie = new JButton("<");
 		btnRemoveMovie.addActionListener(new ActionListener() {
@@ -102,7 +102,7 @@ public class AddPlayedMovieFrame extends JFrame {
 					if (movies.isEmpty()) {
 						throw new Exception("No movie selected");
 					} else {
-						App.getDaoVip().addPlayedMovies(vip, moviesVisa);
+						App.getDaoVip().addDirectedMovies(vip, moviesVisa);
 						clearInfo();
 					}
 				} catch (Exception exception) {
