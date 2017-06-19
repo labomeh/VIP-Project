@@ -16,6 +16,7 @@ import java.awt.Component;
 
 import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,10 +135,18 @@ public class NewVipFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if (txtNewName.getText().isEmpty()) {
-						formError("You must fill the name field");
+						formError("You must fill a name!");
+					} else if (txtNewSurname1.getText().isEmpty()) {
+						formError("You must fill at least one surname!");
+					} else if (!App.checkDateFormat(txtNewBirthdate.getText())) {
+						formError("The date format is incorrect: it should be yyyy-mm-dd.");
+					} else if(!App.checkDateValue(txtNewBirthdate.getText())) {
+						formError("The date value is incorrect: it should be before today!");
 					}
-					else if (txtNewSurname1.getText().isEmpty()) {
-						formError("You must fill the surname field");
+					else if (txtNewBirthplace.getText().isEmpty()) {
+						formError("You must fill a birthplace");
+					} else if (nationalities.isEmpty()) {
+						formError("You must choose at least one nationality!");
 					} else {
 						newVip.setName(txtNewName.getText());
 						String[] surnames = { txtNewSurname1.getText(), txtNewSurname2.getText() };
@@ -157,7 +166,8 @@ public class NewVipFrame extends JFrame {
 
 		JButton btnAddNationality = new JButton("Add");
 		btnAddNationality.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+
+	public void actionPerformed(ActionEvent arg0) {
 				String nationality = (String) cbxNationality.getSelectedItem();
 				if (!nationalities.contains(nationality)) {
 					nationalities.add(nationality);
@@ -203,8 +213,8 @@ public class NewVipFrame extends JFrame {
 		System.out.println(nationalities.toString());
 		nationalitiesValues.setText("");
 	}
-	
-	public void formError(String msg){
+
+	public void formError(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
 	}
 }

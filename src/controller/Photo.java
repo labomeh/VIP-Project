@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -44,8 +45,8 @@ public class Photo {
 		this.idPhoto = idPhoto;
 	}
 
-	public void setDate(LocalDate date) {
-		this.date = date;
+	public void setDate(Date date) {
+		this.date = date.toLocalDate();
 	}
 
 	public void setPlace(String place) {

@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.UIManager;
 
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.sql.DataSource;
 
 import model.*;
@@ -100,5 +105,19 @@ public class App {
 				}
 			}
 		});
+	}
+	
+	public static boolean checkDateFormat(String date) {
+		Pattern pattern = Pattern.compile("[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}");
+        Matcher matcher = pattern.matcher(date);
+        return matcher.matches();
+	}
+
+	public static boolean checkDateValue(String date) {
+		LocalDate localDate = Date.valueOf(date).toLocalDate();
+		if(localDate.compareTo(LocalDate.now())>=0) {
+			return false;
+		}
+		return true;
 	}
 }

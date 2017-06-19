@@ -138,6 +138,16 @@ public class VipListFrame extends JFrame {
 		btnAddPlayedMovie.setEnabled(false);
 		
 		JButton btnAddDirectedMovie = new JButton("Add a movie he/she directed");
+		btnAddDirectedMovie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					AddDirectedMovieFrame addDirectedMovieFrame = addDirectedMovieDisplay();
+					addDirectedMovieFrame.setVisible(true);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
 		btnAddDirectedMovie.setBounds(558, 308, 224, 25);
 		contentPane.add(btnAddDirectedMovie);
 		btnAddDirectedMovie.setEnabled(false);
@@ -186,6 +196,10 @@ public class VipListFrame extends JFrame {
 	
 	private AddPlayedMovieFrame addPlayedMovieDisplay() throws SQLException{
 		return new AddPlayedMovieFrame(this, currentVip);
+	}
+	
+	private AddDirectedMovieFrame addDirectedMovieDisplay() throws SQLException{
+		return new AddDirectedMovieFrame(this, currentVip);
 	}
 	
 	private AddWeddingFrame addWeddingDisplay() throws SQLException{

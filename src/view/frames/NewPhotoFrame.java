@@ -7,6 +7,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -15,7 +16,7 @@ import javax.swing.JSeparator;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -176,27 +177,14 @@ public class NewPhotoFrame extends JFrame {
 				try {
 					if (txtNewPlace.getText().isEmpty()) {
 						throw new Exception("The place of the photo must be filled.");
+					} else if (!App.checkDateFormat(txtNewDate.getText())) {
+						formError("The date format is incorrect: it should be yyyy-mm-dd.");
+					} else if (!App.checkDateValue(txtNewDate.getText())) {
+						formError("The date value is incorrect: it should be before today!");
 					} else {
 						newPhoto.setPlace(txtNewPlace.getText());
 						String[] dateFields = txtNewDate.getText().split("-");
-						for (String field : dateFields) {
-							System.out.println(field.toString());
-							System.out.println(Integer.parseInt(field));
-						}
-						try {
-
-							LocalDate newDate = LocalDate.of(Integer.parseInt(dateFields[0]),
-									Integer.parseInt(dateFields[1]), Integer.parseInt(dateFields[2]));
-							LocalDate today = LocalDate.now();
-							System.out.println(today.toString());
-							System.out.println(newDate.toString());
-							if (newDate.isAfter(today)) {
-								throw new Exception("The date must be earlier than today.");
-							}
-							newPhoto.setDate(newDate);
-						} catch (DateTimeException | NumberFormatException | ArrayIndexOutOfBoundsException ex) {
-							throw new Exception("Invalid Date Format");
-						}
+						newPhoto.setDate(Date.valueOf(txtNewDate.getText()));
 						App.getDaoPhoto().addNewPhoto(newPhoto, identifiedVipId);
 						clearInfo();
 					}
@@ -235,6 +223,10 @@ public class NewPhotoFrame extends JFrame {
 	private void clearAllItems(List list, JLabel jLabel) {
 		list.clear();
 		jLabel.setText(list.toString());
+	}
+	
+	public void formError(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
 	}
 
 }

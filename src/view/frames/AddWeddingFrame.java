@@ -36,7 +36,8 @@ public class AddWeddingFrame extends JFrame {
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public AddWeddingFrame(VipListFrame vipListFrame, Vip vip) throws SQLException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -45,50 +46,53 @@ public class AddWeddingFrame extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		model = new VipJTable();
-		
+
 		JLabel lblDate = new JLabel("Wedding Date");
 		lblDate.setBounds(10, 336, 80, 14);
 		contentPane.add(lblDate);
-		
+
 		txtDate = new JTextField();
 		txtDate.setBounds(139, 333, 109, 20);
 		contentPane.add(txtDate);
 		txtDate.setColumns(10);
-	
+
 		JLabel label = new JLabel("");
 		label.setBounds(10, 34, 399, 14);
 		contentPane.add(label);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 414, 315);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
-		
+
 		txtPlace = new JTextField();
 		txtPlace.setBounds(139, 364, 212, 20);
 		contentPane.add(txtPlace);
 		txtPlace.setColumns(10);
-		
+
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if(txtDate.getText().isEmpty()){
+				if (txtDate.getText().isEmpty()) {
 					formError("You must fill the date field");
-				}
-				else if(txtPlace.getText().isEmpty()){
+				} else if (!App.checkDateFormat(txtDate.getText())) {
+					formError("The date format is incorrect: it should be yyyy-mm-dd.");
+				} else if (!App.checkDateValue(txtDate.getText())) {
+					formError("The date value is incorrect: it should be before today!");
+				} else if (txtPlace.getText().isEmpty()) {
 					formError("You must fill the place field");
-				}
-				else{
-					Event event = new Event(vip.getIdVip(),Date.valueOf(txtDate.getText()).toLocalDate(),model.getVipList().get(table.getSelectedRow()).getIdVip(),txtPlace.getText(),null);
-					
+				} else {
+					Event event = new Event(vip.getIdVip(), Date.valueOf(txtDate.getText()).toLocalDate(),
+							model.getVipList().get(table.getSelectedRow()).getIdVip(), txtPlace.getText(), null);
+
 					try {
 						App.getDaoEvent().addWedding(event);
 					} catch (SQLException e) {
@@ -101,31 +105,29 @@ public class AddWeddingFrame extends JFrame {
 		btnAdd.setBounds(203, 399, 59, 23);
 		contentPane.add(btnAdd);
 		btnAdd.setEnabled(false);
-		
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	        	if(table.getSelectedRow()!=-1){
-	        		if(model.getVipList().get(table.getSelectedRow()).getIdPartner()==-1){
-	        			btnAdd.setEnabled(true);
-	        		}
-	        		else{
-	        			btnAdd.setEnabled(false);
-	        		}
-	        	}
-	        }
+
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				if (table.getSelectedRow() != -1) {
+					if (model.getVipList().get(table.getSelectedRow()).getIdPartner() == -1) {
+						btnAdd.setEnabled(true);
+					} else {
+						btnAdd.setEnabled(false);
+					}
+				}
+			}
 		});
-		
-		
+
 		JLabel lblWeddingPlace = new JLabel("Wedding Place");
 		lblWeddingPlace.setBounds(10, 367, 80, 14);
 		contentPane.add(lblWeddingPlace);
-		
+
 		JLabel lblYyyymmdd = new JLabel("(yyyy-mm-dd)");
 		lblYyyymmdd.setBounds(258, 336, 93, 14);
 		contentPane.add(lblYyyymmdd);
 	}
-	
-	public void formError(String msg){
+
+	public void formError(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
 	}
 }
