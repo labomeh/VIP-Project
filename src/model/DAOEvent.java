@@ -63,25 +63,27 @@ public class DAOEvent {
 		pstmt.setInt(3, vip.getIdVip());
 		pstmt.setInt(4, vip.getIdVip());
 		ResultSet rset=pstmt.executeQuery();
-		rset.next();
-		int idVip1 = rset.getInt(1);
-		LocalDate weddingDate = rset.getDate(2).toLocalDate();
-		int idVip2 = rset.getInt(3);
-		String weddingPlace = rset.getString(4);
-		LocalDate divorceDate;
-		if(rset.getDate(5)==null){
-			divorceDate= null;
+		if(rset.next()){
+			int idVip1 = rset.getInt(1);
+			LocalDate weddingDate = rset.getDate(2).toLocalDate();
+			int idVip2 = rset.getInt(3);
+			String weddingPlace = rset.getString(4);
+			LocalDate divorceDate;
+			if(rset.getDate(5)==null){
+				divorceDate= null;
+			}
+			else{
+				divorceDate = rset.getDate(5).toLocalDate();
+			}
+			 
+			Event event = new Event(idVip1, weddingDate, idVip2, weddingPlace, divorceDate);
+			return event;
 		}
-		else{
-			divorceDate = rset.getDate(5).toLocalDate();
-		}
-		 
-		Event event = new Event(idVip1, weddingDate, idVip2, weddingPlace, divorceDate);
-		return event;
+		return null;
 	}
 	
 	public void addWedding(Event event) throws SQLException{
-		String requete = "INSERT INTO EVENT VALUES(?, ?, ?, ?, ?);";
+		String requete = "INSERT INTO event VALUES(?, ?, ?, ?, ?);";
 		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, event.getIdVip1());
 		pstmt.setDate(2, Date.valueOf(event.getWeddingDate()));
@@ -92,12 +94,14 @@ public class DAOEvent {
 		pstmt.close();
 	}
 	
-	public void addDivorce(LocalDate weddingDate, int idVip1, int idVip2) throws SQLException{
-		String requete = "UPDATE EVENT SET weddingDate=? WHERE idVip1=? AND idVip2=?);";
+	public void addDivorce(Date divorceDate, int idVip1, int idVip2) throws SQLException{
+		String requete = "UPDATE event SET divorceDate=? WHERE (idVip1=? AND idVip2=?) or (idVip2=? AND idVip1=?);";
 		PreparedStatement pstmt = connection.prepareStatement(requete);
-		pstmt.setDate(1, Date.valueOf(weddingDate));
+		pstmt.setDate(1, divorceDate);
 		pstmt.setInt(2, idVip1);
 		pstmt.setInt(3, idVip2);
+		pstmt.setInt(4, idVip1);
+		pstmt.setInt(5, idVip2);
 		pstmt.executeUpdate();
 		pstmt.close();
 	}

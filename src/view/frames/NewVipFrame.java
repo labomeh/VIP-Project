@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import app.App;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -137,10 +138,10 @@ public class NewVipFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					if (txtNewName.getText().isEmpty()) {
-						throw new Exception("You must fill the name field");
+						formError("You must fill the name field");
 					}
-					if (txtNewSurname1.getText().isEmpty()) {
-						throw new Exception("You must fill the surname field");
+					else if (txtNewSurname1.getText().isEmpty()) {
+						formError("You must fill the surname field");
 					} else {
 						newVip.setName(txtNewName.getText());
 						String[] surnames = { txtNewSurname1.getText(), txtNewSurname2.getText() };
@@ -205,5 +206,9 @@ public class NewVipFrame extends JFrame {
 		nationalities.clear();
 		System.out.println(nationalities.toString());
 		nationalitiesValues.setText("");
+	}
+	
+	public void formError(String msg){
+		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
 	}
 }
