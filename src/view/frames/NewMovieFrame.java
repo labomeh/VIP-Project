@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -147,12 +148,16 @@ public class NewMovieFrame extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if (txtNewVisa.getText().isEmpty()) {
-						throw new Exception("You must fill the Visa field");
+					if (txtNewVisa.getText().isEmpty() || !App.checkVisaFormat(txtNewVisa.getText())) {
+						formError("You must fill the visa field with the right format: it should be like an integer!");
+					} else if (txtNewTitle.getText().isEmpty()) {
+						formError("You must give a title to your movie");
+					} else if (!App.checkYearFormat(txtNewReleaseYear.getText())) {
+						formError("Invalid year format: it should be yyyy!");
+					} else if (genres.isEmpty()) {
+						formError("You must choose at least one genre for your movie");
 					}
-					if (txtNewTitle.getText().isEmpty()) {
-						throw new Exception("You must fill the Title field");
-					} else {
+					else {
 						newMovie.setMovieVisa(new Integer(txtNewVisa.getText()));
 						newMovie.setMovieTitle(txtNewTitle.getText());
 						newMovie.setReleaseYear(Integer.valueOf(txtNewReleaseYear.getText()));
@@ -309,5 +314,9 @@ public class NewMovieFrame extends JFrame {
 	private void clearAllItems(List list, JLabel jLabel) {
 		list.clear();
 		jLabel.setText(list.toString());
+	}
+	
+	public void formError(String msg) {
+		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
 	}
 }

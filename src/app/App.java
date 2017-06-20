@@ -120,4 +120,16 @@ public class App {
 		}
 		return true;
 	}
+	
+	public static boolean checkYearFormat(String year) {
+		Pattern pattern = Pattern.compile("[0-9]{4}");
+        Matcher matcher = pattern.matcher(year);
+        return matcher.matches();
+	}
+
+	public static boolean checkVisaFormat(String visa) {
+		Pattern pattern = Pattern.compile("[0-9]+");
+        Matcher matcher = pattern.matcher(visa);
+        return matcher.matches();
+	}
 }
