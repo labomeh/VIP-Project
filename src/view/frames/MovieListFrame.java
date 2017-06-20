@@ -36,7 +36,7 @@ public class MovieListFrame extends JFrame {
 	public MovieListFrame(Frame parent) throws SQLException {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 567, 589);
+		setBounds(100, 100, 567, 539);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,7 +69,7 @@ public class MovieListFrame extends JFrame {
 				}
 			}
 		});
-		btnAddActor.setBounds(22, 439, 153, 25);
+		btnAddActor.setBounds(21, 439, 242, 25);
 		contentPane.add(btnAddActor);
 
 		JButton btnAddDirector = new JButton("Add a director");
@@ -83,7 +83,7 @@ public class MovieListFrame extends JFrame {
 				}
 			}
 		});
-		btnAddDirector.setBounds(197, 439, 153, 25);
+		btnAddDirector.setBounds(284, 439, 242, 25);
 		contentPane.add(btnAddDirector);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

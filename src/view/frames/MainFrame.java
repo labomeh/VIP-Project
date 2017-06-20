@@ -14,6 +14,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import controller.*;
+import javax.swing.SwingConstants;
 
 public class MainFrame extends JFrame {
 
@@ -29,15 +30,16 @@ public class MainFrame extends JFrame {
 		this.dataSource = dataSource;
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 564, 476);
+		setBounds(100, 100, 564, 344);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblVipWorld = new JLabel("VIP WORLD");
+		lblVipWorld.setHorizontalAlignment(SwingConstants.CENTER);
 		lblVipWorld.setFont(new Font("Tahoma", Font.BOLD, 41));
-		lblVipWorld.setBounds(143, 11, 251, 65);
+		lblVipWorld.setBounds(12, 11, 522, 65);
 		contentPane.add(lblVipWorld);
 
 		JButton btnViewVipList = new JButton("View all the VIP");
@@ -51,7 +53,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnViewVipList.setBounds(123, 103, 138, 65);
+		btnViewVipList.setBounds(9, 103, 169, 65);
 		contentPane.add(btnViewVipList);
 
 		JButton btnViewEventList = new JButton("View all the events");
@@ -65,7 +67,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnViewEventList.setBounds(287, 103, 138, 65);
+		btnViewEventList.setBounds(365, 103, 169, 65);
 		contentPane.add(btnViewEventList);
 
 		JButton btnViewMovieList = new JButton("View all the movies");
@@ -79,7 +81,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnViewMovieList.setBounds(202, 181, 138, 65);
+		btnViewMovieList.setBounds(187, 103, 169, 65);
 		contentPane.add(btnViewMovieList);
 
 		JButton btnNewVip = new JButton("New VIP");
@@ -95,7 +97,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnNewVip.setBounds(31, 286, 97, 25);
+		btnNewVip.setBounds(9, 198, 169, 65);
 		contentPane.add(btnNewVip);
 
 		JButton btnNewMovie = new JButton("New Movie");
@@ -111,12 +113,8 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnNewMovie.setBounds(159, 286, 97, 25);
+		btnNewMovie.setBounds(187, 198, 169, 65);
 		contentPane.add(btnNewMovie);
-
-		JButton btnNewEvent = new JButton("New Event");
-		btnNewEvent.setBounds(287, 286, 97, 25);
-		contentPane.add(btnNewEvent);
 
 		JButton btnNewPhoto = new JButton("New Photo");
 		btnNewPhoto.addActionListener(new ActionListener() {
@@ -131,7 +129,7 @@ public class MainFrame extends JFrame {
 				}
 			}
 		});
-		btnNewPhoto.setBounds(415, 286, 97, 25);
+		btnNewPhoto.setBounds(365, 198, 169, 65);
 		contentPane.add(btnNewPhoto);
 	}
 

@@ -29,36 +29,36 @@ public class AddPlayedMovieFrame extends JFrame {
 	public AddPlayedMovieFrame(VipListFrame vipListFrame, Vip vip) throws SQLException {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 812, 517);
+		setBounds(100, 100, 541, 301);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblAddPlayedMovies = new JLabel("Add Played Movies For");
-		lblAddPlayedMovies.setBounds(0, 0, 449, 52);
+		lblAddPlayedMovies.setBounds(12, 0, 499, 52);
 		getContentPane().add(lblAddPlayedMovies);
 
-		JLabel lblSelectedActor = new JLabel(vip.getSurname()[0] + vip.getName());
-		lblSelectedActor.setBounds(0, 53, 449, 52);
+		JLabel lblSelectedActor = new JLabel(vip.getSurname()[0] + " " + vip.getName());
+		lblSelectedActor.setBounds(12, 53, 499, 52);
 		getContentPane().add(lblSelectedActor);
 
 		JLabel lblMovie = new JLabel("Movie");
-		lblMovie.setBounds(10, 127, 113, 16);
+		lblMovie.setBounds(12, 118, 113, 16);
 		getContentPane().add(lblMovie);
 
 		JLabel lblSelectedMovies = new JLabel("Added Movies");
-		lblSelectedMovies.setBounds(10, 162, 113, 16);
+		lblSelectedMovies.setBounds(12, 153, 113, 16);
 		getContentPane().add(lblSelectedMovies);
 
 		moviesValues = new JLabel("");
-		moviesValues.setBounds(135, 162, 158, 16);
+		moviesValues.setBounds(136, 153, 259, 16);
 		getContentPane().add(moviesValues);
 
 		JComboBox cbxMovie = new JComboBox();
 		moviesJComboBox = new NotPlayedMovieJComboBox(vip);
 		cbxMovie.setModel(moviesJComboBox);
-		cbxMovie.setBounds(135, 124, 158, 22);
+		cbxMovie.setBounds(137, 115, 258, 22);
 		getContentPane().add(cbxMovie);
 
 		JButton btnAddPlayedMovie = new JButton("Add");
@@ -74,7 +74,7 @@ public class AddPlayedMovieFrame extends JFrame {
 				moviesValues.setText(movies.toString());
 			}
 		});
-		btnAddPlayedMovie.setBounds(305, 123, 104, 25);
+		btnAddPlayedMovie.setBounds(407, 114, 104, 25);
 		getContentPane().add(btnAddPlayedMovie);
 
 		JButton btnRemoveMovie = new JButton("<");
@@ -83,7 +83,7 @@ public class AddPlayedMovieFrame extends JFrame {
 				removeLastItem(movies, moviesValues);
 			}
 		});
-		btnRemoveMovie.setBounds(305, 158, 51, 25);
+		btnRemoveMovie.setBounds(407, 149, 51, 25);
 		getContentPane().add(btnRemoveMovie);
 
 		JButton btnClearAllMovies = new JButton("<<");
@@ -92,7 +92,7 @@ public class AddPlayedMovieFrame extends JFrame {
 				clearAllItems(movies, moviesValues);
 			}
 		});
-		btnClearAllMovies.setBounds(358, 158, 51, 25);
+		btnClearAllMovies.setBounds(460, 149, 51, 25);
 		getContentPane().add(btnClearAllMovies);
 
 		JButton btnSave = new JButton("Save");
@@ -110,7 +110,7 @@ public class AddPlayedMovieFrame extends JFrame {
 				}
 			}
 		});
-		btnSave.setBounds(135, 232, 158, 25);
+		btnSave.setBounds(175, 216, 158, 25);
 		getContentPane().add(btnSave);
 	}
 

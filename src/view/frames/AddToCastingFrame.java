@@ -17,6 +17,8 @@ import java.util.List;
 import app.App;
 import controller.Movie;
 import view.JComboBoxModels.ActorsJComboBox;
+import java.awt.Dimension;
+import javax.swing.SwingConstants;
 
 public class AddToCastingFrame extends JFrame {
 
@@ -29,22 +31,24 @@ public class AddToCastingFrame extends JFrame {
 	public AddToCastingFrame(MovieListFrame movieListFrame, Movie movie) throws SQLException {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 812, 517);
+		setBounds(100, 100, 516, 323);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblAddToCasting = new JLabel("Add Actors For");
-		lblAddToCasting.setBounds(0, 0, 449, 52);
+		lblAddToCasting.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddToCasting.setBounds(10, 0, 476, 52);
 		getContentPane().add(lblAddToCasting);
 
 		JLabel lblSelectedMovie = new JLabel(movie.getMovieTitle());
-		lblSelectedMovie.setBounds(0, 53, 449, 52);
+		lblSelectedMovie.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSelectedMovie.setBounds(10, 53, 476, 52);
 		getContentPane().add(lblSelectedMovie);
 
 		JLabel lblActor = new JLabel("Actor");
-		lblActor.setBounds(10, 127, 113, 16);
+		lblActor.setBounds(11, 127, 113, 16);
 		getContentPane().add(lblActor);
 
 		JLabel lblSelectedActors = new JLabel("Added Actors");
@@ -52,13 +56,13 @@ public class AddToCastingFrame extends JFrame {
 		getContentPane().add(lblSelectedActors);
 
 		actorsValues = new JLabel("");
-		actorsValues.setBounds(135, 162, 158, 16);
+		actorsValues.setBounds(135, 162, 212, 16);
 		getContentPane().add(actorsValues);
 
 		JComboBox cbxActor = new JComboBox();
 		actorsJComboBox = new ActorsJComboBox(movie);
 		cbxActor.setModel(actorsJComboBox);
-		cbxActor.setBounds(135, 124, 158, 22);
+		cbxActor.setBounds(135, 124, 212, 22);
 		getContentPane().add(cbxActor);
 
 		JButton btnAddToCasting = new JButton("Add");
@@ -74,7 +78,7 @@ public class AddToCastingFrame extends JFrame {
 				actorsValues.setText(actors.toString());
 			}
 		});
-		btnAddToCasting.setBounds(305, 123, 104, 25);
+		btnAddToCasting.setBounds(358, 123, 127, 25);
 		getContentPane().add(btnAddToCasting);
 
 		JButton btnRemoveActor = new JButton("<");
@@ -83,7 +87,7 @@ public class AddToCastingFrame extends JFrame {
 				removeLastItem(actors, actorsValues);
 			}
 		});
-		btnRemoveActor.setBounds(305, 158, 51, 25);
+		btnRemoveActor.setBounds(359, 158, 61, 25);
 		getContentPane().add(btnRemoveActor);
 
 		JButton btnClearAllActors = new JButton("<<");
@@ -92,7 +96,7 @@ public class AddToCastingFrame extends JFrame {
 				clearAllItems(actors, actorsValues);
 			}
 		});
-		btnClearAllActors.setBounds(358, 158, 51, 25);
+		btnClearAllActors.setBounds(425, 158, 61, 25);
 		getContentPane().add(btnClearAllActors);
 
 		JButton btnSave = new JButton("Save");
@@ -110,7 +114,7 @@ public class AddToCastingFrame extends JFrame {
 				}
 			}
 		});
-		btnSave.setBounds(135, 232, 158, 25);
+		btnSave.setBounds(135, 214, 212, 25);
 		getContentPane().add(btnSave);
 	}
 

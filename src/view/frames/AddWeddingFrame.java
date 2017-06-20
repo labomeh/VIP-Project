@@ -21,6 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
@@ -74,7 +75,7 @@ public class AddWeddingFrame extends JFrame {
 		scrollPane.setViewportView(table);
 
 		txtPlace = new JTextField();
-		txtPlace.setBounds(139, 364, 212, 20);
+		txtPlace.setBounds(139, 364, 270, 20);
 		contentPane.add(txtPlace);
 		txtPlace.setColumns(10);
 
@@ -95,8 +96,8 @@ public class AddWeddingFrame extends JFrame {
 
 					try {
 						App.getDaoEvent().addWedding(event);
+						clearInfo();
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -129,5 +130,10 @@ public class AddWeddingFrame extends JFrame {
 
 	public void formError(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
+	}
+	
+	private void clearInfo() {
+		txtDate.setText("");
+		txtPlace.setText("");
 	}
 }
