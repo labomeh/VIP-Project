@@ -35,7 +35,7 @@ public class IdentificationFrame extends javax.swing.JDialog {
 
         lbUser.setText("User");
 
-        lbPasswd.setText("Passwd");
+        lbPasswd.setText("Password");
 
         jButton1.setText("OK");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

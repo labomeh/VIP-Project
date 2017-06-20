@@ -185,7 +185,7 @@ public class NewPhotoFrame extends JFrame {
 						newPhoto.setPlace(txtNewPlace.getText());
 						String[] dateFields = txtNewDate.getText().split("-");
 						newPhoto.setDate(Date.valueOf(txtNewDate.getText()));
-						App.getDaoPhoto().addNewPhoto(newPhoto, identifiedVipId);
+						App.getDaoPhoto().addNewPhoto(newPhoto, identifiedVipId,fileChooser.getSelectedFile().getAbsolutePath());
 						clearInfo();
 					}
 				} catch (Exception e) {

@@ -1,5 +1,8 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,6 +12,10 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPSClient;
 
 import app.App;
 import controller.Photo;
@@ -64,7 +71,24 @@ public class DAOPhoto {
 
 	} // getIdentifiedVip method
 
-	public void addNewPhoto(Photo newPhoto, List<Integer> identifiedVipId) throws SQLException {
+	public void addNewPhoto(Photo newPhoto, List<Integer> identifiedVipId, String photoPath) throws SQLException, IOException {
+		
+		Properties properties = new Properties();
+		FileInputStream fichier = new FileInputStream("src/ftp.properties");
+		properties.load(fichier);
+		FTPSClient ftp = new FTPSClient();
+		ftp.connect(properties.getProperty("host"),990);
+		ftp.login(properties.getProperty("login"), properties.getProperty("password"));
+		ftp.enterLocalPassiveMode();
+		ftp.setFileType(FTP.BINARY_FILE_TYPE);
+		
+		InputStream input = new FileInputStream(photoPath);
+		boolean bool = false;
+		while(bool!=true){
+			bool = ftp.storeFile("/public_html/image/" + newPhoto.getFileName(), input);
+			System.out.println(photoPath);
+		}
+		
 		String queryNewPhoto = "INSERT INTO photo VALUES(idPhoto, ?, ?, ?);";
 		PreparedStatement pstmtNewPhoto = connexion.prepareStatement(queryNewPhoto);
 		pstmtNewPhoto.setString(1, newPhoto.getPlace());

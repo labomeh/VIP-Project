@@ -1,5 +1,4 @@
-/app/
-/connection.properties
-/controller/
 /model/
 /view/
+/controller/
+/ftp.properties
