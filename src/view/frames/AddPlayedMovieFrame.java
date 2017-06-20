@@ -17,6 +17,7 @@ import java.util.List;
 import app.App;
 import controller.Vip;
 import view.JComboBoxModels.NotPlayedMovieJComboBox;
+import javax.swing.SwingConstants;
 
 public class AddPlayedMovieFrame extends JFrame {
 
@@ -36,10 +37,12 @@ public class AddPlayedMovieFrame extends JFrame {
 		contentPane.setLayout(null);
 
 		JLabel lblAddPlayedMovies = new JLabel("Add Played Movies For");
+		lblAddPlayedMovies.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddPlayedMovies.setBounds(12, 0, 499, 52);
 		getContentPane().add(lblAddPlayedMovies);
 
 		JLabel lblSelectedActor = new JLabel(vip.getSurname()[0] + " " + vip.getName());
+		lblSelectedActor.setHorizontalAlignment(SwingConstants.CENTER);
 		lblSelectedActor.setBounds(12, 53, 499, 52);
 		getContentPane().add(lblSelectedActor);
 
