@@ -40,68 +40,97 @@ public class VipListFrame extends JFrame {
 
 	private JPanel contentPane;
 	private VipJTable model;
-	private boolean outputState;
 	private JTable table;
 	private Vip currentVip;
 	private JTextField txtNewDivorceDate;
 
 	/**
 	 * Create the frame.
-	 * @throws SQLException 
+	 * 
+	 * @throws SQLException
 	 */
 	public VipListFrame(Frame parent) throws SQLException {
-		
+
+		model = new VipJTable();
+
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 812, 517);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		model = new VipJTable();
-		
+
 		JLabel lblMovieList = new JLabel("VIP");
 		lblMovieList.setHorizontalAlignment(SwingConstants.CENTER);
 		lblMovieList.setFont(new Font("Tahoma", Font.PLAIN, 28));
 		lblMovieList.setBounds(10, 13, 528, 36);
 		contentPane.add(lblMovieList);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
-		
 		scrollPane.setBounds(10, 61, 528, 396);
 		contentPane.add(scrollPane);
-		
+
 		table = new JTable();
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 		scrollPane.setViewportView(table);
-		
+
 		JPanel panel = new JPanel();
-		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Marital status", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+		panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Marital status",
+				TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(548, 61, 238, 243);
 		contentPane.add(panel);
 		panel.setLayout(null);
-		
+
+		JLabel lblPartner = new JLabel("");
+		lblPartner.setBounds(10, 51, 218, 14);
+		panel.add(lblPartner);
+
+		JLabel lblWeddingDate = new JLabel("");
+		lblWeddingDate.setBounds(10, 96, 218, 14);
+		panel.add(lblWeddingDate);
+
+		JLabel lblDivorceDate = new JLabel("");
+		lblDivorceDate.setBounds(12, 108, 218, 14);
+		panel.add(lblDivorceDate);
+
+		JButton btnAddWedding = new JButton("Add wedding");
+		btnAddWedding.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					AddWeddingFrame addWeddingFrame = addWeddingDisplay();
+					addWeddingFrame.setVisible(true);
+				} catch (SQLException weddingException) {
+					weddingException.printStackTrace();
+				}
+			}
+		});
+		btnAddWedding.setBounds(12, 135, 216, 23);
+		panel.add(btnAddWedding);
+		btnAddWedding.setEnabled(false);
+
 		JButton btnAddDivorce = new JButton("Add divorce");
 		btnAddDivorce.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!App.checkDateFormat(txtNewDivorceDate.getText())) {
 					formError("The date format is incorrect: it should be yyyy-mm-dd.");
-				} else if(!App.checkDateValue(txtNewDivorceDate.getText())) {
+				} else if (!App.checkDateValue(txtNewDivorceDate.getText())) {
 					formError("The date value is incorrect: it should be before today!");
 				} else {
 					try {
-					LocalDate weddingDate = App.getDaoEvent().getMaritialStatus(currentVip).getWeddingDate();
-					LocalDate divorceDate = Date.valueOf(txtNewDivorceDate.getText()).toLocalDate();
-					if (divorceDate.compareTo(weddingDate)<=0) {
-						formError("The divorce date can't be before the wedding date!");
-					} else {
-							App.getDaoEvent().addDivorce(Date.valueOf(txtNewDivorceDate.getText()), currentVip.getIdVip(), currentVip.getIdPartner());
+						LocalDate weddingDate = App.getDaoEvent().getMaritialStatus(currentVip).getWeddingDate();
+						LocalDate divorceDate = Date.valueOf(txtNewDivorceDate.getText()).toLocalDate();
+						if (divorceDate.compareTo(weddingDate) <= 0) {
+							formError("The divorce date can't be before the wedding date!");
+						} else {
+							App.getDaoEvent().addDivorce(Date.valueOf(divorceDate), currentVip.getIdVip(),
+									currentVip.getIdPartner());
+							clearInfo();
 						}
-					} catch (Exception e5) {
-						e5.printStackTrace();
+					} catch (Exception divorceException) {
+						divorceException.printStackTrace();
 					}
 				}
 			}
@@ -109,59 +138,18 @@ public class VipListFrame extends JFrame {
 		btnAddDivorce.setBounds(12, 160, 216, 23);
 		panel.add(btnAddDivorce);
 		btnAddDivorce.setEnabled(false);
-		
-		JButton btnAddWedding = new JButton("Add wedding");
-		btnAddWedding.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					AddWeddingFrame addWeddingFrame = addWeddingDisplay();
-					addWeddingFrame.setVisible(true);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		btnAddWedding.setBounds(12, 135, 216, 23);
-		panel.add(btnAddWedding);
-		btnAddWedding.setEnabled(false);
-		
-		
-		JLabel lblPartner = new JLabel("");
-		lblPartner.setBounds(10, 51, 218, 14);
-		panel.add(lblPartner);
-		
-		JLabel lblWeddingDate = new JLabel("");
-		lblWeddingDate.setBounds(10, 96, 218, 14);
-		panel.add(lblWeddingDate);
-		
-		JLabel lblDivorceDate = new JLabel("");
-		lblDivorceDate.setBounds(12, 108, 218, 14);
-		panel.add(lblDivorceDate);
-		
+
 		JLabel lblNewDivorceDate = new JLabel("Divorce date (yyyy-mm-dd)");
 		lblNewDivorceDate.setBounds(12, 185, 216, 23);
 		panel.add(lblNewDivorceDate);
-		
+		lblNewDivorceDate.setEnabled(false);
+
 		txtNewDivorceDate = new JTextField();
 		txtNewDivorceDate.setBounds(12, 209, 214, 23);
 		panel.add(txtNewDivorceDate);
 		txtNewDivorceDate.setColumns(10);
-		
-		JButton btnAddDirectedMovie = new JButton("Add a movie he/she directed");
-		btnAddDirectedMovie.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					AddDirectedMovieFrame addDirectedMovieFrame = addDirectedMovieDisplay();
-					addDirectedMovieFrame.setVisible(true);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		});
-		btnAddDirectedMovie.setBounds(550, 355, 232, 25);
-		contentPane.add(btnAddDirectedMovie);
-		btnAddDirectedMovie.setEnabled(false);
-		
+		txtNewDivorceDate.setEnabled(false);
+
 		JButton btnAddPlayedMovie = new JButton("Add a movie he/she played in");
 		btnAddPlayedMovie.setBounds(550, 317, 232, 25);
 		contentPane.add(btnAddPlayedMovie);
@@ -176,70 +164,84 @@ public class VipListFrame extends JFrame {
 			}
 		});
 		btnAddPlayedMovie.setEnabled(false);
-		
-		table.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-	        public void valueChanged(ListSelectionEvent event) {
-	        	if(table.getSelectedRow()!=-1){
-	        		btnAddPlayedMovie.setEnabled(true);
-	        		btnAddDirectedMovie.setEnabled(true);
-	        		try {
-	        			currentVip=model.getVipList().get(table.getSelectedRow());
-						if(model.getVipList().get(table.getSelectedRow()).getIdPartner()!=-1){							
-							lblPartner.setText("Wed to : " + App.getDaoVip().getPartner(currentVip).getSurname()[0] + " " + App.getDaoVip().getPartner(model.getVipList().get(table.getSelectedRow())).getName());
-							lblWeddingDate.setText("On : "+ App.getDaoEvent().getMaritialStatus(currentVip).getWeddingDate());
+
+		JButton btnAddDirectedMovie = new JButton("Add a movie he/she directed");
+		btnAddDirectedMovie.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					AddDirectedMovieFrame addDirectedMovieFrame = addDirectedMovieDisplay();
+					addDirectedMovieFrame.setVisible(true);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		btnAddDirectedMovie.setBounds(550, 355, 232, 25);
+		contentPane.add(btnAddDirectedMovie);
+		btnAddDirectedMovie.setEnabled(false);
+
+		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+			public void valueChanged(ListSelectionEvent event) {
+				if (table.getSelectedRow() != -1) {
+					btnAddPlayedMovie.setEnabled(true);
+					btnAddDirectedMovie.setEnabled(true);
+					try {
+						currentVip = model.getVipList().get(table.getSelectedRow());
+						if (model.getVipList().get(table.getSelectedRow()).getIdPartner() != -1) {
+							lblPartner.setText("Wed to : " + App.getDaoVip().getPartner(currentVip).getSurname()[0]
+									+ " " + App.getDaoVip().getPartner(model.getVipList().get(table.getSelectedRow()))
+											.getName());
+							lblWeddingDate.setText(
+									"On : " + App.getDaoEvent().getMaritialStatus(currentVip).getWeddingDate());
 							btnAddWedding.setEnabled(false);
 							lblNewDivorceDate.setEnabled(true);
 							txtNewDivorceDate.setEnabled(true);
-						}
-						else{
+						} else {
 							lblPartner.setText("Single");
 							lblWeddingDate.setText("");
 							btnAddWedding.setEnabled(true);
 							lblNewDivorceDate.setEnabled(false);
 							txtNewDivorceDate.setEnabled(false);
 						}
-						if(App.getDaoEvent().getMaritialStatus(currentVip)!=null&&App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate()!=null){
-							lblDivorceDate.setText("Divorced : "+ App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate());
+						if (App.getDaoEvent().getMaritialStatus(currentVip) != null
+								&& App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate() != null) {
+							lblDivorceDate.setText(
+									"Divorced : " + App.getDaoEvent().getMaritialStatus(currentVip).getDivorceDate());
 							btnAddDivorce.setEnabled(false);
-						}
-						else{
+						} else {
 							lblDivorceDate.setText("");
 							btnAddDivorce.setEnabled(true);
 						}
-						if(btnAddWedding.isEnabled()){
+						if (btnAddWedding.isEnabled()) {
 							btnAddDivorce.setEnabled(false);
 						}
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-	    		}
-	        }
-	    });
-		
-		
-		
-		
-		
+				}
+			}
+		});
+
 	} // Constructor
-	
-	private AddPlayedMovieFrame addPlayedMovieDisplay() throws SQLException{
+
+	private AddPlayedMovieFrame addPlayedMovieDisplay() throws SQLException {
 		return new AddPlayedMovieFrame(this, currentVip);
 	}
-	
-	private AddDirectedMovieFrame addDirectedMovieDisplay() throws SQLException{
+
+	private AddDirectedMovieFrame addDirectedMovieDisplay() throws SQLException {
 		return new AddDirectedMovieFrame(this, currentVip);
 	}
-	
-	private AddWeddingFrame addWeddingDisplay() throws SQLException{
+
+	private AddWeddingFrame addWeddingDisplay() throws SQLException {
 		return new AddWeddingFrame(this, currentVip);
 	}
-	
-	private String DialogDivorceDate(){
-		return (String)JOptionPane.showInputDialog(this,"Divorce date (yyyy-mm-dd) :","Add Divorce",JOptionPane.PLAIN_MESSAGE);
-	}
-	
+
 	public void formError(String msg) {
 		JOptionPane.showMessageDialog(this, msg, "Form error", JOptionPane.ERROR_MESSAGE);
+	}
+
+	private void clearInfo() {
+		txtNewDivorceDate.setText("");
 	}
 }
