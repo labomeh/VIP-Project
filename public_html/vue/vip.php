@@ -33,8 +33,8 @@
 					} else {
 						echo '<td></td>';
 					}
-					echo '
-					</tr>';
+					echo '<td><button data-toggle="collapse" data-target="#data'.$v_vip[0].'" class="btn-info">Voir plus</button></td></tr>';
+					echo '<tr id="data'.$v_vip[0].'" class="collapse"><td>Coucou</td><tr> ';
 				}
 				?>
 				</tbody>
