@@ -3,6 +3,7 @@ package view.frames;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -29,22 +30,24 @@ public class AddToDirectionFrame extends JFrame {
 	public AddToDirectionFrame(MovieListFrame movieListFrame, Movie movie) throws SQLException {
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 812, 517);
+		setBounds(100, 100, 516, 323);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblAddToDirection = new JLabel("Add Director For");
-		lblAddToDirection.setBounds(0, 0, 449, 52);
+		lblAddToDirection.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddToDirection.setBounds(10, 0, 476, 52);
 		getContentPane().add(lblAddToDirection);
 
 		JLabel lblSelectedMovie = new JLabel(movie.getMovieTitle());
-		lblSelectedMovie.setBounds(0, 53, 449, 52);
+		lblSelectedMovie.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSelectedMovie.setBounds(10, 53, 476, 52);
 		getContentPane().add(lblSelectedMovie);
 
 		JLabel lblDirector = new JLabel("Movie");
-		lblDirector.setBounds(10, 127, 113, 16);
+		lblDirector.setBounds(11, 127, 113, 16);
 		getContentPane().add(lblDirector);
 
 		JLabel lblSelectedDirectors = new JLabel("Added Directors");
@@ -52,13 +55,13 @@ public class AddToDirectionFrame extends JFrame {
 		getContentPane().add(lblSelectedDirectors);
 
 		directorsValues = new JLabel("");
-		directorsValues.setBounds(135, 162, 158, 16);
+		directorsValues.setBounds(135, 162, 212, 16);
 		getContentPane().add(directorsValues);
 
 		JComboBox cbxDirector = new JComboBox();
 		directorsJComboBox = new DirectorsJComboBox(movie);
 		cbxDirector.setModel(directorsJComboBox);
-		cbxDirector.setBounds(135, 124, 158, 22);
+		cbxDirector.setBounds(135, 124, 212, 22);
 		getContentPane().add(cbxDirector);
 
 		JButton btnAddToDirection = new JButton("Add");
@@ -74,7 +77,7 @@ public class AddToDirectionFrame extends JFrame {
 				directorsValues.setText(directors.toString());
 			}
 		});
-		btnAddToDirection.setBounds(305, 123, 104, 25);
+		btnAddToDirection.setBounds(358, 123, 127, 25);
 		getContentPane().add(btnAddToDirection);
 
 		JButton btnRemoveDirector = new JButton("<");
@@ -83,7 +86,7 @@ public class AddToDirectionFrame extends JFrame {
 				removeLastItem(directors, directorsValues);
 			}
 		});
-		btnRemoveDirector.setBounds(305, 158, 51, 25);
+		btnRemoveDirector.setBounds(359, 158, 61, 25);
 		getContentPane().add(btnRemoveDirector);
 
 		JButton btnClearAllDirectors = new JButton("<<");
@@ -92,7 +95,7 @@ public class AddToDirectionFrame extends JFrame {
 				clearAllItems(directors, directorsValues);
 			}
 		});
-		btnClearAllDirectors.setBounds(358, 158, 51, 25);
+		btnClearAllDirectors.setBounds(425, 158, 61, 25);
 		getContentPane().add(btnClearAllDirectors);
 
 		JButton btnSave = new JButton("Save");
@@ -110,7 +113,7 @@ public class AddToDirectionFrame extends JFrame {
 				}
 			}
 		});
-		btnSave.setBounds(135, 232, 158, 25);
+		btnSave.setBounds(135, 214, 212, 25);
 		getContentPane().add(btnSave);
 	}
 

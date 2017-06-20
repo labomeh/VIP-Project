@@ -71,6 +71,7 @@ public class MovieListFrame extends JFrame {
 		});
 		btnAddActor.setBounds(21, 439, 242, 25);
 		contentPane.add(btnAddActor);
+		btnAddActor.setEnabled(false);
 
 		JButton btnAddDirector = new JButton("Add a director");
 		btnAddDirector.addActionListener(new ActionListener() {
@@ -85,12 +86,15 @@ public class MovieListFrame extends JFrame {
 		});
 		btnAddDirector.setBounds(284, 439, 242, 25);
 		contentPane.add(btnAddDirector);
+		btnAddDirector.setEnabled(false);
 		
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 				if (table.getSelectedRow() != -1) {
 					try {
 						currentMovie = model.getMovieList().get(table.getSelectedRow());
+						btnAddActor.setEnabled(true);
+						btnAddDirector.setEnabled(true);
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
