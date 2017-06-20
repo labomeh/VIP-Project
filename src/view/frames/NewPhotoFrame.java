@@ -211,7 +211,9 @@ public class NewPhotoFrame extends JFrame {
 		txtNewDate.setText("");
 		cbxVip.setSelectedIndex(-1);
 		identifiedVip.clear();
+		identifiedVipId.clear();
 		identifiedVipValues.setText("");
+		lblSelectedFile.setText("");
 	}
 
 	private void removeLastItem(List list, JLabel jLabel) {
