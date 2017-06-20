@@ -82,7 +82,9 @@ public class AddWeddingFrame extends JFrame {
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				if (txtDate.getText().isEmpty()) {
+				if (vip.getIdVip()==model.getVipList().get(table.getSelectedRow()).getIdVip()) {
+					formError("A VIP cannot marry himself!");
+				} else if (txtDate.getText().isEmpty()) {
 					formError("You must fill the date field");
 				} else if (!App.checkDateFormat(txtDate.getText())) {
 					formError("The date format is incorrect: it should be yyyy-mm-dd.");
