@@ -110,6 +110,7 @@ public class NewPhotoFrame extends JFrame {
 		cbxVip.setBounds(147, 279, 274, 22);
 		contentPane.add(cbxVip);
 
+		//Button to select the photo to upload to the server
 		JButton btnSelectFile = new JButton("Select a file");
 		btnSelectFile.addActionListener(new ActionListener() {
 
@@ -130,6 +131,7 @@ public class NewPhotoFrame extends JFrame {
 		btnSelectFile.setBounds(147, 69, 178, 25);
 		contentPane.add(btnSelectFile);
 
+		//Button to identify a vip to the current photo
 		JButton btnAddVip = new JButton("Add");
 		btnAddVip.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -171,6 +173,7 @@ public class NewPhotoFrame extends JFrame {
 		btnErase.setBounds(86, 464, 158, 25);
 		contentPane.add(btnErase);
 
+		//Button to add the photo to the database and the server
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

@@ -24,6 +24,7 @@ public class DAOMovie {
 		this.connexion = App.getConnection();
 	}
 
+	//Gather all the movies
 	public void getMovies(List<Movie> movieList) throws SQLException {
 		String requete = "select * from movie";
 		Statement stmt = connexion.createStatement();
@@ -39,6 +40,7 @@ public class DAOMovie {
 		stmt.close();
 	} // getMovies method
 
+	//Gather all the genres for the parameter movie
 	public List<String> getMovieGenres(Movie movie) throws SQLException {
 		int movieVisa = movie.getMovieVisa();
 		List<String> movieGenres = new ArrayList<>();
@@ -55,6 +57,7 @@ public class DAOMovie {
 		return movieGenres;
 	} // getMovieGenre method
 
+	//Gather the casting of parameter movie
 	public List<Integer> getCasting(Movie movie) throws SQLException {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieCasting = new ArrayList<>();
@@ -71,6 +74,7 @@ public class DAOMovie {
 		return movieCasting;
 	} // getCasting method
 
+	//Gather the directors of the parameter movie
 	public List<Integer> getDirector(Movie movie) throws SQLException {
 		int movieVisa = movie.getMovieVisa();
 		List<Integer> movieDirectors = new ArrayList<>();
@@ -87,6 +91,8 @@ public class DAOMovie {
 		return movieDirectors;
 	} // getDirector method
 
+	
+	//Adds a new movie to the database
 	public void addNewMovie(Movie newMovie, List<String> genres) throws SQLException {
 		String queryNewVip = "INSERT INTO movie VALUES(?, ?, ?);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
@@ -105,6 +111,7 @@ public class DAOMovie {
 		pstmtNewVip.close();
 	} // addNewMovie method
 
+	//Adds actors to a movie
 	public void addMovieCasting(Movie newMovie, List<Integer> actorsId) throws SQLException {
 		for (int actorId : actorsId) {
 			String queryNewActor = "INSERT INTO casting VALUES(?, ?);";
@@ -116,6 +123,8 @@ public class DAOMovie {
 		}
 	} // addMovieCasting method
 
+	
+	//Adds directors to a movie
 	public void addMovieDirection(Movie newMovie, List<Integer> directorsId) throws SQLException {
 		for (int directorId : directorsId) {
 			String queryNewDirector = "INSERT INTO directing VALUES(?, ?);";

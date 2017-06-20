@@ -29,6 +29,7 @@ public class DAOEvent {
 		this.connection = App.getConnection();
 	}
 
+	//Gather all the events
 	public List<Event> getEvents() throws SQLException {
 		List<Event> eventList = new ArrayList<>();
 		String requete = "select * from event";
@@ -55,6 +56,8 @@ public class DAOEvent {
 		return eventList;
 	} // getEvents method
 	
+	
+	//Get the current marital status of the parameter vip (current wedding or last divorce)
 	public Event getMaritialStatus(Vip vip) throws SQLException{
 		String query = "select * from event where (idVIP1=? or idVIP2=?) and weddingDate=(select max(weddingDate) from event where idVIP1=? or idVIP2=?)";
 		PreparedStatement pstmt = connection.prepareStatement(query);
@@ -82,6 +85,7 @@ public class DAOEvent {
 		return null;
 	}
 	
+	//Adds a wedding to the database
 	public void addWedding(Event event) throws SQLException{
 		String requete = "INSERT INTO event VALUES(?, ?, ?, ?, ?);";
 		PreparedStatement pstmt = connection.prepareStatement(requete);
@@ -94,6 +98,8 @@ public class DAOEvent {
 		pstmt.close();
 	}
 	
+	
+	//Adds a divorce to the database
 	public void addDivorce(Date divorceDate, int idVip1, int idVip2) throws SQLException{
 		String requete = "UPDATE event SET divorceDate=? WHERE (idVip1=? AND idVip2=?) or (idVip2=? AND idVip1=?);";
 		PreparedStatement pstmt = connection.prepareStatement(requete);

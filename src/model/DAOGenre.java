@@ -25,6 +25,7 @@ public class DAOGenre {
 		this.connexion = App.getConnection();
 	}
 
+	//Gather all the genres names
 	public static List<String> getGenres() throws SQLException {
 		List<String> genreList = new ArrayList<String>();
 		String query = "select * from genre";

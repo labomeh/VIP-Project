@@ -130,6 +130,7 @@ public class NewVipFrame extends JFrame {
 		btnErase.setBounds(147, 331, 158, 25);
 		contentPane.add(btnErase);
 
+		//Button to add the vip to the database if the form is correctly filled
 		JButton btnSave = new JButton("Save");
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -167,6 +168,7 @@ public class NewVipFrame extends JFrame {
 		JButton btnAddNationality = new JButton("Add");
 		btnAddNationality.addActionListener(new ActionListener() {
 
+			//Button to add nationalities
 	public void actionPerformed(ActionEvent arg0) {
 				String nationality = (String) cbxNationality.getSelectedItem();
 				if (!nationalities.contains(nationality)) {
@@ -202,6 +204,7 @@ public class NewVipFrame extends JFrame {
 
 	}
 
+	//Clears all the fields, making room for another vip creation
 	private void clearInfo(JComboBox cbxNationality, JLabel nationalitiesValues) {
 		txtNewName.setText("");
 		txtNewSurname1.setText("");

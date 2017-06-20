@@ -96,6 +96,7 @@ public class VipListFrame extends JFrame {
 		lblDivorceDate.setBounds(12, 108, 218, 14);
 		panel.add(lblDivorceDate);
 
+		//Button to open the wedding with the selected vip creation frame
 		JButton btnAddWedding = new JButton("Add wedding");
 		btnAddWedding.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -111,6 +112,7 @@ public class VipListFrame extends JFrame {
 		panel.add(btnAddWedding);
 		btnAddWedding.setEnabled(false);
 
+		//Button to create a divorce with the selected vip using the associated textfield
 		JButton btnAddDivorce = new JButton("Add divorce");
 		btnAddDivorce.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -150,6 +152,7 @@ public class VipListFrame extends JFrame {
 		txtNewDivorceDate.setColumns(10);
 		txtNewDivorceDate.setEnabled(false);
 
+		//Button to open the frame to add movies to the selected vip
 		JButton btnAddPlayedMovie = new JButton("Add a movie he/she played in");
 		btnAddPlayedMovie.setBounds(550, 317, 232, 25);
 		contentPane.add(btnAddPlayedMovie);
@@ -180,6 +183,7 @@ public class VipListFrame extends JFrame {
 		contentPane.add(btnAddDirectedMovie);
 		btnAddDirectedMovie.setEnabled(false);
 
+		//Event handling to know which buttons can be pressed depending on the selected vip, also displays the marital status
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 				if (table.getSelectedRow() != -1) {

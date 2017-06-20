@@ -79,6 +79,7 @@ public class AddWeddingFrame extends JFrame {
 		contentPane.add(txtPlace);
 		txtPlace.setColumns(10);
 
+		//If the fields are filled correctly, this button adds the wedding with the selected vip to the database
 		JButton btnAdd = new JButton("Add");
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -109,6 +110,7 @@ public class AddWeddingFrame extends JFrame {
 		contentPane.add(btnAdd);
 		btnAdd.setEnabled(false);
 
+		//Checking if the selected vip can be wed
 		table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			public void valueChanged(ListSelectionEvent event) {
 				if (table.getSelectedRow() != -1) {

@@ -71,8 +71,9 @@ public class DAOPhoto {
 
 	} // getIdentifiedVip method
 
+	//Adds a new photo to the database and the server
 	public void addNewPhoto(Photo newPhoto, List<Integer> identifiedVipId, String photoPath) throws SQLException, IOException {
-		
+		//Transfering the file via FTP
 		Properties properties = new Properties();
 		FileInputStream fichier = new FileInputStream("src/ftp.properties");
 		properties.load(fichier);
@@ -86,9 +87,10 @@ public class DAOPhoto {
 		boolean bool = false;
 		while(bool!=true){
 			bool = ftp.storeFile("/public_html/image/" + newPhoto.getFileName(), input);
-			System.out.println(photoPath);
+			System.out.println("Upload Ok");
 		}
 		
+		//Adding the photo details to the database
 		String queryNewPhoto = "INSERT INTO photo VALUES(idPhoto, ?, ?, ?);";
 		PreparedStatement pstmtNewPhoto = connexion.prepareStatement(queryNewPhoto);
 		pstmtNewPhoto.setString(1, newPhoto.getPlace());
