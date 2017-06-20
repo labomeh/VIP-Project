@@ -139,7 +139,7 @@ public class NewVipFrame extends JFrame {
 					} else if (txtNewSurname1.getText().isEmpty()) {
 						formError("You must fill at least one surname!");
 					} else if (!App.checkDateFormat(txtNewBirthdate.getText())) {
-						formError("The date format is incorrect: it should be yyyy-mm-dd.");
+						formError("The date format is incorrect or the field is empty: it should be yyyy-mm-dd.");
 					} else if(!App.checkDateValue(txtNewBirthdate.getText())) {
 						formError("The date value is incorrect: it should be before today!");
 					}

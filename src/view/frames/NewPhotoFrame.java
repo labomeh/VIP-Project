@@ -175,10 +175,10 @@ public class NewPhotoFrame extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
-					if (txtNewPlace.getText().isEmpty()) {
-						throw new Exception("The place of the photo must be filled.");
+					if(lblSelectedFile.getText().equals("")) {
+						formError("No file selected");					
 					} else if (!App.checkDateFormat(txtNewDate.getText())) {
-						formError("The date format is incorrect: it should be yyyy-mm-dd.");
+						formError("The date format is incorrect or the field is empty: it should be yyyy-mm-dd.");
 					} else if (!App.checkDateValue(txtNewDate.getText())) {
 						formError("The date value is incorrect: it should be before today!");
 					} else {
