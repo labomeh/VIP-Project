@@ -121,7 +121,7 @@ public class DAOVip {
 	} // getVipNationalities method
 
 	public void addNewVip(Vip vip, List<String> nationalities) throws SQLException {
-		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, ?, ?, null, null);";
+		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, ?, ?, DEFAULT, DEFAULT);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
 		pstmtNewVip.setString(1, vip.getName());
 		pstmtNewVip.setString(2, vip.getSurname()[0]);

@@ -46,7 +46,7 @@ public class AddToDirectionFrame extends JFrame {
 		lblSelectedMovie.setBounds(10, 53, 476, 52);
 		getContentPane().add(lblSelectedMovie);
 
-		JLabel lblDirector = new JLabel("Movie");
+		JLabel lblDirector = new JLabel("Director");
 		lblDirector.setBounds(11, 127, 113, 16);
 		getContentPane().add(lblDirector);
 
