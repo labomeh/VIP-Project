@@ -1,2 +1,6 @@
-/view/
+/app/
+/connection.properties
+/controller/
+/ftp.properties
 /model/
+/view/
