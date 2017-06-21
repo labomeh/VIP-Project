@@ -6,7 +6,7 @@ include (PATH_VUE . ALERT);
 <div class="container">
 	<div class="container">
 	<h1><?php echo $vip[0][1]." ".$vip[0][3]?></h1>
-	<p>Born in <?php echo $vip[0][4].", ".$vip[0][5]?></p>
+	<p>Born the <?php echo $vip[0][4].", ".$vip[0][5]?></p>
 	<p>Nationalities: <?php foreach($nationalities as $nationality){
 		echo $nationality[0].', ';
 	}

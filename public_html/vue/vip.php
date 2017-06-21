@@ -7,8 +7,16 @@
 <div class="container-fluid bg-3">
 
 	<h1 class="margin">VIP List</h1>
+    <form class="form-inline" action="index.php" method="get">
+        <input type="hidden" name="page" value="vip">
+        <div class="form-group">
+            <label for="search">Search for a vip :</label>
+            <input class="form-control" type="text" name="search" id="search">
+        </div>
+    </form>
 	<div class="row">
 		<div class="col-sm-12">
+            
 			<table class="table table-hover">
 				<thead>
 					<tr>
