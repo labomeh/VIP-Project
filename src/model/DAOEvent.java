@@ -29,7 +29,6 @@ public class DAOEvent {
 		this.connection = App.getConnection();
 	}
 
-	//Gather all the events
 	public List<Event> getEvents() throws SQLException {
 		List<Event> eventList = new ArrayList<>();
 		String requete = "select * from event";
@@ -41,13 +40,12 @@ public class DAOEvent {
 			int idVip2 = rset.getInt(3);
 			String weddingPlace = rset.getString(4);
 			LocalDate divorceDate;
-			if(rset.getDate(5)==null){
-				divorceDate= null;
-			}
-			else{
+			if (rset.getDate(5) == null) {
+				divorceDate = null;
+			} else {
 				divorceDate = rset.getDate(5).toLocalDate();
 			}
-			 
+
 			Event event = new Event(idVip1, weddingDate, idVip2, weddingPlace, divorceDate);
 			eventList.add(event);
 		}
@@ -55,38 +53,43 @@ public class DAOEvent {
 		stmt.close();
 		return eventList;
 	} // getEvents method
-	
-	
-	//Get the current marital status of the parameter vip (current wedding or last divorce)
-	public Event getMaritialStatus(Vip vip) throws SQLException{
+
+	/**
+	 * Get the current marital status of the parameter vip (current wedding or
+	 * last divorce)
+	 *
+	 * @return event the last event that concerns the parameter vip
+	 */
+	public Event getMaritialStatus(Vip vip) throws SQLException {
 		String query = "select * from event where (idVIP1=? or idVIP2=?) and weddingDate=(select max(weddingDate) from event where idVIP1=? or idVIP2=?)";
 		PreparedStatement pstmt = connection.prepareStatement(query);
 		pstmt.setInt(1, vip.getIdVip());
 		pstmt.setInt(2, vip.getIdVip());
 		pstmt.setInt(3, vip.getIdVip());
 		pstmt.setInt(4, vip.getIdVip());
-		ResultSet rset=pstmt.executeQuery();
-		if(rset.next()){
+		ResultSet rset = pstmt.executeQuery();
+		if (rset.next()) {
 			int idVip1 = rset.getInt(1);
 			LocalDate weddingDate = rset.getDate(2).toLocalDate();
 			int idVip2 = rset.getInt(3);
 			String weddingPlace = rset.getString(4);
 			LocalDate divorceDate;
-			if(rset.getDate(5)==null){
-				divorceDate= null;
-			}
-			else{
+			if (rset.getDate(5) == null) {
+				divorceDate = null;
+			} else {
 				divorceDate = rset.getDate(5).toLocalDate();
 			}
-			 
+
 			Event event = new Event(idVip1, weddingDate, idVip2, weddingPlace, divorceDate);
 			return event;
 		}
 		return null;
 	}
-	
-	//Adds a wedding to the database
-	public void addWedding(Event event) throws SQLException{
+
+	/**
+	 * Add a wedding to the database
+	 */
+	public void addWedding(Event event) throws SQLException {
 		String requete = "INSERT INTO event VALUES(?, ?, ?, ?, ?);";
 		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setInt(1, event.getIdVip1());
@@ -97,10 +100,11 @@ public class DAOEvent {
 		pstmt.executeUpdate();
 		pstmt.close();
 	}
-	
-	
-	//Adds a divorce to the database
-	public void addDivorce(Date divorceDate, int idVip1, int idVip2) throws SQLException{
+
+	/**
+	 * Add a divorce to the database
+	 */
+	public void addDivorce(Date divorceDate, int idVip1, int idVip2) throws SQLException {
 		String requete = "UPDATE event SET divorceDate=? WHERE (idVip1=? AND idVip2=?) or (idVip2=? AND idVip1=?);";
 		PreparedStatement pstmt = connection.prepareStatement(requete);
 		pstmt.setDate(1, divorceDate);
@@ -110,6 +114,6 @@ public class DAOEvent {
 		pstmt.setInt(5, idVip2);
 		pstmt.executeUpdate();
 		pstmt.close();
-	}
+	} // addDivorce method
 
 } // DAOEvent class

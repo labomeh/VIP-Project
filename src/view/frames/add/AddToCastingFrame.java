@@ -17,7 +17,7 @@ import java.util.List;
 import app.App;
 import controller.Movie;
 import view.JComboBoxModels.ActorsJComboBox;
-import view.frames.MovieListFrame;
+import view.frames.list.MovieListFrame;
 
 import java.awt.Dimension;
 import javax.swing.SwingConstants;

@@ -26,7 +26,6 @@ public class DAOVip {
 		this.connexion = App.getConnection();
 	}
 
-	//Gather all the vips
 	public List<Vip> getVip() throws SQLException {
 		List<Vip> vipList = new ArrayList<>();
 		String query = "select * from VIP";
@@ -57,7 +56,13 @@ public class DAOVip {
 	} // getVip method
 
 	
-	//Gather the vip with parameter id
+	/**
+	 * Get the vip knowing his id
+	 * 
+	 * @param idVIP
+	 * @return vip corresponding to the id parameter
+	 * @throws SQLException
+	 */
 	public Vip getVip(int idVIP) throws SQLException {
 		Vip vip;
 		String query = "SELECT * FROM VIP WHERE idVIP=?;";
@@ -85,7 +90,13 @@ public class DAOVip {
 		return vip;
 	} // getVip method
 
-	//Gather the partner of a vip
+	/**
+	 * Get the vip's partner knowing his id
+	 * 
+	 * @param idVIP
+	 * @return vip corresponding to the id parameter
+	 * @throws SQLException
+	 */
 	public Vip getPartner(Vip vip) throws SQLException {
 		String query = "select * from VIP where idVIP = ? ";
 		PreparedStatement pstmt = connexion.prepareStatement(query);
@@ -107,25 +118,13 @@ public class DAOVip {
 		return partner;
 	} // getPartner method
 
-	//Gather the nationalities of a vip
-	public List<String> getVipNationalities(Vip vip) throws SQLException {
-		int idVip = vip.getIdVip();
-		List<String> vipNationalities = new ArrayList<>();
-		String query = "SELECT country.country FROM country, VIP, nationality WHERE VIP.idVIP=? and nationality.idVIP=? and country.country=nationality.country";
-		PreparedStatement pstmt = connexion.prepareStatement(query);
-		pstmt.setInt(1, idVip);
-		pstmt.setInt(2, idVip);
-		ResultSet rset = pstmt.executeQuery();
-		while (rset.next()) {
-			String nationality = rset.getString(1);
-			vipNationalities.add(nationality);
-		}
-		rset.close();
-		pstmt.close();
-		return vipNationalities;
-	} // getVipNationalities method
-
-	//Adds a new vip to the database
+	/**
+	 * Add a vip to the database and add all hisnationalities
+	 * 
+	 * @param vip
+	 * @param nationalities the list of nationalities of this vip
+	 * @throws SQLException
+	 */
 	public void addNewVip(Vip vip, List<String> nationalities) throws SQLException {
 		String queryNewVip = "INSERT INTO VIP VALUES(idVIP, ?, ?, ?, ?, ?, DEFAULT, DEFAULT);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
@@ -152,7 +151,13 @@ public class DAOVip {
 		pstmtNewVip.close();
 	} // addNewVip method
 
-	//Adds an actor role for parameter vip in parameter movies
+	/**
+	 * Add movie casting to the database
+	 * 
+	 * @param vip
+	 * @param moviesVisa the visa list of the movies the vip played in
+	 * @throws SQLException
+	 */
 	public void addPlayedMovies(Vip vip, List<Integer> moviesVisa) throws SQLException {
 		String query = "INSERT INTO casting VALUES(?, ?);";
 		for (int movieVisa : moviesVisa) {
@@ -164,7 +169,13 @@ public class DAOVip {
 		}
 	} // addPlayedMovie method
 
-	//Adds an director role for parameter vip in parameter movies
+	/**
+	 * Add movie direction to the database
+	 * 
+	 * @param vip
+	 * @param moviesVisa the visa list of the movies the vip directed
+	 * @throws SQLException
+	 */
 	public void addDirectedMovies(Vip vip, List<Integer> moviesVisa) throws SQLException {
 		String query = "INSERT INTO directing VALUES(?, ?);";
 		for (int movieVisa : moviesVisa) {
@@ -176,7 +187,13 @@ public class DAOVip {
 		}
 	} // addDirectedMovies method
 
-	//Gather the movies parameter vip hasn't played in
+	/**
+	 * Return the list of movies in which the vip is not playing
+	 * 
+	 * @param vip
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Movie> getNotPlayedMovies(Vip vip) throws SQLException {
 		int idVip = vip.getIdVip();
 		List<Movie> vipNotPlayedMovies = new ArrayList<>();
@@ -196,7 +213,13 @@ public class DAOVip {
 		return vipNotPlayedMovies;
 	} // getVipNotPlayedMovies method
 
-	//Gather the movies parameter vip hasn't directed
+	/**
+	 * Return the list of movies the vip has not directed
+	 * 
+	 * @param vip
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Movie> getNotDirectedMovies(Vip vip) throws SQLException {
 		int idVip = vip.getIdVip();
 		List<Movie> vipNotDirectedMovies = new ArrayList<>();
@@ -216,7 +239,13 @@ public class DAOVip {
 		return vipNotDirectedMovies;
 	} // getNotDirectedMovies method
 
-	//Gathers the vips not acting in parameter movie
+	/**
+	 * Returns the list of vip who are not playing in the movie parameter
+	 * 
+	 * @param movie
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Vip> getActorsToAdd(Movie movie) throws SQLException {
 		List<Vip> vipList = new ArrayList<>();
 		String query = "SELECT * FROM VIP WHERE idVIP NOT IN (SELECT idVIP FROM casting WHERE movieVisa=?);";
@@ -246,7 +275,13 @@ public class DAOVip {
 		return vipList;
 	} // getActorsToAdd method
 
-	//Gather the vips not directing parameter movie
+	/**
+	 * Returns the list of vip who are not directing the movie parameter
+	 * 
+	 * @param movie
+	 * @return
+	 * @throws SQLException
+	 */
 	public List<Vip> getDirectorsToAdd(Movie movie) throws SQLException {
 		List<Vip> vipList = new ArrayList<>();
 		String query = "SELECT * FROM VIP WHERE idVIP NOT IN (SELECT idVIP FROM directing WHERE movieVisa=?);";

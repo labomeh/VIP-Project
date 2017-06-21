@@ -2,7 +2,6 @@ package controller;
 
 import java.sql.Date;
 import java.time.*;
-import java.util.Arrays;
 
 /**
  * 
@@ -80,20 +79,4 @@ public class Vip {
 	public void setBirthplace(String birthplace) {
 		this.birthplace = birthplace;
 	}
-
-	public void setRoleCode(char roleCode) {
-		this.roleCode = roleCode;
-	}
-
-	public void setIdPartner(int idPartner) {
-		this.idPartner = idPartner;
-	}
-
-	@Override
-	public String toString() {
-		return "Vip [idVip=" + idVip + ", name=" + name + ", surname=" + Arrays.toString(surname) + ", birthdate="
-				+ birthdate + ", birthplace=" + birthplace + ", roleCode=" + roleCode + ", idPartner=" + idPartner
-				+ "]";
-	}
-
 }

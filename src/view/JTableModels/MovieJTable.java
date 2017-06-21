@@ -8,7 +8,6 @@ import java.util.List;
 
 import app.App;
 import controller.Movie;
-import controller.Vip;
 import model.DAOMovie;
 
 /**
@@ -19,14 +18,13 @@ import model.DAOMovie;
 public class MovieJTable extends AbstractTableModel {
 	private List<Movie> movieList;
 	private final String[] columnHeads = { "Visa", "Title", "Release year" };
-	private DAOMovie dao;
 
 	public MovieJTable(DAOMovie dao) throws SQLException {
 		movieList = new ArrayList<Movie>();
-		this.dao = App.getDaoMovie();
+		App.getDaoMovie();
 		dao.getMovies(movieList);
 	}
-	
+
 	public List<Movie> getMovieList() {
 		return movieList;
 	}

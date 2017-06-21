@@ -43,10 +43,4 @@ public class Movie {
 	public void setReleaseYear(int releaseYear) {
 		this.releaseYear = releaseYear;
 	}
-
-	@Override
-	public String toString() {
-		return "Movie [Visa=" + movieVisa + ", Title=" + movieTitle + ", Release year=" + releaseYear + "]";
-	}
-
 }

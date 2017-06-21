@@ -18,6 +18,7 @@ import view.frames.create.NewMovieFrame;
 import view.frames.create.NewPhotoFrame;
 import view.frames.create.NewVipFrame;
 import view.frames.list.EventListFrame;
+import view.frames.list.MovieListFrame;
 import view.frames.list.VipListFrame;
 
 import javax.swing.SwingConstants;
@@ -25,16 +26,12 @@ import javax.swing.SwingConstants;
 public class MainFrame extends JFrame {
 
 	private JPanel contentPane;
-	private DataSource dataSource;
-
 	/**
 	 * Create the frame.
 	 * 
 	 * @throws SQLException
 	 */
 	public MainFrame(DataSource dataSource) throws SQLException {
-		this.dataSource = dataSource;
-
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 344);
 		contentPane = new JPanel();

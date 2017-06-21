@@ -40,28 +40,26 @@ public class EventJTable extends AbstractTableModel {
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		try {
-			Vip vip1= App.getDaoVip().getVip(eventList.get(rowIndex).getIdVip1());
-			Vip vip2= App.getDaoVip().getVip(eventList.get(rowIndex).getIdVip2());
-		
-		
-		
-		switch (columnIndex) {
-		case 0:
-			return vip1.getSurname()[0]+" "+vip1.getName();
-		case 1:
-			return vip2.getSurname()[0]+" "+vip2.getName();
-		case 2:
-			return eventList.get(rowIndex).getWeddingDate();
-		case 3:
-			return eventList.get(rowIndex).getWeddingPlace();
-		case 4:
-			return eventList.get(rowIndex).getDivorceDate();
-		}
+			Vip vip1 = App.getDaoVip().getVip(eventList.get(rowIndex).getIdVip1());
+			Vip vip2 = App.getDaoVip().getVip(eventList.get(rowIndex).getIdVip2());
+
+			switch (columnIndex) {
+			case 0:
+				return vip1.getSurname()[0] + " " + vip1.getName();
+			case 1:
+				return vip2.getSurname()[0] + " " + vip2.getName();
+			case 2:
+				return eventList.get(rowIndex).getWeddingDate();
+			case 3:
+				return eventList.get(rowIndex).getWeddingPlace();
+			case 4:
+				return eventList.get(rowIndex).getDivorceDate();
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
-		
+
 	}
 }

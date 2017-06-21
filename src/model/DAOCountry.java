@@ -23,7 +23,6 @@ public class DAOCountry {
 		this.connection = App.getConnection();
 	}
 
-	//Gathers the country names
 	public List<String> getCountries() throws SQLException {
 		List<String> countryList = new ArrayList<String>();
 		String query = "select * from country";

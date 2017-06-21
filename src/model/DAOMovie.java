@@ -24,7 +24,6 @@ public class DAOMovie {
 		this.connexion = App.getConnection();
 	}
 
-	//Gather all the movies
 	public void getMovies(List<Movie> movieList) throws SQLException {
 		String requete = "select * from movie";
 		Statement stmt = connexion.createStatement();
@@ -39,60 +38,14 @@ public class DAOMovie {
 		rset.close();
 		stmt.close();
 	} // getMovies method
-
-	//Gather all the genres for the parameter movie
-	public List<String> getMovieGenres(Movie movie) throws SQLException {
-		int movieVisa = movie.getMovieVisa();
-		List<String> movieGenres = new ArrayList<>();
-		String requete = "select genreTitle from movieCategory where movieVisa=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
-		ResultSet rset = pstmt.executeQuery(requete);
-		pstmt.setInt(1, movieVisa);
-		while (rset.next()) {
-			String genreTitle = rset.getString(1);
-			movieGenres.add(genreTitle);
-		}
-		rset.close();
-		pstmt.close();
-		return movieGenres;
-	} // getMovieGenre method
-
-	//Gather the casting of parameter movie
-	public List<Integer> getCasting(Movie movie) throws SQLException {
-		int movieVisa = movie.getMovieVisa();
-		List<Integer> movieCasting = new ArrayList<>();
-		String requete = "SELECT idVIP FROM playing WHERE movieVisa=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
-		pstmt.setInt(1, movieVisa);
-		ResultSet rset = pstmt.executeQuery(requete);
-		while (rset.next()) {
-			int playingActor = rset.getInt(1);
-			movieCasting.add(playingActor);
-		}
-		rset.close();
-		pstmt.close();
-		return movieCasting;
-	} // getCasting method
-
-	//Gather the directors of the parameter movie
-	public List<Integer> getDirector(Movie movie) throws SQLException {
-		int movieVisa = movie.getMovieVisa();
-		List<Integer> movieDirectors = new ArrayList<>();
-		String requete = "SELECT idVIP FROM directing WHERE movieVisa=?";
-		PreparedStatement pstmt = connexion.prepareStatement(requete);
-		pstmt.setInt(1, movieVisa);
-		ResultSet rset = pstmt.executeQuery(requete);
-		while (rset.next()) {
-			int idDirector = rset.getInt(1);
-			movieDirectors.add(idDirector);
-		}
-		rset.close();
-		pstmt.close();
-		return movieDirectors;
-	} // getDirector method
-
 	
-	//Adds a new movie to the database
+	/**
+	 * Add a movie to the database
+	 * 
+	 * @param the movie to add to the database
+	 * @param a list that contains all the movie's genres
+	 *
+	 */
 	public void addNewMovie(Movie newMovie, List<String> genres) throws SQLException {
 		String queryNewVip = "INSERT INTO movie VALUES(?, ?, ?);";
 		PreparedStatement pstmtNewVip = connexion.prepareStatement(queryNewVip);
@@ -111,7 +64,13 @@ public class DAOMovie {
 		pstmtNewVip.close();
 	} // addNewMovie method
 
-	//Adds actors to a movie
+	/**
+	 * Add a casting to the database
+	 * 
+	 * @param the movie concerned
+	 * @param a list that contains all the actors' id playing in this movie
+	 *
+	 */
 	public void addMovieCasting(Movie newMovie, List<Integer> actorsId) throws SQLException {
 		for (int actorId : actorsId) {
 			String queryNewActor = "INSERT INTO casting VALUES(?, ?);";
@@ -124,7 +83,13 @@ public class DAOMovie {
 	} // addMovieCasting method
 
 	
-	//Adds directors to a movie
+	/**
+	 * Add a movie direction to the database
+	 * 
+	 * @param the movie concerned
+	 * @param a list that contains all the movie directors' id
+	 *
+	 */
 	public void addMovieDirection(Movie newMovie, List<Integer> directorsId) throws SQLException {
 		for (int directorId : directorsId) {
 			String queryNewDirector = "INSERT INTO directing VALUES(?, ?);";

@@ -41,40 +41,16 @@ public class App {
 		return connection;
 	}
 
-	public static void setConnection(Connection connection) {
-		App.connection = connection;
-	}
-
 	public static DAOVip getDaoVip() {
 		return daoVip;
-	}
-
-	public static void setDaoVip(DAOVip daoVip) {
-		App.daoVip = daoVip;
 	}
 
 	public static DAOCountry getDaoCountry() {
 		return daoCountry;
 	}
 
-	public static void setDaoCountry(DAOCountry daoCountry) {
-		App.daoCountry = daoCountry;
-	}
-
 	public static DAOMovie getDaoMovie() {
 		return daoMovie;
-	}
-
-	public static void setDaoMovie(DAOMovie daoMovie) {
-		App.daoMovie = daoMovie;
-	}
-
-	public static DAOGenre getDaoGenre() {
-		return daoGenre;
-	}
-
-	public static void setDaoGenre(DAOGenre daoGenre) {
-		App.daoGenre = daoGenre;
 	}
 
 	public static DAOPhoto getDaoPhoto() {
@@ -121,12 +97,23 @@ public class App {
 		});
 	}
 	
-	public static boolean checkDateFormat(String date) {
+	/**
+	 * Check the string's format
+	 * Return true if the string's format is yyyy-m-d or yyyy-mm-dd
+	 * 
+	 * @param string
+	 */
+	public static boolean checkDateFormat(String string) {
 		Pattern pattern = Pattern.compile("[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}");
-        Matcher matcher = pattern.matcher(date);
+        Matcher matcher = pattern.matcher(string);
         return matcher.matches();
 	}
-
+	
+	/**
+	 * Check if the string is an earlier date than today
+	 * 
+	 * @param string
+	 */
 	public static boolean checkDateValue(String date) {
 		LocalDate localDate = Date.valueOf(date).toLocalDate();
 		if(localDate.compareTo(LocalDate.now())>=0) {
@@ -135,12 +122,24 @@ public class App {
 		return true;
 	}
 	
+	/**
+	 * Check the string's format
+	 * Return true if the string's format is yyyy
+	 * 
+	 * @param string
+	 */
 	public static boolean checkYearFormat(String year) {
 		Pattern pattern = Pattern.compile("[0-9]{4}");
         Matcher matcher = pattern.matcher(year);
         return matcher.matches();
 	}
-
+	
+	/**
+	 * Check the string's format
+	 * Return true if the string is only composed of integers
+	 * 
+	 * @param string
+	 */
 	public static boolean checkVisaFormat(String visa) {
 		Pattern pattern = Pattern.compile("[0-9]+");
         Matcher matcher = pattern.matcher(visa);

@@ -9,8 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -19,7 +17,6 @@ import org.apache.commons.net.ftp.FTPSClient;
 
 import app.App;
 import controller.Photo;
-import controller.Vip;
 
 /**
  * @author Simon
@@ -33,47 +30,16 @@ public class DAOPhoto {
 		this.connexion = App.getConnection();
 	}
 
-	public List<Photo> getPhoto() throws SQLException {
-		List<Photo> photoList = new ArrayList<>();
-		String query = "select * from photo";
-		Statement stmt = connexion.createStatement();
-		ResultSet rset = stmt.executeQuery(query);
-		while (rset.next()) {
-			int idPhoto = rset.getInt(1);
-			String place = rset.getString(2);
-			LocalDate date = rset.getDate(3).toLocalDate();
-			Photo photo = new Photo(idPhoto, place, date);
-			photoList.add(photo);
-		}
-		rset.close();
-		stmt.close();
-		return photoList;
-
-	} // getPhoto method
-
-	public List<Vip> getIdentifiedVip(Photo photo) throws SQLException {
-		int idPhoto = photo.getIdPhoto();
-		List<Integer> identifiedVipId = new ArrayList<>();
-		List<Vip> identifiedVip = new ArrayList<>();
-		String query = "SELECT idVip FROM photo WHERE idPhoto=?";
-		PreparedStatement pstmt = connexion.prepareStatement(query);
-		pstmt.setInt(1, idPhoto);
-		ResultSet rset = pstmt.executeQuery(query);
-		while (rset.next()) {
-			identifiedVipId.add(rset.getInt(1));
-		}
-		for (int idVip : identifiedVipId) {
-			identifiedVip.add(App.getDaoVip().getVip(idVip));
-		}
-		rset.close();
-		pstmt.close();
-		return identifiedVip;
-
-	} // getIdentifiedVip method
-
-	//Adds a new photo to the database and the server
+	/**
+	 * 
+	 * @param newPhoto the photo to transfer
+	 * @param identifiedVipId a list of vip's id that appear on the photo
+	 * @param photoPath photo local path
+	 * @throws SQLException
+	 * @throws IOException
+	 */
 	public void addNewPhoto(Photo newPhoto, List<Integer> identifiedVipId, String photoPath) throws SQLException, IOException {
-		//Transfering the file via FTP
+		// Transferring the file via FTP
 		Properties properties = new Properties();
 		FileInputStream fichier = new FileInputStream("src/ftp.properties");
 		properties.load(fichier);
@@ -90,7 +56,7 @@ public class DAOPhoto {
 			System.out.println("Upload Ok");
 		}
 		
-		//Adding the photo details to the database
+		// Adding the photo details to the database
 		String queryNewPhoto = "INSERT INTO photo VALUES(idPhoto, ?, ?, ?);";
 		PreparedStatement pstmtNewPhoto = connexion.prepareStatement(queryNewPhoto);
 		pstmtNewPhoto.setString(1, newPhoto.getPlace());

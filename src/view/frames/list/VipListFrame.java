@@ -27,10 +27,6 @@ import javax.swing.border.TitledBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import javax.swing.ListSelectionModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;

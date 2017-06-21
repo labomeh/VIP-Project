@@ -41,10 +41,6 @@ public class Photo {
 	}
 
 	// Setters
-	public void setIdPhoto(int idPhoto) {
-		this.idPhoto = idPhoto;
-	}
-
 	public void setDate(Date date) {
 		this.date = date.toLocalDate();
 	}
@@ -56,10 +52,4 @@ public class Photo {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-
-	@Override
-	public String toString() {
-		return "Photo [idPhoto=" + idPhoto + ", place=" + place + ", date=" + date + "]";
-	}
-
 }
