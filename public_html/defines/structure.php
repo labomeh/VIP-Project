@@ -11,7 +11,6 @@
 	define('PATH_SCRIPT','script/');
 	define('PATH_VUE','vue/');
 	define('PATH_IMAGE', 'image/');
-	define('PATH_IMAGE_SLIDER', 'image/slider/');
 
 	//Sous dossiers
 	define('PATH_FR','FR-fr/');

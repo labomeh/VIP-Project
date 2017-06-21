@@ -2,6 +2,7 @@
 
 	define('NOM_SITE','VIP World');
 	define('INDEX', 'index.php');
+	define('HOME', 'home.php');
 	define('LOGO', 'logo.jpg');
 	define('HEADER', 'header.php');
 	define('FOOTER', 'footer.php');
@@ -9,6 +10,10 @@
 	define('BDD', 'bdd.php');
 	define('VIP_LOADER', 'vip_loader.php');
 	define('VIP', 'vip.php');
+	define('VIP_INFO_LOADER', 'vip_info_loader.php');
+	define('VIP_INFO', 'vip_info.php');
+	define('SLIDER_LOADER', 'slider_loader.php');
+	define('SLIDER', 'slider.php');
 	define('MOVIES_LOADER', 'movies_loader.php');
 	define('MOVIES', 'movies.php');
 	define('ALERT', 'alert.php');

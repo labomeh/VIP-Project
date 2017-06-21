@@ -6,9 +6,9 @@
 <!-- Container (Grid) -->
 <div class="container-fluid bg-3">
 
-	<h1 class="margin">VIP Details</h1>
+	<h1 class="margin">VIP List</h1>
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-12">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -33,30 +33,17 @@
 					} else {
 						echo '<td></td>';
 					}
-					echo '<td><button data-toggle="collapse" data-target="#data'.$v_vip[0].'" class="btn-info">Voir plus</button></td></tr>';
-					echo '<tr id="data'.$v_vip[0].'" class="collapse"><td>Coucou</td><tr> ';
+					echo '<td><form method="post" action="index.php?page=vip_info">
+								<input type="hidden" name="idVIP" value="'.$v_vip[0].'">
+								<input type="hidden" name="idPartner" value="'.$v_vip[6].'">
+								<input type="hidden" name="roleCode" value="'.$v_vip[5].'">
+								<button type="submit" class="btn-info">Voir plus</button></form></td></tr>';
 				}
 				?>
 				</tbody>
 			</table>
 		</div>
-		<div class="col-sm-4">
-			<div class="well">
-				<p>VIP</p>
-			</div>
-			<div class="well">
-				<p>VIP info to display</p>
-				<p id="selectedVIP"></p>
-			</div>
-		</div>
 	</div>
-	
-	<script type="text/javascript">
-	function myFunction(Obj) {
-	    document.getElementById("selectedVIP").innerHTML = "Selected VIP : "+Obj.id;
-	}
-	</script>
-
 
 </div>
 
