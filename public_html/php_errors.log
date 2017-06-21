@@ -1,6 +1,0 @@
-[05-Apr-2017 19:19:12 Europe/Paris] PHP Warning:  require_once(vue/arthur.php): failed to open stream: No such file or directory in /home/UNIV-LYON1/p1523150/public_html/controller/arthur.php on line 5
-[05-Apr-2017 19:19:12 Europe/Paris] PHP Fatal error:  require_once(): Failed opening required 'vue/arthur.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/UNIV-LYON1/p1523150/public_html/controller/arthur.php on line 5
-[05-Apr-2017 19:20:40 Europe/Paris] PHP Warning:  require_once(vue/arthur.php): failed to open stream: No such file or directory in /home/UNIV-LYON1/p1523150/public_html/controller/arthur.php on line 5
-[05-Apr-2017 19:20:40 Europe/Paris] PHP Fatal error:  require_once(): Failed opening required 'vue/arthur.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/UNIV-LYON1/p1523150/public_html/controller/arthur.php on line 5
-[05-Apr-2017 19:21:13 Europe/Paris] PHP Warning:  require_once(vue/arthur.php): failed to open stream: No such file or directory in /home/UNIV-LYON1/p1523150/public_html/controller/arthur.php on line 5
-[05-Apr-2017 19:21:13 Europe/Paris] PHP Fatal error:  require_once(): Failed opening required 'vue/arthur.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/UNIV-LYON1/p1523150/public_html/controller/arthur.php on line 5
