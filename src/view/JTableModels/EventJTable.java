@@ -8,6 +8,7 @@ import java.util.List;
 
 import app.App;
 import controller.Event;
+import controller.Vip;
 import model.DAOEvent;
 
 public class EventJTable extends AbstractTableModel {
@@ -38,11 +39,17 @@ public class EventJTable extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
+		try {
+			Vip vip1= App.getDaoVip().getVip(eventList.get(rowIndex).getIdVip1());
+			Vip vip2= App.getDaoVip().getVip(eventList.get(rowIndex).getIdVip2());
+		
+		
+		
 		switch (columnIndex) {
 		case 0:
-			return eventList.get(rowIndex).getIdVip1();
+			return vip1.getSurname()[0]+" "+vip1.getName();
 		case 1:
-			return eventList.get(rowIndex).getIdVip2();
+			return vip2.getSurname()[0]+" "+vip2.getName();
 		case 2:
 			return eventList.get(rowIndex).getWeddingDate();
 		case 3:
@@ -50,6 +57,11 @@ public class EventJTable extends AbstractTableModel {
 		case 4:
 			return eventList.get(rowIndex).getDivorceDate();
 		}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
+		
 	}
 }
