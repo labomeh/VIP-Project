@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.list;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 import app.App;
 import controller.Vip;
 import view.JTableModels.VipJTable;
+import view.frames.add.AddDirectedMovieFrame;
+import view.frames.add.AddPlayedMovieFrame;
+import view.frames.add.AddWeddingFrame;
 
 import javax.swing.JTable;
 import javax.swing.JLabel;

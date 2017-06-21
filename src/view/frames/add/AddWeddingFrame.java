@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.add;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -15,6 +15,7 @@ import app.App;
 import controller.Event;
 import controller.Vip;
 import view.JTableModels.VipJTable;
+import view.frames.list.VipListFrame;
 
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;

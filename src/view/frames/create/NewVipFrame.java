@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.create;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -23,6 +23,7 @@ import java.util.List;
 import app.App;
 import controller.Vip;
 import view.JComboBoxModels.CountryJComboBox;
+import view.frames.MainFrame;
 
 public class NewVipFrame extends JFrame {
 

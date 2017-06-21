@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.create;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -24,6 +24,7 @@ import app.App;
 import controller.Movie;
 import view.JComboBoxModels.GenreJComboBox;
 import view.JComboBoxModels.VipJComboBox;
+import view.frames.MainFrame;
 
 public class NewMovieFrame extends JFrame {
 

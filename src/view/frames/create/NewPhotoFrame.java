@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.create;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -28,6 +28,7 @@ import java.io.File;
 import app.App;
 import controller.Photo;
 import view.JComboBoxModels.VipJComboBox;
+import view.frames.MainFrame;
 
 public class NewPhotoFrame extends JFrame {
 

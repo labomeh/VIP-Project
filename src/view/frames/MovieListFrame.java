@@ -20,6 +20,8 @@ import java.sql.SQLException;
 import app.App;
 import controller.Movie;
 import view.JTableModels.MovieJTable;
+import view.frames.add.AddToCastingFrame;
+import view.frames.add.AddToDirectionFrame;
 
 public class MovieListFrame extends JFrame {
 

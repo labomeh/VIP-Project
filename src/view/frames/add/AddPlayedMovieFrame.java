@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.add;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,6 +17,8 @@ import java.util.List;
 import app.App;
 import controller.Vip;
 import view.JComboBoxModels.NotPlayedMovieJComboBox;
+import view.frames.list.VipListFrame;
+
 import javax.swing.SwingConstants;
 
 public class AddPlayedMovieFrame extends JFrame {

@@ -14,6 +14,12 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 import controller.*;
+import view.frames.create.NewMovieFrame;
+import view.frames.create.NewPhotoFrame;
+import view.frames.create.NewVipFrame;
+import view.frames.list.EventListFrame;
+import view.frames.list.VipListFrame;
+
 import javax.swing.SwingConstants;
 
 public class MainFrame extends JFrame {

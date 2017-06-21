@@ -1,4 +1,4 @@
-package view.frames;
+package view.frames.add;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +18,7 @@ import java.util.List;
 import app.App;
 import controller.Movie;
 import view.JComboBoxModels.DirectorsJComboBox;
+import view.frames.MovieListFrame;
 
 public class AddToDirectionFrame extends JFrame {
 
