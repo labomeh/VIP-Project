@@ -7,8 +7,17 @@
 <div class="container-fluid bg-3">
 
 	<h1 class="margin">MOVIES List</h1>
+	<form method="get" action="index.php" class="form-inline">
+		<input type="hidden" name="page" value="movies">
+		<div class="form-group">
+      		<label for="search">Search a visa or a title</label>
+      		<input id="search" class="form-control" name="search" type="text">
+    	</div>
+    	<button type="submit" class="btn btn-default">Submit</button>
+	</form>
+	<br>
 	<div class="row">
-		<div class="col-sm-8">
+		<div class="col-sm-12">
 			<table class="table table-hover">
 				<thead>
 					<tr>
@@ -21,7 +30,7 @@
 				<?php
 				foreach ($movies as $movie) {
 					echo '
-					<tr id="'.$movie[2].'" onclick="myFunction(this)">
+					<tr id="'.$movie[2].'">
 						<td>'.$movie[0].'</td>
 						<td>'.$movie[1].'</td>
 						<td>'.$movie[2].'</td>
@@ -32,13 +41,6 @@
 			</table>
 		</div>
 	</div>
-	
-	<script type="text/javascript">
-	function myFunction(Obj) {
-	    document.getElementById("selectedMovie").innerHTML = "Selected movie's Visa: "+Obj.id;
-	}
-	</script>
-
 
 </div>
 
