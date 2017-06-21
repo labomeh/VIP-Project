@@ -8,4 +8,11 @@
 	WHERE photo.idPhoto=shows.idPhoto and shows.idVIP=".$idVIP.";";
 	$bdd->queryArray($slider_elements_loading_query);
 	$photos = $bdd->_data;
+	
+	$info_loading_query =
+	"SELECT idVIP, surname1VIP, surname2VIP, nameVIP, birthdateVIP, birthplaceVIP, roleCodeVIP
+	FROM VIP
+	WHERE idVIP=".$idVIP.";";
+	$bdd->queryArray($info_loading_query);
+	$vip = $bdd->_data;
 ?>

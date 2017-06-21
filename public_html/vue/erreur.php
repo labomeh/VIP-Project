@@ -5,7 +5,7 @@
 
 	<div class="container-fluid bg-3 text-center">
 
-		<h1 class="margin">Erreur 404: La page demandÃ©e n'existe pas !</h1>
+		<h1 class="margin">Erreur 404: La page demandée n'existe pas !</h1>
 		
 	</div>
 

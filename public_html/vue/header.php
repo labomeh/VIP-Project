@@ -27,9 +27,6 @@
 					<a href="index.php"><img src="<?php echo PATH_IMAGE.LOGO; ?>" alt="<?php echo LOGO ?>"
 						class="img-circle" style="width: 100%"></a>
 				</div>
-				<div class="col-md-10 col-sm_10 col-xs-12">
-					<h1><?php echo NOM_SITE; ?></h1>
-				</div>
 			</div>
 		</section>
 	</header>
